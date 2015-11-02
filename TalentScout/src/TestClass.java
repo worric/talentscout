@@ -7,7 +7,7 @@ public class TestClass {
 		p.setNote("og n jadjsf klæjasdbfj\n asdh jhai ehviuhv akl joisadfk\n IALF WOEIH FAVKJDHASDKFH KJ VHAOIAOIH KJH AISDF HASDHF IUAKJSDH IAKJSDHVAIUSKJDHOADSLGHOASIDFJ9Uoi sdahf aogh hasdkj fhkjvchasudh asdhæoaie aoihfaofhaodshfawohds");
 		p.addScoutingSession(new ScoutingSession());
 		
-		System.out.println(p.getScoutingSession(0).getPlace());
+		// System.out.println(p.getScoutingSession(0).getPlace());
 		
 		System.out.println(p.getNote());
 		System.out.println(p.getId());
