@@ -27,7 +27,7 @@ public class Player {
 	 */
 	public Player(){
 		this("ikke-navngivet", "tom", null);
-	}
+	} // Default constructor slut
 	
 	/**
 	 * Testfunktion til at skrive en note til et playerobjekt.
