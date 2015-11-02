@@ -1,8 +1,4 @@
-/**
- * Klassen har til formål at repræsentere de kvalitative data, som talentspejderen indtaster
- * @author folmer
- *
- */
+
 public class QualitativeData {
 	
 	private String spilintelligens;
