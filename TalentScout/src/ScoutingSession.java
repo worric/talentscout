@@ -36,6 +36,9 @@ public class ScoutingSession {
 		return this.isFinished;
 	}
 	
+	public QualitativeData getQualData(){
+		return this.qualData;
+	}
 	
 
 }

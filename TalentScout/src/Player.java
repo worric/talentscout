@@ -19,6 +19,7 @@ public class Player {
 		this.id = idCounter;
 		idCounter++;
 		this.active = true;
+		this.sessions = new ArrayList<ScoutingSession>();
 		this.sessions.add(s);
 	} //Constructer slut
 	
@@ -34,7 +35,6 @@ public class Player {
 	 * @param note
 	 */
 	public void setNote(String note){
-		// TODO: jeg ved ikke om der skal laves en funktion til hver af de enkelte notetyper.
 		this.noteGeneral = note;
 	}
 	/**
@@ -42,7 +42,6 @@ public class Player {
 	 * @return
 	 */
 	public String getNote(){
-		// TODO: jeg ved ikke om der skal laves en funktion til hver af de enkelte notetyper.
 		return this.noteGeneral;
 	}
 	

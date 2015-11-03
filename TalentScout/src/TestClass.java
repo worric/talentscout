@@ -2,10 +2,18 @@
 public class TestClass {
 
 	public static void main(String[] args) {
+		
+		Bgf b = new Bgf("skod");
+		
+		b.go();
+		
 		Player p = new Player("hakon","tom",new ScoutingSession());
 		
+		ScoutingSession s = new ScoutingSession();
+		
+		
 		p.setNote("og n jadjsf klæjasdbfj\n asdh jhai ehviuhv akl joisadfk\n IALF WOEIH FAVKJDHASDKFH KJ VHAOIAOIH KJH AISDF HASDHF IUAKJSDH IAKJSDHVAIUSKJDHOADSLGHOASIDFJ9Uoi sdahf aogh hasdkj fhkjvchasudh asdhæoaie aoihfaofhaodshfawohds");
-		p.addScoutingSession(new ScoutingSession());
+		p.addScoutingSession(s);
 		
 		// System.out.println(p.getScoutingSession(0).getPlace());
 		

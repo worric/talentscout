@@ -1,5 +1,5 @@
 /**
- * Klassen har til formål at repræsentere de kvalitative data, som talentspejderen indtaster
+ * The purpose of the class is to represent the qualitative data that the talent scout enters
  * @author folmer
  *
  */
@@ -21,16 +21,32 @@ public class QualitativeData {
 		this.spilintelligens = s;
 	}
 	
+	public String getSpilintelligens(String s){
+		return this.spilintelligens;
+	}
+	
 	public void setAttitude(String s){
 		this.attitude = s;
+	}
+	
+	public String getAttitude(){
+		return this.attitude;
 	}
 	
 	public void setTeknik(String s){
 		this.teknik = s;
 	}
 	
+	public String getTeknik(){
+		return this.teknik;
+	}
+	
 	public void setSpeed(String s){
 		this.speed = s;
+	}
+	
+	public String getSpeed(){
+		return this.speed;
 	}
 
 }
