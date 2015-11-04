@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 public class Player {
 	
 	private String name;
@@ -6,7 +7,10 @@ public class Player {
 	private int id;
 	private String noteGeneral;
 	private boolean active;
-	private ArrayList<ScoutingSession> sessions;
+	private ArrayList<ScoutingSession> sessions; // TODO evt implementer en helper class der kan styre tilgangen til objekter
+	private Date discoveredDate;
+	private Date undiscoveredDate;
+	private boolean isDiscovered;
 	
 	/**
 	 * Constructor.
@@ -21,6 +25,8 @@ public class Player {
 		this.active = true;
 		this.sessions = new ArrayList<ScoutingSession>();
 		this.sessions.add(s);
+		this.discoveredDate = new Date();
+		this.isDiscovered = true;
 	} //Constructer slut
 	
 	/**
@@ -74,6 +80,10 @@ public class Player {
 	
 	public ScoutingSession getScoutingSession(int i){
 		return sessions.get(i);
+	}
+	
+	public String getName(){
+		return this.name;
 	}
 	
 
