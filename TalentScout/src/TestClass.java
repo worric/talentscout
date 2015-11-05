@@ -3,9 +3,7 @@ public class TestClass {
 
 	public static void main(String[] args) {
 		
-		Bgf b = new Bgf("skod");
-		
-		b.go();
+		new Bgf("tite på vores app");
 		
 		Player p = new Player("hakon","tom",new ScoutingSession());
 		
