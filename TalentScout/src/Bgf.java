@@ -33,7 +33,7 @@ public class Bgf extends JFrame {
 		
 		contentPane.add(BorderLayout.NORTH, tpp);
 		contentPane.add(BorderLayout.WEST, lbp);
-		contentPane.add(BorderLayout.CENTER, mW);
+		contentPane.add(BorderLayout.CENTER, pL);
 		
 		JButton but1 = new JButton("test2");
 		// but1.addActionListener(new ButtonListener(tf));
