@@ -72,9 +72,9 @@ public class Player {
 	}
 	
 	public void removeScoutingSession(ScoutingSession s){
-		ScoutingSession session = s;
+		int i = sessions.indexOf(s);
 		
-		sessions.remove(s);
+		sessions.remove(i);
 		
 	}
 	
