@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+//tak for hjælpen robin
+
 public class Bgf extends JFrame {
 	
 	private Container contentPane = this.getContentPane();
