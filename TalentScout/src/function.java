@@ -39,7 +39,7 @@ public class function {
             } else if(plrRestore.name.matches(inputName + ".*")){
                 System.out.println(plrRestore.name);
                 //if true, add the player object to the ArrayList
-                foundPlayers.add(plrRestore);
+                foundPlayers.add(plrRestore); 
             } else {
                 // if false, that is if there are no matches we display an empty table
                 foundPlayers.clear();
