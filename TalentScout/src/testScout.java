@@ -11,12 +11,25 @@ public class testScout {
 	private static Player player1;
 	private static Player player2;
 	
+	private static PlayerDB pdb;
+	
 	public static void main(String[] args){
 		//testSessionID();
 		//testDisplaySessions();
 		//testFindObject();
 		//testPlayerRegistration();
-		testProgram();
+		//testProgram();
+		testPlayerDB();
+	}
+	
+	public static void testPlayerDB(){
+		agenda = new Agenda();
+		pdb = new PlayerDB();
+		session0 = agenda.planSession("Frederikshavn", new Date());
+		
+		
+		pdb.addPlayer(new Player("lol", 21, "Horsens"));
+		
 	}
 	
 	public static void testProgram(){
@@ -26,9 +39,9 @@ public class testScout {
 		ScoutingSession session1 = agenda.planSession("Odense", new Date());
 		ScoutingSession session2 = agenda.planSession("Aalborg", new Date());
 		
-		Player player0 = new Player("Dan Joy", 20, "FC København");
+		Player player0 = new Player("Dan Joy", 20, "FC Kï¿½benhavn");
 		Player player1 = new Player("Morten Fedolin", 30, "Vejle BK");
-		Player player2 = new Player("Søren Fuil", 25, "Horsens");
+		Player player2 = new Player("Sï¿½ren Fuil", 25, "Horsens");
 		
 		session1.addPlayer(player0);
 		session1.addPlayer(player1);
@@ -68,7 +81,7 @@ public class testScout {
 		ScoutingSession session1 = agenda.planSession("Odense", new Date());
 		ScoutingSession session2 = agenda.planSession("Aalborg", new Date());
 		
-		Player player0 = new Player("Dan Joy", 20, "FC København");
+		Player player0 = new Player("Dan Joy", 20, "FC Kï¿½benhavn");
 		
 		System.out.println(player0.getName());
 	}
