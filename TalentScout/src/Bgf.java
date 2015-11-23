@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 //tak for hjælpen robin
+//Hej Mikkel
 
 public class Bgf extends JFrame {
 	
