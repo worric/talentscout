@@ -26,6 +26,14 @@ public class Player {
 	public Note getNote(int index){
 		return notes.get(index);
 	}
+	/**
+	 * Adds the functionality to check the size of the ArrayList
+	 * used in interations in other classes
+	 * @return
+	 */
+	public int getNumberOfNotes(){
+		return notes.size();
+	}
 	
 	public void displayNote(int index){
 		System.out.println(notes.get(index));
@@ -36,18 +44,25 @@ public class Player {
 			displayNote(i);
 		}
 	}
-	
+	/**
+	 * Changed this method to check if any notes have been made before doing the calculation
+	 * @return
+	 */
 	public double displayAverageScore(){
 		double totalScore = 0;
 		
-		for(int i = 0; i < notes.size(); i++){
-			Note report = getNote(i);
-			int speed = report.getSpeedScore();
-			int attitude = report.getAttitudeScore();
-			int technique = report.getTechniqueScore();
-			int gameSense = report.getGameSenseScore();
-			
-			totalScore = totalScore + speed + attitude + technique + gameSense;
+		if(notes.size() > 0){
+			for(int i = 0; i < notes.size(); i++){
+				Note report = getNote(i);
+				int speed = report.getSpeedScore();
+				int attitude = report.getAttitudeScore();
+				int technique = report.getTechniqueScore();
+				int gameSense = report.getGameSenseScore();
+				
+				totalScore = totalScore + speed + attitude + technique + gameSense;
+			}
+		} else {
+			return totalScore;
 		}
 		
 		System.out.println(totalScore);  

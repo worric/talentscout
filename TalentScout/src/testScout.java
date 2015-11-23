@@ -32,15 +32,14 @@ public class testScout {
 		
 		if (dmgr.isValid(dato)){
 			session0 = agenda.planSession("Frederikshavn", dmgr.fromStringToDate(dato));
+			session1 = agenda.planSession("Fredericia", dmgr.fromStringToDate(dato));
+			session2 = agenda.planSession("Skive", dmgr.fromStringToDate(dato));
 		}
-		
-		session1 = agenda.planSession("Fredericia", new Date());
-		session2 = agenda.planSession("Skive", new Date());
 		
 		player0 = new Player("Hej", 21, "Skive");
 		player1 = new Player("hejsa", 22, "Skodsborg");
 		player2 = new Player("Hejsasa", 23, "Aalborg Chang");
-		player3 = new Player("Olf Arne", 23, "Skodsborg");
+		player3 = new Player("Olf Arne", 24, "Skodsborg");
 		
 		
 		pdb.addPlayer(player0);
@@ -55,6 +54,16 @@ public class testScout {
 		pdb.addPlayer(player3);
 		player3.addNote(new Note(session0, player3));
 		session0.addPlayer(player3);
+		
+		if(player0.getNumberOfNotes() > 0){
+			for(int i = 0; i < player0.getNumberOfNotes(); i++){
+				System.out.println(player0.getNote(i));
+			}
+		} else {
+			System.out.println("der er ingen note!");
+		}
+		
+		// agenda.displaySessionOverview();
 		
 		String searchStringName = "";
 		String searchStringClub = "skod";
