@@ -45,6 +45,15 @@ public class DateManager {
 			return false;
 		}
 	}
+	
+	public Date fromStringToDate(String date){
+		try {
+			return df.parse(date);
+		} catch (ParseException p) {
+			p.printStackTrace();
+			return null;
+		}
+	}
 	/**
 	 * Function that can take a date object and return the date in the
 	 * same notation as the pattern specified in the constructor 

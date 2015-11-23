@@ -1,10 +1,16 @@
 import java.util.ArrayList;
-public class PlayerDB {
+import java.util.Observable;
+import java.util.Observer;
+
+public class PlayerDB implements Observer {
 	
 	private ArrayList<Player> playerDB;
+	private Observable agenda;
 	
-	public PlayerDB(){
+	public PlayerDB(Observable o){
 		playerDB = new ArrayList<Player>();
+		this.agenda = o;
+		agenda.addObserver(this);
 	}
 	
 	public void addPlayer(Player p){
@@ -31,6 +37,17 @@ public class PlayerDB {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		if(o instanceof Agenda && arg instanceof ScoutingSession){
+			ScoutingSession s = (ScoutingSession) arg;
+			Agenda a = (Agenda) o;
+			System.out.println(s);
+			System.out.println(a);
+		}
+		
 	}
 
 }

@@ -10,6 +10,7 @@ public class testScout {
 	private static Player player0;
 	private static Player player1;
 	private static Player player2;
+	private static Player player3;
 	
 	private static PlayerDB pdb;
 	
@@ -24,24 +25,38 @@ public class testScout {
 	
 	public static void testPlayerDB(){
 		agenda = new Agenda();
-		pdb = new PlayerDB();
-		session0 = agenda.planSession("Frederikshavn", new Date());
+		DateManager dmgr = new DateManager();
+		pdb = new PlayerDB(agenda); // agenda er argument pga. observer interface
+		
+		String dato = "27-11-2015";
+		
+		if (dmgr.isValid(dato)){
+			session0 = agenda.planSession("Frederikshavn", dmgr.fromStringToDate(dato));
+		}
+		
 		session1 = agenda.planSession("Fredericia", new Date());
 		session2 = agenda.planSession("Skive", new Date());
 		
 		player0 = new Player("Hej", 21, "Skive");
 		player1 = new Player("hejsa", 22, "Skodsborg");
 		player2 = new Player("Hejsasa", 23, "Aalborg Chang");
+		player3 = new Player("Olf Arne", 23, "Skodsborg");
 		
 		
 		pdb.addPlayer(player0);
+		player0.addNote(new Note(session0, player0));
 		session0.addPlayer(player0);
 		pdb.addPlayer(player1);
+		player1.addNote(new Note(session0, player1));
 		session0.addPlayer(player1);
 		pdb.addPlayer(player2);
+		player2.addNote(new Note(session0, player2));
 		session0.addPlayer(player2);
+		pdb.addPlayer(player3);
+		player3.addNote(new Note(session0, player3));
+		session0.addPlayer(player3);
 		
-		String searchStringName = "Hejs";
+		String searchStringName = "";
 		String searchStringClub = "skod";
 		
 		for(int i = 0; i < pdb.getSize(); i++){

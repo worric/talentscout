@@ -1,5 +1,7 @@
 
 public class Note {
+	
+	public enum elements {speedText, speedScore, attitudeText, attitudeScore, techniqueText, techniqueScore, gameSenseText, gameSenseScore};
 
 	private ScoutingSession session;
 	private Player player;
