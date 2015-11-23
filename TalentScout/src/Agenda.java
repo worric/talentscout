@@ -1,7 +1,4 @@
 import java.util.ArrayList;
-
-// hej
-
 import java.util.Date;
 
 /**The Agenda class holds an ArrayList of ScoutingSessions.
@@ -9,6 +6,7 @@ import java.util.Date;
  *It can also show an overview of all the planned ScoutingSessions.
  *
  * @author Frederik Frode Nygart
+ * 
  */
 
 public class Agenda {
