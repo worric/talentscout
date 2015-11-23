@@ -26,17 +26,22 @@ public class Agenda {
 	}
 	
 	
-	/**This method plans a new ScoutingSession by add'ing it to the ArrayList sessions. It also gives the new ScoutingSession an unique sessionID.
-	 * @param place, date
-	 * @return
+	/**Plans a new ScoutingSession by adding it to the ArrayList sessions. It also initiates a new ScoutingSession with an unique sessionID.
+	 * @param location is the location of where a planned ScoutingSession takes place.
+	 * @param date is the date of when a ScoutingSession takes place.
+	 * @return ScoutingSession(location, date)
 	 * */
-	public ScoutingSession planSession(String place, Date date){
+	public ScoutingSession planSession(String location, Date date){
 		String sessionID = generateSessionID();
-		ScoutingSession session = new ScoutingSession(place, date, sessionID);
+		ScoutingSession session = new ScoutingSession(location, date, sessionID);
 		sessions.add(session);
 		return session;
 	}
 	
+	/**Creates an unique sessionID which is given to an instance of the class ScoutingSession;
+	 * @return a String with "Session" + sessions.size()
+	 * @see #planSession(String, Date)
+	 */
 	public String generateSessionID(){
 		return "Session" + sessions.size();
 	}
