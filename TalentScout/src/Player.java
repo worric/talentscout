@@ -15,6 +15,10 @@ public class Player {
 		notes = new ArrayList<Note>();
 	}
 	
+	public Player(){
+		this("Ikke-navngivet", 0, "Ikke-navngivet");
+	}
+	
 	public void addNote(Note note){
 		notes.add(note);
 	}

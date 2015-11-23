@@ -19,6 +19,11 @@ public class PlayerDB {
 		return playerDB.get(i);
 	}
 	
+	
+	public int getSize(){
+		return playerDB.size();
+	}
+	
 	public Player findPlayer(String name){
 		for(Player p : playerDB){
 			if(p.getName().equals(name)){

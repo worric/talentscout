@@ -26,9 +26,33 @@ public class testScout {
 		agenda = new Agenda();
 		pdb = new PlayerDB();
 		session0 = agenda.planSession("Frederikshavn", new Date());
+		session1 = agenda.planSession("Fredericia", new Date());
+		session2 = agenda.planSession("Skive", new Date());
+		
+		player0 = new Player("Hej", 21, "Skive");
+		player1 = new Player("hejsa", 22, "Skodsborg");
+		player2 = new Player("Hejsasa", 23, "Aalborg Chang");
 		
 		
-		pdb.addPlayer(new Player("lol", 21, "Horsens"));
+		pdb.addPlayer(player0);
+		session0.addPlayer(player0);
+		pdb.addPlayer(player1);
+		session0.addPlayer(player1);
+		pdb.addPlayer(player2);
+		session0.addPlayer(player2);
+		
+		String searchStringName = "Hejs";
+		String searchStringClub = "skod";
+		
+		for(int i = 0; i < pdb.getSize(); i++){
+			Player p = pdb.getPlayer(i);
+			if (p.getName().toLowerCase().matches(".*" + searchStringName.toLowerCase() + ".*") &&
+					p.getClub().toLowerCase().matches(".*" + searchStringClub.toLowerCase() + ".*")){
+				System.out.println("Name search: " + p.getName() + ", " + p.getAge() + ", " + p.getClub());
+			}
+		}
+		
+		
 		
 	}
 	
