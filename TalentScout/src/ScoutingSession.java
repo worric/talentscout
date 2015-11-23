@@ -1,44 +1,61 @@
 import java.util.Date;
+import java.util.ArrayList;
+
 public class ScoutingSession {
 	
-	private boolean event;
-	private boolean kamp;
+	private ArrayList <Player> players;
 	private String place;
-	private Date dateTime;
-	private boolean isFinished;
-	private QualitativeData qualData;
-	private QuantitativeData quanData;
+	private Date date;
+	private String sessionID;
 	
-	
-	public ScoutingSession(Date d, boolean event, boolean kamp, String place){
-		this.dateTime = d;
-		this.event = event;
-		this.kamp = kamp;
+	public ScoutingSession(String place, Date date, String sessionID){
+		players = new ArrayList <Player>();
 		this.place = place;
-		this.isFinished = false;
-		this.qualData = new QualitativeData();
-		this.quanData = new QuantitativeData();
+		this.date = date;
+		this.setSessionID(sessionID);
 	}
 	
-	public ScoutingSession(){
-		this(new Date(), true, false, "Dueodde");
+	public void addPlayer(Player player){
+		players.add(player);
+	}
+	
+	public Note makeNote(Player player){
+			Note note = new Note(this, player);
+			player.addNote(note);
+			return note;
+	}
+	
+	public Player getPlayer(int index){
+		return players.get(index);
 	}
 	
 	public String getPlace(){
-		return this.place;
+		return place;
 	}
 	
-	public Date getDate(){
-		return this.dateTime;
+	public void removePlayer(Player peter){
+		int k = players.indexOf(peter);
+		players.remove(k);
 	}
 	
-	public boolean getState(){
-		return this.isFinished;
+	public void displayPlayer(int index){
+		System.out.println(players.get(index));
+	}
+
+	public void displayPlayerOverview(){
+		for(int i = 0; i < players.size(); i++){
+			displayPlayer(i);
+		}
 	}
 	
-	public QualitativeData getQualData(){
-		return this.qualData;
+	public String getSessionID(){
+		return sessionID;
 	}
+
+	public void setSessionID(String sessionID) {
+		this.sessionID = sessionID;
+	}
+	
 	
 
 }

@@ -1,90 +1,77 @@
 import java.util.ArrayList;
-import java.util.Date;
+
 public class Player {
 	
 	private String name;
-	private static int idCounter = 0;
-	private int id;
-	private String noteGeneral;
-	private boolean active;
-	private ArrayList<ScoutingSession> sessions; // TODO evt implementer en helper class der kan styre tilgangen til objekter
-	private Date discoveredDate;
-	private Date undiscoveredDate;
-	private boolean isDiscovered;
+	private int age;
+	private String club;
+	private ArrayList <Note> notes;
 	
-	/**
-	 * Constructor.
-	 * @param name
-	 * @param id
-	 * @param note
-	 */
-	public Player(String name, String note, ScoutingSession s){
-		this.name = name;
-		this.id = idCounter;
-		idCounter++;
-		this.active = true;
-		this.sessions = new ArrayList<ScoutingSession>();
-		this.sessions.add(s);
-		this.discoveredDate = new Date();
-		this.isDiscovered = true;
-	} //Constructer slut
 	
-	/**
-	 * default constructor
-	 */
-	public Player(){
-		this("ikke-navngivet", "tom", null);
-	} // Default constructor slut
-	
-	/**
-	 * Testfunktion til at skrive en note til et playerobjekt.
-	 * @param note
-	 */
-	public void setNote(String note){
-		this.noteGeneral = note;
-	}
-	/**
-	 * testfuntion til at læse en note fra et playerobjekt.
-	 * @return
-	 */
-	public String getNote(){
-		return this.noteGeneral;
+	public Player(String name, int age, String club){
+		this.setName(name);
+		this.setAge(age);
+		this.setClub(club);
+		notes = new ArrayList<Note>();
 	}
 	
-	public int getId(){
-		return this.id;
+	public void addNote(Note note){
+		notes.add(note);
 	}
 	
-	public void setInactive(){
-		this.active = false;
+	public Note getNote(int index){
+		return notes.get(index);
 	}
 	
-	public void setActive(){
-		this.active = true;
+	public void displayNote(int index){
+		System.out.println(notes.get(index));
 	}
 	
-	public void addScoutingSession(ScoutingSession s){
-		this.sessions.add(s);
+	public void displayNoteOverview(){
+		for(int i = 0; i < notes.size(); i++){
+			displayNote(i);
+		}
 	}
 	
-	public void removeScoutingSession(int id){
-		this.sessions.remove(id);
-	}
-	
-	public void removeScoutingSession(ScoutingSession s){
-		int i = sessions.indexOf(s);
+	public double displayAverageScore(){
+		double totalScore = 0;
 		
-		sessions.remove(i);
+		for(int i = 0; i < notes.size(); i++){
+			Note report = getNote(i);
+			int speed = report.getSpeedScore();
+			int attitude = report.getAttitudeScore();
+			int technique = report.getTechniqueScore();
+			int gameSense = report.getGameSenseScore();
+			
+			totalScore = totalScore + speed + attitude + technique + gameSense;
+		}
 		
+		System.out.println(totalScore);  
+		return totalScore/(notes.size()*4);
 	}
-	
-	public ScoutingSession getScoutingSession(int i){
-		return sessions.get(i);
-	}
-	
-	public String getName(){
-		return this.name;
-	}
-	
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getClub() {
+		return club;
+	}
+
+	public void setClub(String club) {
+		this.club = club;
+	}
+	
 }
