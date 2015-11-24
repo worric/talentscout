@@ -439,10 +439,10 @@ public class UserInterface extends javax.swing.JFrame {
                         //open each player file
                         Player plrRestore = function.open(list[i].getName());
                         //convert the int age to a String
-                        String age = Integer.toString(plrRestore.age);
+                        String age = Integer.toString(plrRestore.getAge());
 
                         // create array containing player attributes
-                        String[] data = {plrRestore.name, age, plrRestore.Club};
+                        String[] data = {plrRestore.getName(), age, plrRestore.getClub()};
                         
                         // insert the array into the table 
                         model.addRow(data);
@@ -476,10 +476,10 @@ public class UserInterface extends javax.swing.JFrame {
         try {
             Player plrRestore = function.open(getFindPlayerFieldText());
             
-            actualName.setText(plrRestore.name);
-            String age = Integer.toString(plrRestore.age);
+            actualName.setText(plrRestore.getName());
+            String age = Integer.toString(plrRestore.getAge());
             actualAge.setText(age);
-            actualClub.setText(plrRestore.Club);
+            actualClub.setText(plrRestore.getClub());
             function.changeCard(playerPanelBottom, playerPanelBottomShow);
             
             function.buildString();

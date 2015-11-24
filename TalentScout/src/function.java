@@ -63,10 +63,10 @@ public class function {
                 
                 Player plrRestore = playersFound.get(i);
                 // Convert player age from type int to String
-                String age = Integer.toString(plrRestore.age);
+                String age = Integer.toString(plrRestore.getAge());
                 
                 // Make a String array of the players' attributes
-                String[] data = {plrRestore.name, age, plrRestore.club};
+                String[] data = {plrRestore.getName(), age, plrRestore.getClub()};
                 
                 // Add the array to a row in the table
                 model.addRow(data);
