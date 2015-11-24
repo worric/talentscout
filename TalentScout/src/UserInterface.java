@@ -17,7 +17,10 @@ import java.util.ArrayList;
  * @author mikkelmoerch
  */
 public class UserInterface extends javax.swing.JFrame {
-    function function = new function();
+    function function;
+    Agenda agenda;
+    PlayerDB plrDB;
+    
     /**
      * Creates new form UserInterface
      */
@@ -25,6 +28,10 @@ public class UserInterface extends javax.swing.JFrame {
     public UserInterface() {
         initComponents();
         model = (DefaultTableModel) plrTable.getModel();
+        this.function = new function(plrDB, agenda);
+    	this.agenda = new Agenda();
+        this.plrDB = new PlayerDB(agenda, function);
+        plrDB.loadPlayerDB();   
     }
 
     /**
@@ -430,14 +437,17 @@ public class UserInterface extends javax.swing.JFrame {
         model.setRowCount(0);
         
         try{
-            // create array of all files in the directory
-            File[] list = function.getFiles();
-                // Check if there are player files in the array
-                if(list.length != 0) {                   
-                    // iterate through all files
-                    for(int i = 0; i < list.length; i++){
+            // Get current ArrayList of all Player Objects
+            ArrayList<Player> list = plrDB.getArrayListPlayer();
+                // Check if there are Player Objects in the array
+                if(list.size() != 0) {                   
+                    // iterate through all Player Objects
+                    for(int i = 0; i < list.size(); i++){
                         //open each player file
-                        Player plrRestore = function.open(list[i].getName());
+                        //Player plrRestore = function.open(list[i].getName());
+                    	Player plrRestore = list.get(i);
+                    	// print the list to the console as a test
+                    	System.out.println(list.get(i).getName());
                         //convert the int age to a String
                         String age = Integer.toString(plrRestore.getAge());
 
@@ -460,32 +470,18 @@ public class UserInterface extends javax.swing.JFrame {
         String club = clubField.getText();
         
         // Saving the player object in a file
-        Player plr = function.register(name, age, club);
-        try {
-            function.save(plr);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        plrDB.register(name, age, club);
         
         // Let the user view the player list
         viewPlayerList();
     }//GEN-LAST:event_registerBtnActionPerformed
 
     private void findPlayerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findPlayerBtnActionPerformed
-
-        try {
-            Player plrRestore = function.open(getFindPlayerFieldText());
-            
-            actualName.setText(plrRestore.getName());
-            String age = Integer.toString(plrRestore.getAge());
-            actualAge.setText(age);
-            actualClub.setText(plrRestore.getClub());
-            function.changeCard(playerPanelBottom, playerPanelBottomShow);
-            
-            function.buildString();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+    	// Erstattet med savePlayerDB, som skriver alle Player Objects i ArrayListen
+    	// til filen. 
+    	
+    	plrDB.savePlayerDB(plrDB.getArrayListPlayer());
+    	
     }//GEN-LAST:event_findPlayerBtnActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed

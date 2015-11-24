@@ -16,8 +16,13 @@ import javax.swing.table.DefaultTableModel;
 public class function {
     
     Preferences preference = new Preferences();
-    Agenda agenda = new Agenda();
-    PlayerDB plrDB = new PlayerDB(agenda);
+    Agenda agenda;
+    PlayerDB plrDB;
+    
+    function(PlayerDB plrDB, Agenda agenda){
+    	this.plrDB = plrDB;
+    	this.agenda = agenda;
+    }
     
     // CURRENT FUNCTION BEEN WORKED ON
     public ArrayList<Player> searchForName(String inputName)throws Exception{
@@ -259,21 +264,7 @@ public class function {
         // revalidates the component hierarchy
         parent.revalidate();
     }
-    /**
-     * Creates a Player object with specified attributes which is added to the PlayerDB ArrayList
-     * @param name name of the player
-     * @param age player's age
-     * @param club club of the player
-     * @return a Player object
-     */
-    public void register(String name, int age, String club){
-        Player plr = new Player(name, age, club);
-        /*plr.setName(name);
-        plr.setAge(age);
-        plr.setClub(club);*/
-        
-        plrDB.addPlayer(plr);
-    }
+
     
     /**
      * Writes a Player object to a file
@@ -341,87 +332,6 @@ public class function {
         return plrRestore;
     }
     
-    /**
-     * Load a file which contains all player objects
-     * @return
-     */
-    public ArrayList<Player> loadPlayerDB(){
-    	try {
-    	//Directory of file containing Player Objects
-    		// Declaring the directory of the file we want to access
-    		String path ="./playerfiles";
-    		String fileName = "playerdb";
-    		String pathForFile = path+"/"+fileName;
-    		
-    	// Connection established to the file
-    	FileInputStream fi = new FileInputStream(pathForFile);
-    	
-    	// Preparing for reading of file
-    	ObjectInputStream oi = new ObjectInputStream(fi);
-    	
-    	// Reading the file 
-    	@SuppressWarnings("unchecked")
-		ArrayList<Player> arrayOfPlayers = (ArrayList<Player>) oi.readObject();
-    	
-    	//Closing the stream
-    	oi.close();
-    	
-    	for(int i = 0; i < arrayOfPlayers.size(); i++){
-    		// prints Player Objects
-    		System.out.println(arrayOfPlayers.get(i).getName());
-
-    		int NN = arrayOfPlayers.get(i).getNumberOfNotes();
-    		for(int j = 0; j < NN; j++){
-    			// prints Note Objects of that Player
-    			System.out.println(arrayOfPlayers.get(i).getNote(j));
-    		}
-    		System.out.println("-------");
-    	}
-    	
-    	return arrayOfPlayers;
-    	
-    	} catch (Exception e){
-    		e.printStackTrace();
-    		return null;
-    	}
-    }
-    
-    /**
-     * Saves all current Player Objects in the ArrayList<Player> to the playerdb file
-     * @param playerList
-     */
-    public void savePlayerDB(ArrayList<Player> playerList){
-    	try {
-    		
-    		// creating instances of Players and adding Notes to those Player Objects
-    		Player Børge = new Player("Børge", 30, "Horsens");
-    		Player Ralf = new Player("Ralf", 21, "VIK");
-    		Børge.addNote(new Note(null, Børge));
-    		Ralf.addNote(new Note(null, Ralf));
-    		
-    		//adding players to the arrayList
-    		playerList.add(Ralf);
-    		playerList.add(Børge);
-    		
-    		// Declaring the directory of the file we want to access
-    		String path ="./playerfiles";
-    		String fileName = "playerdb";
-    		String pathForFile = path+"/"+fileName;
-    		
-    		//Connecting to the file
-    		FileOutputStream fo = new FileOutputStream(pathForFile);
-    		
-    		//Opening the file
-    		ObjectOutputStream oo = new ObjectOutputStream(fo);
-    		
-    		// Writing to the file 
-    		oo.writeObject(playerList);
-    		
-    		oo.close();
-    	} catch (Exception e){
-    		e.printStackTrace();
-    	}
-    }
     
     public void saveAgenda(ArrayList<ScoutingSession> agenda){
     	try {
