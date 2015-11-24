@@ -36,8 +36,8 @@ public class function {
 
             if(inputName.isEmpty()){
                 foundPlayers.add(plrRestore);
-            } else if(plrRestore.name.matches(inputName + ".*")){
-                System.out.println(plrRestore.name);
+            } else if(plrRestore.getName().matches(inputName + ".*")){
+                //System.out.println(plrRestore.getName());
                 //if true, add the player object to the ArrayList
                 foundPlayers.add(plrRestore); 
             } else {
@@ -46,9 +46,9 @@ public class function {
             }
         }
         // return the ArrayList with all the players found.
-        /*for(int i = 0; i < foundPlayers.size(); i++){
-        System.out.println(foundPlayers.get(i).name);
-        }*/
+        for(int i = 0; i < foundPlayers.size(); i++){
+        System.out.println(foundPlayers.get(i).getName());
+        }
         return foundPlayers;
     }
     
