@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Note {
+public class Note implements Serializable {
 	
 	public enum elements {speedText, speedScore, attitudeText, attitudeScore, techniqueText, techniqueScore, gameSenseText, gameSenseScore};
 
