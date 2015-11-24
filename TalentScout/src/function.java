@@ -105,7 +105,7 @@ public class function {
              plrRestore = open(files[i].getName());
              // Convert the int age to a String in order to be able to compare it
              // with user input via the matches() method. 
-             String age = Integer.toString(plrRestore.age);
+             String age = Integer.toString(plrRestore.getAge());
              
              // User input we want to check if it matches with any Player object's attributes
              // Given variables to give a better overview.
@@ -115,13 +115,13 @@ public class function {
              if(inputName.isEmpty()){
                  checkInputName = true;
              } else {
-                 checkInputName = plrRestore.name.matches(inputName + ".*");
+                 checkInputName = plrRestore.getName().matches(inputName + ".*");
              }
              
              if(inputClub.isEmpty()){
                  checkInputClub = true;
              } else {
-                 checkInputClub = plrRestore.club.matches(inputClub + ".*");
+                 checkInputClub = plrRestore.getClub().matches(inputClub + ".*");
              }
              
              if(inputAge.isEmpty()){
@@ -171,10 +171,10 @@ public class function {
                  
                  Player plrRestore = playersFound.get(i);
                  // Convert player age from type int to String
-                 String age = Integer.toString(plrRestore.age);
+                 String age = Integer.toString(plrRestore.getAge());
                  
                  // Make a String array of the players' attributes
-                 String[] data = {plrRestore.name, age, plrRestore.club};
+                 String[] data = {plrRestore.getName(), age, plrRestore.getClub()};
                  
                  // Add the array to a row in the table
                  model.addRow(data);
@@ -207,7 +207,7 @@ public class function {
             // Checks if the user inputs match the Player object's attributes.
             // Also due to code above, this returns true if some search fields are left blank
             // and one search field has a value which matches the attribute of a Player object.
-            } else if(plrRestore.club.matches(inputClub + ".*")){
+            } else if(plrRestore.getClub().matches(inputClub + ".*")){
             
                 //if true, add the player object to the ArrayList
                 foundPlayers.add(plrRestore);
@@ -232,10 +232,10 @@ public class function {
                 
                 Player plrRestore = playersFound.get(i);
                 // Convert player age from type int to String
-                String age = Integer.toString(plrRestore.age);
+                String age = Integer.toString(plrRestore.getAge());
                 
                 // Make a String array of the players' attributes
-                String[] data = {plrRestore.name, age, plrRestore.club};
+                String[] data = {plrRestore.getName(), age, plrRestore.getClub()};
                 
                 // Add the array to a row in the table
                 model.addRow(data);
@@ -269,10 +269,10 @@ public class function {
      * @return a Player object
      */
     public Player register(String name, int age, String club){
-        Player plr = new Player();
-        plr.name = name;
-        plr.age = age;
-        plr.club = club;
+        Player plr = new Player(name, age, club);
+        /*plr.setName(name);
+        plr.setAge(age);
+        plr.setClub(club);*/
         
         return plr;
     }
@@ -284,7 +284,7 @@ public class function {
      */
     public void save(Player plr) throws Exception {
         // The to-be file name which is equal to the player name
-        String fileName = plr.name;
+        String fileName = plr.getName();
         // The path of the directory we want to keep our files in
         String path = preference.getPlayerDir().getPath();
         // The path of the file we want to create
@@ -379,7 +379,6 @@ public class function {
         return paths;
 
         }
-    }
 
 	// OUT-OF-CONTEXT FUNCTIONS BEING RESEARCHED
     /**
@@ -429,3 +428,4 @@ public class function {
         }
         System.out.println(sb);
     }
+}
