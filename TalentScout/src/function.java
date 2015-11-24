@@ -17,14 +17,10 @@ public class function {
     
     Preferences preference = new Preferences();
     
-    public function(){
-        
-    }
-    
     // CURRENT FUNCTION BEEN WORKED ON
     public ArrayList<Player> searchForName(String inputName)throws Exception{
         // ArrayList of Player objects
-        ArrayList<Player> foundPlayers = new ArrayList();
+        ArrayList<Player> foundPlayers = new ArrayList<Player>();
         Player plrRestore;
         // Declaring the directory of player objects 
         File[] files = getFiles();
@@ -86,7 +82,7 @@ public class function {
       */
      public ArrayList<Player> search(String inputName, String inputClub, String inputAge)throws Exception{
          // ArrayList of Player objects
-         ArrayList<Player> foundPlayers = new ArrayList();
+         ArrayList<Player> foundPlayers = new ArrayList<Player>();
          Player plrRestore;
          boolean checkInputName;
          boolean checkInputClub;
