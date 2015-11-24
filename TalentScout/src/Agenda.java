@@ -15,21 +15,21 @@ import java.util.Date;
 
 public class Agenda {
 	
-	/**ArrayList with ScoutingSessions referred to as sessions.*/
+	/**ArrayList with ScoutingSessions referred to as "sessions".*/
 	private ArrayList <ScoutingSession> sessions;
 	 
-	/** A generic ScoutingSession referred to as session.*/
+	/** A generic ScoutingSession referred to as "session".*/
 	private ScoutingSession session;
 	
 	
-	/**The Agenda constructor which ties the reference variable sessions to a new ArrayList*/
+	/**Creates an agenda which ties the reference variable "sessions" to a new ArrayList*/
 	public Agenda(){
 		sessions = new ArrayList<ScoutingSession>();
 	}
 	
 	
 	/**
-	 * Plans a ScoutingSession by creating a new ScoutingSession and thereafter adding it to the ArrayList sessions. It also initiates a new ScoutingSession with an unique sessionID.
+	 * Plans a ScoutingSession by creating a new ScoutingSession and thereafter adding it to the ArrayList "sessions". It also initiates a new ScoutingSession with an unique sessionID.
 	 * @param location is the location of where a planned ScoutingSession takes place.
 	 * @param date is the date of when a ScoutingSession takes place.
 	 * @return ScoutingSession(location, date)
@@ -63,8 +63,8 @@ public class Agenda {
 	
 	
 	/**
-	 * Gets a ScoutingSession from the ArrayList of sessions.
-	 * @param index is an integer value where a user can insert the wanted return index
+	 * Gets a ScoutingSession from the ArrayList "sessions".
+	 * @param index is an integer value which decides the place of action in the ArrayList
 	 * @return ScoutingSession
 	 */
 	public ScoutingSession getSession(int index){
@@ -97,7 +97,7 @@ public class Agenda {
 	
 	
 	/**
-	 * Displays the entire ArrayList of sessions.
+	 * Displays the entire ArrayList "sessions".
 	 */
 	public void displaySessionOverview(){
 		for(int i = 0; i < sessions.size(); i = i + 1){
