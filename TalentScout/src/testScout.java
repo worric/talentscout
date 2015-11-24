@@ -12,11 +12,11 @@ public class testScout {
 	private static Player player2;
 	
 	public static void main(String[] args){
-		//testSessionID();
+		testSessionID();
 		//testDisplaySessions();
 		//testFindObject();
 		//testPlayerRegistration();
-		testProgram();
+		//testProgram();
 	}
 	
 	public static void testProgram(){
@@ -75,11 +75,19 @@ public class testScout {
 	
 	private static void testSessionID(){
 		agenda = new Agenda();
-		agenda.planSession("Randers", new Date());
-		agenda.planSession("Odense", new Date());
-		agenda.planSession("Aalborg", new Date());
+		ScoutingSession session0 = agenda.planSession("Randers", new Date());
+		ScoutingSession session1 = agenda.planSession("Odense", new Date());
+		ScoutingSession session2 = agenda.planSession("Aalborg", new Date());
 		
-		System.out.println(agenda.findSession("Session0").getPlace());
+		System.out.println(session0.getSessionID());
+		
+		agenda.cancelSession(session0);
+		
+		agenda.getSession(10);
+		
+		agenda.displaySession(0);
+		agenda.displaySessionOverview();
+		
 	}
 	
 	private static void testDisplaySessions(){
