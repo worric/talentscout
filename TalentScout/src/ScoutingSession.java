@@ -1,7 +1,8 @@
 import java.util.Date;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ScoutingSession {
+public class ScoutingSession implements Serializable {
 	
 	private ArrayList <Player> players;
 	private String place;
@@ -29,6 +30,10 @@ public class ScoutingSession {
 		return players.get(index);
 	}
 	
+	public int getNumberOfPlayers(){
+		return players.size();
+	}
+	
 	public String getPlace(){
 		return place;
 	}
@@ -54,6 +59,10 @@ public class ScoutingSession {
 
 	public void setSessionID(String sessionID) {
 		this.sessionID = sessionID;
+	}
+	
+	public ArrayList<Player> getList(){
+		return players;
 	}
 	
 	

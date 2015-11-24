@@ -423,6 +423,87 @@ public class function {
     	}
     }
     
+    public void saveAgenda(ArrayList<ScoutingSession> agenda){
+    	try {
+    		
+    		/*
+    		// creating instances of Players and adding Notes to those Player Objects
+    		Player Børge = new Player("Børge", 30, "Horsens");
+    		Player Ralf = new Player("Ralf", 21, "VIK");
+    		Børge.addNote(new Note(null, Børge));
+    		Ralf.addNote(new Note(null, Ralf));
+    		
+    		//adding players to the arrayList
+    		playerList.add(Ralf);
+    		playerList.add(Børge);*/
+    		
+    		// Declaring the directory of the file we want to access
+    		String path ="./playerfiles";
+    		String fileName = "sessiondb";
+    		String pathForFile = path+"/"+fileName;
+    		
+    		//Connecting to the file
+    		FileOutputStream fo = new FileOutputStream(pathForFile);
+    		
+    		//Opening the file
+    		ObjectOutputStream oo = new ObjectOutputStream(fo);
+    		
+    		// Writing to the file 
+    		oo.writeObject(agenda);
+    		
+    		oo.close();
+    	} catch (Exception e){
+    		e.printStackTrace();
+    	}
+    }
+    
+    public ArrayList<ScoutingSession> loadAgenda(){
+    	try {
+    	//Directory of file containing Player Objects
+    		// Declaring the directory of the file we want to access
+    		String path ="./playerfiles";
+    		String fileName = "sessiondb";
+    		String pathForFile = path+"/"+fileName;
+    		
+    	// Connection established to the file
+    	FileInputStream fi = new FileInputStream(pathForFile);
+    	
+    	// Preparing for reading of file
+    	ObjectInputStream oi = new ObjectInputStream(fi);
+    	
+    	// Reading the file 
+    	@SuppressWarnings("unchecked")
+    	ArrayList<ScoutingSession> agendaArray;
+    	if(oi.readObject() instanceof ArrayList<?>){
+    		agendaArray = (ArrayList<ScoutingSession>) oi.readObject();
+    	} else {
+    		agendaArray = null;
+    	}
+		
+    	
+    	//Closing the stream
+    	oi.close();
+    	
+    	for(int i = 0; i < agendaArray.size(); i++){
+    		// prints Player Objects
+    		System.out.println(agendaArray.get(i));
+
+    		int NN = agendaArray.get(i).getNumberOfPlayers();
+    		for(int j = 0; j < NN; j++){
+    			// prints Note Objects of that Player
+    			System.out.println(agendaArray.get(i).getPlayer(j));
+    		}
+    		System.out.println("-------");
+    	}
+    	
+    	return agendaArray;
+    	
+    	} catch (Exception e){
+    		e.printStackTrace();
+    		return null;
+    	}
+    }
+    
     /**
      * Checks if the directory for player files is created.
      * If it isn't, we create it using mkdir(). 

@@ -79,6 +79,10 @@ public class Agenda extends Observable {
 			displaySession(i);
 		}
 	}
+	
+	public ArrayList<ScoutingSession> getList(){
+		return sessions;
+	}
 
 	
 

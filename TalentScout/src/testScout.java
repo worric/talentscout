@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 
 public class testScout {
@@ -20,15 +21,16 @@ public class testScout {
 		//testFindObject();
 		//testPlayerRegistration();
 		//testProgram();
-		//testPlayerDB();
-		function func = new function();
-		func.savePlayerDB();
-		func.loadPlayerDB();
+		testPlayerDB();
+		//function func = new function();
+		//func.savePlayerDB();
+		//func.loadPlayerDB();
 		
 	}
 	
 	public static void testPlayerDB(){
 		agenda = new Agenda();
+		function f = new function();
 		DateManager dmgr = new DateManager();
 		pdb = new PlayerDB(agenda); // agenda er argument pga. observer interface
 		
@@ -59,13 +61,19 @@ public class testScout {
 		player3.addNote(new Note(session0, player3));
 		session0.addPlayer(player3);
 		
-		if(player0.getNumberOfNotes() > 0){
-			for(int i = 0; i < player0.getNumberOfNotes(); i++){
-				System.out.println(player0.getNote(i));
+		ArrayList<ScoutingSession> agendaList = agenda.getList();
+		for (int i = 0; i < agendaList.size(); i++){
+			System.out.println(agendaList.get(i));
+			for(int j = 0; j < agendaList.get(i).getNumberOfPlayers(); j++){
+				System.out.println(agendaList.get(i).getPlayer(j));
 			}
-		} else {
-			System.out.println("der er ingen note!");
 		}
+		
+		// save both databases. agenda.getlist is a list of sessions, session0.getlist i a list of players
+		f.saveAgenda(agenda.getList());
+		f.savePlayerDB(session0.getList());
+		
+
 		
 		// agenda.displaySessionOverview();
 		
