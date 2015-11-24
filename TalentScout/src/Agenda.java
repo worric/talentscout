@@ -6,14 +6,18 @@ import java.util.Date;
  *It can also show an overview of all the planned ScoutingSessions.
  *
  * @author Frederik Frode Nygart
- * 
+ * @author Mikkel Mørch
+ * @author Jacob Krag Hansen
+ * @author Robin Damsgaard Larsen
+ * @author Lotte Selnø
+ * @author Bjørn Alsted Nielsen 
  */
 
 public class Agenda {
 	
 	/**ArrayList with ScoutingSessions referred to as sessions.*/
 	private ArrayList <ScoutingSession> sessions;
-	
+	 
 	/** A generic ScoutingSession referred to as session.*/
 	private ScoutingSession session;
 	
