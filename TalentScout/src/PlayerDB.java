@@ -3,18 +3,19 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
-public class PlayerDB implements Observer {
+public class PlayerDB {
 	
 	private ArrayList<Player> playerDB;
-	private Observable agenda;
 	
-	public PlayerDB(Observable o, function func){
-		this.playerDB = loadPlayerDB();
-		this.agenda = o;
-		agenda.addObserver(this);
+	public PlayerDB(){
+		/*try {
+			this.playerDB = loadPlayerDB();
+		} catch (Exception e) {
+			e.printStackTrace();*/
+			this.playerDB = new ArrayList<Player>();
+		//}
+		
 	}
 	
     /**
@@ -133,17 +134,6 @@ public class PlayerDB implements Observer {
 			}
 		}
 		return null;
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		if(o instanceof Agenda && arg instanceof ScoutingSession){
-			ScoutingSession s = (ScoutingSession) arg;
-			Agenda a = (Agenda) o;
-			System.out.println(s);
-			System.out.println(a);
-		}
-		
 	}
 
 }

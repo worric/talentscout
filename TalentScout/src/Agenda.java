@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Observable;
 
 /**The Agenda class holds an ArrayList of ScoutingSessions.
  *The class is responsible for planning ScoutingSessions or canceling planned ScoutingSessions. 
@@ -9,7 +8,7 @@ import java.util.Observable;
  * @author Frederik Frode Nygart
  */
 
-public class Agenda extends Observable {
+public class Agenda {
 	
 	/**ArrayList with ScoutingSessions referred to as sessions.*/
 	private ArrayList <ScoutingSession> sessions;
@@ -32,8 +31,6 @@ public class Agenda extends Observable {
 		String sessionID = generateSessionID();
 		ScoutingSession session = new ScoutingSession(place, date, sessionID);
 		sessions.add(session);
-		this.setChanged();
-		this.notifyObservers(session);
 		return session;
 	}
 	

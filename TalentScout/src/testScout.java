@@ -30,9 +30,9 @@ public class testScout {
 	
 	public static void testPlayerDB(){
 		agenda = new Agenda();
-		function f = new function();
+		//function f = new function();
 		DateManager dmgr = new DateManager();
-		pdb = new PlayerDB(agenda); // agenda er argument pga. observer interface
+		//pdb = new PlayerDB(agenda); // agenda er argument pga. observer interface
 		
 		String dato = "27-11-2015";
 		
@@ -61,6 +61,8 @@ public class testScout {
 		player3.addNote(new Note(session0, player3));
 		session0.addPlayer(player3);
 		
+		System.out.println("------------------");
+		
 		ArrayList<ScoutingSession> agendaList = agenda.getList();
 		for (int i = 0; i < agendaList.size(); i++){
 			System.out.println(agendaList.get(i));
@@ -70,8 +72,8 @@ public class testScout {
 		}
 		
 		// save both databases. agenda.getlist is a list of sessions, session0.getlist i a list of players
-		f.saveAgenda(agenda.getList());
-		f.savePlayerDB(session0.getList());
+		//f.saveAgenda(agenda.getList());
+		//f.savePlayerDB(session0.getList());
 		
 
 		
