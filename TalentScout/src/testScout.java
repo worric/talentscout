@@ -20,7 +20,11 @@ public class testScout {
 		//testFindObject();
 		//testPlayerRegistration();
 		//testProgram();
-		testPlayerDB();
+		//testPlayerDB();
+		function func = new function();
+		func.savePlayerDB();
+		func.loadPlayerDB();
+		
 	}
 	
 	public static void testPlayerDB(){
