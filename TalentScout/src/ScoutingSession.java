@@ -30,12 +30,18 @@ public class ScoutingSession implements Serializable {
 		player.addNote(note);
 		return note;
 	}
-	
+	/**
+	 * Returns a player based on a certain ID. This ID is fetched from the arraylist "spillere"
+	 * and passed as an argument for the getPlayer method of pdb
+	 * @param index
+	 * @return Player
+	 */
 	public Player getPlayer(int index){
-		return players.get(index);
+		//return players.get(index);
+		return pdb.getPlayer(spillere.get(index));
 	}
-	
-	public Player getPlayer(String id){
+
+	public Player getPlayer(String id){ // TODO I'm not sure this method is needed at all.
 		return pdb.getPlayer(id);
 	}
 	
