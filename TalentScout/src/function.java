@@ -28,7 +28,7 @@ public class function {
         // The ArrayList we will populate with Player Objects which match the search criteria
         ArrayList<Player> foundPlayers = new ArrayList<Player>();
         Player plrRestore;
-        // Declaring the directory of registered player objects 
+        // Declaring the ArrayList of registered player objects
         ArrayList<Player> currentPlayerDB = plrDB.getArrayListPlayer();
         
         // Loops through the directory of player objects 

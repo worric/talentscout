@@ -52,14 +52,14 @@ public class PlayerDB {
      */
     public ArrayList<Player> loadPlayerDB(){
     	try {
-    	//Directory of file containing Player Objects
+
     	// Declaring the directory of the file we want to access
     	String path ="./playerfiles";
     	String fileName = "playerdb";
     	String pathForFile = path+"/"+fileName;
     	
-    	// we check if the directory exists
-    	// checkDirectoryExist();
+    	// we check if the file exists
+    	checkFileExist();
     	
     	// Connection established to the file
     	FileInputStream fi = new FileInputStream(pathForFile);
@@ -157,12 +157,25 @@ public class PlayerDB {
             }*/
         }
     }
-    /*
+    
     public void checkFileExist(){
-    	File playerDBFile = new File("playerdb");
+		// Declaring the name of the directory in which our file of player objects would be 
+		String path ="./playerfiles";
+		// Declaring the name of the file of player objects
+		String fileName = "playerdb";
+		// The path of the directory to that file - in type String
+		String pathForFile = path+"/"+fileName;
+    	
+		// Declaring the directory of the file we want to check exists
+		File playerDBFile = new File(pathForFile);
+		
+		// We check if the file exists.
     	if(!playerDBFile.isFile()){
-    		
+    		// If it doesn't, we create a new ArrayList of type Player.
+    		ArrayList<Player> listOfPlayers = new ArrayList<Player>();
+    		// We create a file and write the ArrayList to a file. 
+    		savePlayerDB(listOfPlayers);
     	}
-    }*/
+    }
 
 }
