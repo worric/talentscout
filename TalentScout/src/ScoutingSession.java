@@ -4,30 +4,39 @@ import java.util.ArrayList;
 
 public class ScoutingSession implements Serializable {
 	
+	private PlayerDB pdb;
 	private ArrayList <Player> players;
+	private ArrayList<String> spillere;
 	private String place;
 	private Date date;
 	private String sessionID;
 	
 	public ScoutingSession(String place, Date date, String sessionID){
 		players = new ArrayList <Player>();
+		spillere = new ArrayList<String>();
+		this.pdb = pdb; // TODO ret constructoren 
 		this.place = place;
 		this.date = date;
 		this.setSessionID(sessionID);
 	}
 	
 	public void addPlayer(Player player){
-		players.add(player);
+		//players.add(player);
+		spillere.add(player.getID());
 	}
 	
 	public Note makeNote(Player player){
-			Note note = new Note(this, player);
-			player.addNote(note);
-			return note;
+		Note note = new Note(this, player);
+		player.addNote(note);
+		return note;
 	}
 	
 	public Player getPlayer(int index){
 		return players.get(index);
+	}
+	
+	public Player getPlayer(String id){
+		return pdb.getPlayer(id);
 	}
 	
 	public int getNumberOfPlayers(){

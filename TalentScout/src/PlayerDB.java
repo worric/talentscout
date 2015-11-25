@@ -117,12 +117,8 @@ public class PlayerDB {
      * @param club club of the player
      */
     public void register(String name, int age, String club){
-        Player plr = new Player(name, age, club);
-        /*plr.setName(name);
-        plr.setAge(age);
-        plr.setClub(club);*/
-        
-        addPlayer(plr);
+        Player plr = new Player(name, age, club, generateID());
+        playerDB.add(plr);
     }
 	
 	public void addPlayer(Player p){
@@ -137,6 +133,16 @@ public class PlayerDB {
 		return playerDB.get(i);
 	}
 	
+	public Player getPlayer(String id){
+		
+		for(Player p : playerDB){
+			if (p.getID().equals(id)){
+				return p;
+			}
+		}
+		return null;
+	}
+	
 	public ArrayList<Player> getArrayListPlayer(){
 		return this.playerDB;
 	}
@@ -145,13 +151,8 @@ public class PlayerDB {
 		return playerDB.size();
 	}
 	
-	public Player findPlayer(String name){
-		for(Player p : playerDB){
-			if(p.getName().equals(name)){
-				return p;
-			}
-		}
-		return null;
+	private String generateID(){
+		return "p"+playerDB.size()+Math.floor(Math.random()*10);
 	}
 	
     /**

@@ -7,18 +7,16 @@ public class Player implements Serializable {
 	private String name;
 	private int age;
 	private String club;
+	private String id;
 	private ArrayList <Note> notes;
 	
 	
-	public Player(String name, int age, String club){
+	public Player(String name, int age, String club, String id){
 		this.setName(name);
 		this.setAge(age);
 		this.setClub(club);
+		this.id = id;
 		notes = new ArrayList<Note>();
-	}
-	
-	public Player(){
-		this("Ikke-navngivet", 0, "Ikke-navngivet");
 	}
 	
 	public void addNote(Note note){
@@ -93,6 +91,10 @@ public class Player implements Serializable {
 
 	public void setClub(String club) {
 		this.club = club;
+	}
+	
+	public String getID(){
+		return this.id;
 	}
 	
 }
