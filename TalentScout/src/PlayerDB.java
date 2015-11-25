@@ -31,7 +31,7 @@ public class PlayerDB {
      * In case the file does not exist, it is created automatically and the objects are written to it.
      * @param playerList
      */
-    public void savePlayerDB(ArrayList<Player> playerList){
+    public void savePlayerDB(){
     	try {
     		
     		//Connecting to the file
@@ -41,7 +41,7 @@ public class PlayerDB {
     		ObjectOutputStream oo = new ObjectOutputStream(fo);
     		
     		// Writing to the file 
-    		oo.writeObject(playerList);
+    		oo.writeObject(this.playerDB);
     		
     		oo.close();
     	} catch (Exception e){

@@ -45,7 +45,7 @@ public class Agenda {
     		ObjectOutputStream oo = new ObjectOutputStream(fo);
     		
     		// Writing to the file 
-    		oo.writeObject(sessions);
+    		oo.writeObject(this.sessions);
     		
     		oo.close();
     	} catch (Exception e){
