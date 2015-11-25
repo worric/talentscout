@@ -18,8 +18,8 @@ public class Agenda {
 	/**ArrayList with ScoutingSessions referred to as "sessions".*/
 	private ArrayList <ScoutingSession> sessions;
 	 
-	/** A generic ScoutingSession referred to as "session".*/
-	private ScoutingSession session;
+	///** A generic ScoutingSession referred to as "session".*/
+	//private ScoutingSession session;
 	
 	
 	/**Creates an agenda which ties the reference variable "sessions" to a new ArrayList*/

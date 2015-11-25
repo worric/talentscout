@@ -1,5 +1,6 @@
 import java.util.Date;
 
+@SuppressWarnings("unused")
 public class testScout {
 	
 	private static ScoutingSession session0;
@@ -12,11 +13,13 @@ public class testScout {
 	private static Player player2;
 	
 	public static void main(String[] args){
-		testSessionID();
+		//testSessionID();
 		//testDisplaySessions();
 		//testFindObject();
 		//testPlayerRegistration();
 		//testProgram();
+		
+
 	}
 	
 	public static void testProgram(){
