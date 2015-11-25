@@ -8,31 +8,34 @@ import java.util.ArrayList;
 public class PlayerDB {
 	
 	private ArrayList<Player> playerDB;
+	private String path;
+	private String fileName;
+	private String pathForFile;
 	
 	public PlayerDB(){
 		/*try {
 			this.playerDB = loadPlayerDB();
 		} catch (Exception e) {
 			e.printStackTrace();*/
+
+			this.path = "./playerfiles";
+			this.fileName = "playerdb";
+			this.pathForFile = path+"/"+fileName;
 			this.playerDB = loadPlayerDB();
 		//}
 		
 	}
 	
     /**
-     * Saves all current Player Objects in the ArrayList<Player> to the playerdb file
+     * Saves all current Player Objects in the ArrayList<Player> to the playerdb file.
+     * In case the file does not exist, it is created automatically and the objects are written to it.
      * @param playerList
      */
     public void savePlayerDB(ArrayList<Player> playerList){
     	try {
     		
-    		// Declaring the directory of the file we want to access
-    		String path ="./playerfiles";
-    		String fileName = "playerdb";
-    		String pathForFile = path+"/"+fileName;
-    		
     		//Connecting to the file
-    		FileOutputStream fo = new FileOutputStream(pathForFile);
+    		FileOutputStream fo = new FileOutputStream(this.pathForFile);
     		
     		//Opening the file
     		ObjectOutputStream oo = new ObjectOutputStream(fo);
@@ -47,32 +50,38 @@ public class PlayerDB {
     }
     
     /**
-     * Load a file which contains all player objects
+     * Loads a file which contains all player objects
      * @return
      */
-    public ArrayList<Player> loadPlayerDB(){
+    @SuppressWarnings("unchecked")
+	public ArrayList<Player> loadPlayerDB(){
     	try {
 
-    	// Declaring the directory of the file we want to access
-    	String path ="./playerfiles";
-    	String fileName = "playerdb";
-    	String pathForFile = path+"/"+fileName;
-    	
     	// we check if the folder/directory exists
     	checkDirectoryExist();
     	
     	// we check if the file exists
-    	checkFileExist();
+    	//		- this actually is not necessary as we can resolve this issue in by
+    	//		  catching and handling the FiltNotFoundException.
+    	// checkFileExist();
     	
+    	/**
+    	 * FileInputStream throws the FileNotFoundException
+    	 */
     	// Connection established to the file
-    	FileInputStream fi = new FileInputStream(pathForFile);
+    	FileInputStream fi = new FileInputStream(this.pathForFile);
     	
+    	/**
+    	 * ObjectInputStream throws the IOException
+    	 */
     	// Preparing for reading of file
     	ObjectInputStream oi = new ObjectInputStream(fi);
     	
+    	/**
+    	 * readObjection throws the ClassNotFoundException
+    	 */
     	// Reading the file 
-    	@SuppressWarnings("unchecked")
-		ArrayList<Player> arrayOfPlayers = (ArrayList<Player>) oi.readObject();
+    	ArrayList<Player> arrayOfPlayers = (ArrayList<Player>) oi.readObject();
     	
     	//Closing the stream
     	oi.close();
@@ -94,7 +103,10 @@ public class PlayerDB {
     	
     	} catch (Exception e){
     		e.printStackTrace();
-    		return null;
+    		// In case the file does not exist - there is not ArrayList to load
+    		// we initialize the playerDB ArrayList<Player> and return it. 
+    		playerDB = new ArrayList<Player>();
+    		return playerDB;
     	}
     }
     
@@ -103,7 +115,6 @@ public class PlayerDB {
      * @param name name of the player
      * @param age player's age
      * @param club club of the player
-     * @return a Player object
      */
     public void register(String name, int age, String club){
         Player plr = new Player(name, age, club);
@@ -161,8 +172,8 @@ public class PlayerDB {
         }
     }
     
-    public void checkFileExist(){
-    	
+    /*
+    public void checkFileExist(){	
     	// Declaring the name of the directory in which our file of player objects would be 
 		String path ="./playerfiles";
 		// Declaring the name of the file of player objects
@@ -180,6 +191,6 @@ public class PlayerDB {
     		// We create a file and write the ArrayList to a file. 
     		savePlayerDB(listOfPlayers);
     	}
-    }
+    }*/
 
 }
