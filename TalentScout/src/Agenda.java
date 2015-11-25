@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -26,14 +27,13 @@ public class Agenda {
 	
 	
 	/**The Agenda constructor which ties the reference variable sessions to a new ArrayList*/
-	public Agenda(){
-		// Instantiating a new ArrayList of ScoutingSessions as the database
-		sessions = new ArrayList<ScoutingSession>();
-		
+	public Agenda(){		
 		// Declaring the directory of the file we want to access
 		path = "./playerfiles";
 		fileName = "agendadb";
 		pathForFile = path+"/"+fileName;
+		
+		sessions = this.loadAgenda();
 	}
 	
     public void saveAgenda(){
@@ -57,8 +57,11 @@ public class Agenda {
      * Load a file which contains all agenda objects
      * @return
      */
-    public ArrayList<Player> loadAgenda(){
-    	try {    		
+    public ArrayList<ScoutingSession> loadAgenda(){
+    	try {
+        // we check if the folder/directory exists
+        checkDirectoryExist();
+        
     	// Connection established to the file
     	FileInputStream fi = new FileInputStream(pathForFile);
     	
@@ -67,7 +70,7 @@ public class Agenda {
     	
     	// Reading the file 
     	@SuppressWarnings("unchecked")
-		ArrayList<Player> arrayOfPlayers = (ArrayList<Player>) oi.readObject();
+    	ArrayList<ScoutingSession> agendaArray = (ArrayList<ScoutingSession>) oi.readObject();
     	
     	//Closing the stream
     	oi.close();
@@ -85,11 +88,11 @@ public class Agenda {
     		System.out.println("-------");
     	}*/
     	
-    	return arrayOfPlayers;
+    	return agendaArray;
     	
     	} catch (Exception e){
     		e.printStackTrace();
-    		return null;
+    		return new ArrayList<ScoutingSession>();
     	}
     }
 
@@ -152,7 +155,22 @@ public class Agenda {
 	public ArrayList<ScoutingSession> getList(){
 		return sessions;
 	}
-
 	
-
+    /**
+     * Checks if the directory for player files is created.
+     * If it isn't, we create it using mkdir(). 
+     */
+    public void checkDirectoryExist(){
+    	File playerDir = new File("./playerfiles");
+        // We check if the directory for the file is created
+        if(!playerDir.isDirectory()){
+            // If it doesn't exist, we create it with mkdir().
+            playerDir.mkdir();
+            /*
+            if(!preference.getPlayerDir().isDirectory()){
+            String lol = System.getProperty("user.dir");
+            System.out.println(lol);
+            }*/
+        }
+    }
 }
