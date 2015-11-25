@@ -58,6 +58,9 @@ public class PlayerDB {
     	String fileName = "playerdb";
     	String pathForFile = path+"/"+fileName;
     	
+    	// we check if the folder/directory exists
+    	checkDirectoryExist();
+    	
     	// we check if the file exists
     	checkFileExist();
     	
@@ -159,7 +162,8 @@ public class PlayerDB {
     }
     
     public void checkFileExist(){
-		// Declaring the name of the directory in which our file of player objects would be 
+    	
+    	// Declaring the name of the directory in which our file of player objects would be 
 		String path ="./playerfiles";
 		// Declaring the name of the file of player objects
 		String fileName = "playerdb";
