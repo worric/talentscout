@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -13,7 +14,7 @@ public class PlayerDB {
 			this.playerDB = loadPlayerDB();
 		} catch (Exception e) {
 			e.printStackTrace();*/
-			this.playerDB = new ArrayList<Player>();
+			this.playerDB = loadPlayerDB();
 		//}
 		
 	}
@@ -52,11 +53,14 @@ public class PlayerDB {
     public ArrayList<Player> loadPlayerDB(){
     	try {
     	//Directory of file containing Player Objects
-    		// Declaring the directory of the file we want to access
-    		String path ="./playerfiles";
-    		String fileName = "playerdb";
-    		String pathForFile = path+"/"+fileName;
-    		
+    	// Declaring the directory of the file we want to access
+    	String path ="./playerfiles";
+    	String fileName = "playerdb";
+    	String pathForFile = path+"/"+fileName;
+    	
+    	// we check if the directory exists
+    	// checkDirectoryExist();
+    	
     	// Connection established to the file
     	FileInputStream fi = new FileInputStream(pathForFile);
     	
@@ -135,5 +139,30 @@ public class PlayerDB {
 		}
 		return null;
 	}
+	
+    /**
+     * Checks if the directory for player files is created.
+     * If it isn't, we create it using mkdir(). 
+     */
+    public void checkDirectoryExist(){
+    	File playerDir = new File("./playerfiles");
+        // We check if the directory for the file is created
+        if(!playerDir.isDirectory()){
+            // If it doesn't exist, we create it with mkdir().
+            playerDir.mkdir();
+            /*
+            if(!preference.getPlayerDir().isDirectory()){
+            String lol = System.getProperty("user.dir");
+            System.out.println(lol);
+            }*/
+        }
+    }
+    /*
+    public void checkFileExist(){
+    	File playerDBFile = new File("playerdb");
+    	if(!playerDBFile.isFile()){
+    		
+    	}
+    }*/
 
 }
