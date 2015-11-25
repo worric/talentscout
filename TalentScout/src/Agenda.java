@@ -1,3 +1,7 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -16,11 +20,79 @@ public class Agenda {
 	/** A generic ScoutingSession referred to as session.*/
 	private ScoutingSession session;
 	
+	private String path;
+	private String fileName;
+	private String pathForFile;
+	
 	
 	/**The Agenda constructor which ties the reference variable sessions to a new ArrayList*/
 	public Agenda(){
+		// Instantiating a new ArrayList of ScoutingSessions as the database
 		sessions = new ArrayList<ScoutingSession>();
+		
+		// Declaring the directory of the file we want to access
+		path = "./playerfiles";
+		fileName = "agendadb";
+		pathForFile = path+"/"+fileName;
 	}
+	
+    public void saveAgenda(){
+    	try {
+    		//Connecting to the file
+    		FileOutputStream fo = new FileOutputStream(pathForFile);
+    		
+    		//Opening the file
+    		ObjectOutputStream oo = new ObjectOutputStream(fo);
+    		
+    		// Writing to the file 
+    		oo.writeObject(sessions);
+    		
+    		oo.close();
+    	} catch (Exception e){
+    		e.printStackTrace();
+    	}
+    }
+    
+    /**
+     * Load a file which contains all agenda objects
+     * @return
+     */
+    public ArrayList<Player> loadAgenda(){
+    	try {    		
+    	// Connection established to the file
+    	FileInputStream fi = new FileInputStream(pathForFile);
+    	
+    	// Preparing for reading of file
+    	ObjectInputStream oi = new ObjectInputStream(fi);
+    	
+    	// Reading the file 
+    	@SuppressWarnings("unchecked")
+		ArrayList<Player> arrayOfPlayers = (ArrayList<Player>) oi.readObject();
+    	
+    	//Closing the stream
+    	oi.close();
+    	
+    	/* Print to console for test
+    	for(int i = 0; i < arrayOfPlayers.size(); i++){
+    		// prints Player Objects
+    		System.out.println(arrayOfPlayers.get(i).getName());
+
+    		int NN = arrayOfPlayers.get(i).getNumberOfNotes();
+    		for(int j = 0; j < NN; j++){
+    			// prints Note Objects of that Player
+    			System.out.println(arrayOfPlayers.get(i).getNote(j));
+    		}
+    		System.out.println("-------");
+    	}*/
+    	
+    	return arrayOfPlayers;
+    	
+    	} catch (Exception e){
+    		e.printStackTrace();
+    		return null;
+    	}
+    }
+
 	
 	
 	/**This method plans a new ScoutingSession by add'ing it to the ArrayList sessions. It also gives the new ScoutingSession an unique sessionID.

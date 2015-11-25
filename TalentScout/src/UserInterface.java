@@ -30,7 +30,8 @@ public class UserInterface extends javax.swing.JFrame {
         model = (DefaultTableModel) plrTable.getModel();
         this.function = new function(plrDB, agenda);
     	this.agenda = new Agenda();
-        this.plrDB = new PlayerDB(agenda, function);
+        //this.plrDB = new PlayerDB(agenda, function);
+        this.plrDB = new PlayerDB();
         plrDB.loadPlayerDB();   
     }
 
