@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class ScoutingSession implements Serializable {
 	
-	private PlayerDB pdb;
 	private ArrayList <Player> players;
 	private ArrayList<Integer> spillere;
 	private String place;
@@ -12,9 +11,9 @@ public class ScoutingSession implements Serializable {
 	private int sessionID;
 	
 	public ScoutingSession(String place, Date date, int sessionID){
-		players = new ArrayList <Player>();
+		// TODO kommenteret ud players = new ArrayList <Player>();
 		spillere = new ArrayList<Integer>();
-		this.pdb = pdb; // TODO ret constructoren 
+		
 		this.place = place;
 		this.date = date;
 		this.sessionID = sessionID;
@@ -38,11 +37,13 @@ public class ScoutingSession implements Serializable {
 	 */
 	public Player getPlayer(int index){
 		//return players.get(index);
-		return pdb.getPlayerByIndex(spillere.get(index));
+		return PersonligTest.pdb.getPlayerByIndex(spillere.get(index));
+		// return PersonligTest.pdb.getPlayerByIndex(spillere.get(index));
 	}
 	
 	public int getNumberOfPlayers(){
-		return players.size();
+		//return players.size();
+		return spillere.size();
 	}
 	
 	public String getPlace(){
@@ -55,7 +56,7 @@ public class ScoutingSession implements Serializable {
 	}
 	
 	public void displayPlayer(int index){
-		System.out.println(players.get(index));
+		System.out.println(PersonligTest.pdb.getPlayerById(spillere.get(index)));
 	}
 
 	public void displayPlayerOverview(){

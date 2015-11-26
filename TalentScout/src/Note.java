@@ -2,10 +2,8 @@ import java.io.Serializable;
 
 public class Note implements Serializable {
 	
-	public enum elements {speedText, speedScore, attitudeText, attitudeScore, techniqueText, techniqueScore, gameSenseText, gameSenseScore};
-
-	private ScoutingSession session;
-	private Player player;
+	private int sessionID;
+	private int playerID;
 	private String speedText;
 	private int speedScore;
 	private String attitudeText;
@@ -16,24 +14,24 @@ public class Note implements Serializable {
 	private int gameSenseScore;
 	
 	public Note(ScoutingSession session, Player player){
-		this.setSession(session);
-		this.setPlayer(player);
+		this.sessionID = session.getSessionID();
+		this.playerID = player.getID();
 	}
 	
 	public ScoutingSession getSession() {
-		return session;
+		return PersonligTest.a.getSessionByID(sessionID);
 	}
 
 	public void setSession(ScoutingSession session) {
-		this.session = session;
+		this.sessionID = session.getSessionID();
 	}
 	
 	public Player getPlayer() {
-		return player;
+		return PersonligTest.pdb.getPlayerById(playerID);
 	}
 
 	public void setPlayer(Player player) {
-		this.player = player;
+		this.playerID = player.getID();
 	}
 
 	public String getSpeedText() {

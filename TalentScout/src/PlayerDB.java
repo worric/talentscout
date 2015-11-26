@@ -117,9 +117,11 @@ public class PlayerDB {
      * @param age player's age
      * @param club club of the player
      */
-    public void register(String name, int age, String club){
-        Player plr = new Player(name, age, club, generateID());
+    public Player register(String name, int age, String club){
+        Player plr = new Player(name, age, club, PlayerDB.idCounter);
+        PlayerDB.idCounter++;
         playerDB.add(plr);
+        return plr;
     }
 	
 	public void addPlayer(Player p){

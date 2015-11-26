@@ -26,7 +26,7 @@ public class Search {
 		// Loop through the database one player at a time and add it to a list to be returned to the GUI if it matches
 		for(int i = 0; i < pdb.getSize(); i++){
 			// Local player variable initialized
-			Player p = pdb.getPlayer(i);
+			Player p = pdb.getPlayerByIndex(i);
 			
 			// Check if the player matches the search criteria
 			if (p.getName().toLowerCase().matches(".*" + searchStringName.toLowerCase() + ".*") &&

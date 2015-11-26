@@ -26,15 +26,19 @@ public class Agenda {
 	private String pathForFile;
 	
 	// Class variable for generating ID for the planned session
-	private static int id = 0;
+	private static int idCounter = 0;
+	
+	private PlayerDB pdb;
 	
 	
 	/**The Agenda constructor which ties the reference variable sessions to a new ArrayList*/
-	public Agenda(){		
+	public Agenda(PlayerDB pdb){ // TODO skal muligvis ændres til ikke at tage en playerDB
 		// Declaring the directory of the file we want to access
 		path = "./playerfiles";
 		fileName = "agendadb";
 		pathForFile = path+"/"+fileName;
+		
+		this.pdb = pdb; // TODO skal muligvis slettes og oprettes som static reference
 		
 		sessions = this.loadAgenda();
 	}
@@ -107,9 +111,9 @@ public class Agenda {
 	 * */
 	public ScoutingSession planSession(String place, Date date){
 		// String sessionID = generateSessionID();
-		ScoutingSession session = new ScoutingSession(place, date, Agenda.id);
+		ScoutingSession session = new ScoutingSession(place, date, Agenda.idCounter);
 		sessions.add(session);
-		Agenda.id++;
+		Agenda.idCounter++;
 		return session;
 	}
 	
@@ -132,13 +136,22 @@ public class Agenda {
 	 * @param i
 	 * @return
 	 */
-	public ScoutingSession getSession(int index){
+	public ScoutingSession getSessionByIndex(int index){
 		return sessions.get(index);
+	}
+	
+	public ScoutingSession getSessionByID(int id){
+		for(ScoutingSession s : sessions){
+			if (s.getSessionID() == id){
+				return s;
+			}
+		}
+		return null;
 	}
 	
 	public ScoutingSession findSession(String sessionID){
 		for(int i = 0; i < sessions.size(); i++){
-			ScoutingSession session = getSession(i);
+			ScoutingSession session = getSessionByIndex(i);
 			if(sessionID.equals(session.getSessionID())){
 				return session;
 			}

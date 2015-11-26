@@ -9,6 +9,7 @@ public class Player implements Serializable {
 	private int age;
 	private String club;
 	private ArrayList <Note> notes;
+	private boolean isActive;
 	
 	
 	public Player(String name, int age, String club, int id){
@@ -16,6 +17,7 @@ public class Player implements Serializable {
 		this.setAge(age);
 		this.setClub(club);
 		this.playerID = id;
+		this.isActive = true;
 		notes = new ArrayList<Note>();
 	}
 	
@@ -95,6 +97,18 @@ public class Player implements Serializable {
 	
 	public int getID(){
 		return this.playerID;
+	}
+	
+	public void setInactive(){
+		if(!this.isActive == false){
+			this.isActive = false;
+		}
+	}
+	
+	public void setActive(){
+		if(!this.isActive == true){
+			this.isActive = true;
+		}
 	}
 	
 }
