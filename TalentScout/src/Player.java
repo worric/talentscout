@@ -10,7 +10,8 @@ public class Player implements Serializable {
 	private String club;
 	private ArrayList <Note> notes;
 	private boolean isActive; //TODO may be renamed to reflect "player discarded"
-	public enum parameters {speed, attitude, technique, gamesense};
+	
+	public enum Parameters {SPEED, ATTITUDE, TECHNIQUE, GAMESENSE};
 	
 	
 	public Player(String name, int age, String club, int id){
@@ -66,12 +67,13 @@ public class Player implements Serializable {
 		}
 	}
 	
-	public double getAverage(String parameter){ // TODO lav videre på denne case...
+	public double getAverage(Parameters parameters){ // TODO lav videre på denne case...
 		if(!notes.isEmpty()){
-			switch(parameter){
-			case "speed":
+			int j;
+			switch(parameters){
+			case SPEED:
 				double totalSpeed = 0;
-				int j = 0;
+				j = 0;
 				for(int i = 0; i < notes.size(); i++){
 					if(notes.get(i).getSpeedScore() != 0){
 						j++;
@@ -79,6 +81,36 @@ public class Player implements Serializable {
 					}
 				}
 				return totalSpeed/j;
+			case ATTITUDE:
+				double totalAttitude = 0;
+				j = 0;
+				for(int i = 0; i < notes.size(); i++){
+					if(notes.get(i).getAttitudeScore() != 0){
+						j++;
+						totalAttitude = totalAttitude + notes.get(i).getAttitudeScore();
+					}
+				}
+				return totalAttitude/j;
+			case TECHNIQUE:
+				double totalTechnique = 0;
+				j = 0;
+				for(int i = 0; i < notes.size(); i++){
+					if(notes.get(i).getTechniqueScore() != 0){
+						j++;
+						totalTechnique = totalTechnique + notes.get(i).getTechniqueScore();
+					}
+				}
+				return totalTechnique/j;
+			case GAMESENSE:
+				double totalGameSense = 0;
+				j = 0;
+				for(int i = 0; i < notes.size(); i++){
+					if(notes.get(i).getGameSenseScore() != 0){
+						j++;
+						totalGameSense = totalGameSense + notes.get(i).getGameSenseScore();
+					}
+				}
+				return totalGameSense/j;
 			default:
 				return 0;
 			}
