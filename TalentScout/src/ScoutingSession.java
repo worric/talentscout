@@ -6,18 +6,18 @@ public class ScoutingSession implements Serializable {
 	
 	private PlayerDB pdb;
 	private ArrayList <Player> players;
-	private ArrayList<String> spillere;
+	private ArrayList<Integer> spillere;
 	private String place;
 	private Date date;
-	private String sessionID;
+	private int sessionID;
 	
-	public ScoutingSession(String place, Date date, String sessionID){
+	public ScoutingSession(String place, Date date, int sessionID){
 		players = new ArrayList <Player>();
-		spillere = new ArrayList<String>();
+		spillere = new ArrayList<Integer>();
 		this.pdb = pdb; // TODO ret constructoren 
 		this.place = place;
 		this.date = date;
-		this.setSessionID(sessionID);
+		this.sessionID = sessionID;
 	}
 	
 	public void addPlayer(Player player){
@@ -38,11 +38,7 @@ public class ScoutingSession implements Serializable {
 	 */
 	public Player getPlayer(int index){
 		//return players.get(index);
-		return pdb.getPlayer(spillere.get(index));
-	}
-
-	public Player getPlayer(String id){ // TODO I'm not sure this method is needed at all.
-		return pdb.getPlayer(id);
+		return pdb.getPlayerByIndex(spillere.get(index));
 	}
 	
 	public int getNumberOfPlayers(){
@@ -68,13 +64,13 @@ public class ScoutingSession implements Serializable {
 		}
 	}
 	
-	public String getSessionID(){
+	public int getSessionID(){
 		return sessionID;
 	}
 
-	public void setSessionID(String sessionID) {
+	/*public void setSessionID(String sessionID) {
 		this.sessionID = sessionID;
-	}
+	}*/
 	
 	public ArrayList<Player> getList(){
 		return players;

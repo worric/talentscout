@@ -4,18 +4,18 @@ import java.util.ArrayList;
 
 public class Player implements Serializable {
 	
+	private int playerID;
 	private String name;
 	private int age;
 	private String club;
-	private String id;
 	private ArrayList <Note> notes;
 	
 	
-	public Player(String name, int age, String club, String id){
+	public Player(String name, int age, String club, int id){
 		this.setName(name);
 		this.setAge(age);
 		this.setClub(club);
-		this.id = id;
+		this.playerID = id;
 		notes = new ArrayList<Note>();
 	}
 	
@@ -93,8 +93,8 @@ public class Player implements Serializable {
 		this.club = club;
 	}
 	
-	public String getID(){
-		return this.id;
+	public int getID(){
+		return this.playerID;
 	}
 	
 }

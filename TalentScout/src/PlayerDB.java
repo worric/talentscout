@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class PlayerDB {
 	
+	private static int idCounter = 0;
 	private ArrayList<Player> playerDB;
 	private String path;
 	private String fileName;
@@ -129,14 +130,15 @@ public class PlayerDB {
 		playerDB.remove(p);
 	}
 	
-	public Player getPlayer(int i){
+	public Player getPlayerByIndex(int i){
 		return playerDB.get(i);
 	}
 	
-	public Player getPlayer(String id){
+	public Player getPlayerById(int id){
 		
+		// Iterate through all players and if ID matches, return that player
 		for(Player p : playerDB){
-			if (p.getID().equals(id)){
+			if (p.getID() == id){
 				return p;
 			}
 		}

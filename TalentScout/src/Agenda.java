@@ -25,6 +25,9 @@ public class Agenda {
 	private String fileName;
 	private String pathForFile;
 	
+	// Class variable for generating ID for the planned session
+	private static int id = 0;
+	
 	
 	/**The Agenda constructor which ties the reference variable sessions to a new ArrayList*/
 	public Agenda(){		
@@ -103,15 +106,16 @@ public class Agenda {
 	 * @return
 	 * */
 	public ScoutingSession planSession(String place, Date date){
-		String sessionID = generateSessionID();
-		ScoutingSession session = new ScoutingSession(place, date, sessionID);
+		// String sessionID = generateSessionID();
+		ScoutingSession session = new ScoutingSession(place, date, Agenda.id);
 		sessions.add(session);
+		Agenda.id++;
 		return session;
 	}
 	
-	public String generateSessionID(){
+	/*public String generateSessionID(){
 		return "Session" + sessions.size();
-	}
+	}*/
 	
 	
 	/**This method cancels an already planned ScoutingSession.
