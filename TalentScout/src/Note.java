@@ -13,9 +13,25 @@ public class Note implements Serializable {
 	private String gameSenseText;
 	private int gameSenseScore;
 	
-	public Note(ScoutingSession session, Player player){
+	public Note(ScoutingSession session, Player player,
+			String speedText, int speedScore,
+			String attitudeText, int attitudeScore,
+			String techniqueText, int techniqueScore,
+			String gameSenseText, int gameSenseScore){
 		this.sessionID = session.getSessionID();
 		this.playerID = player.getID();
+		this.speedText = speedText;
+		this.speedScore = speedScore;
+		this.attitudeText = attitudeText;
+		this.attitudeScore = attitudeScore;
+		this.techniqueText = techniqueText;
+		this.techniqueScore = techniqueScore;
+		this.gameSenseText = gameSenseText;
+		this.gameSenseScore = gameSenseScore;
+	}
+	
+	public Note(ScoutingSession session, Player player){
+		this(session, player, "", 0, "", 0, "", 0, "", 0);
 	}
 	
 	public ScoutingSession getSession() {
@@ -96,6 +112,15 @@ public class Note implements Serializable {
 
 	public void setGameSenseScore(int gameSenseScore) {
 		this.gameSenseScore = gameSenseScore;
+	}
+	
+	public void printNote(){
+		System.out.println("Name: "+PersonligTest.pdb.getPlayerById(playerID).getName()+":");
+		System.out.println("Session: "+PersonligTest.a.getSessionByID(sessionID).getPlace());
+		System.out.println("Speed: "+speedText+", "+speedScore+".");
+		System.out.println("Attitude: "+attitudeText+", "+attitudeScore+".");
+		System.out.println("Technique: "+techniqueText+", "+techniqueScore+".");
+		System.out.println("Game Sense: "+gameSenseText+", "+gameSenseScore+".");
 	}
 
 }

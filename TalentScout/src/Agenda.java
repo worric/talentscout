@@ -173,6 +173,10 @@ public class Agenda {
 		return sessions;
 	}
 	
+	public int getSize(){
+		return sessions.size();
+	}
+	
     /**
      * Checks if the directory for player files is created.
      * If it isn't, we create it using mkdir(). 

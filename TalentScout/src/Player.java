@@ -21,8 +21,26 @@ public class Player implements Serializable {
 		notes = new ArrayList<Note>();
 	}
 	
-	public void addNote(Note note){
+	public Note addNote(ScoutingSession session,
+			String speedText, int speedScore,
+			String attitudeText, int attitudeScore,
+			String techniqueText, int techniqueScore,
+			String gameSenseText, int gameSenseScore){
+		
+		// Construct a new note from the arguments passed
+		Note n = new Note(session, this,
+				speedText, speedScore,
+				attitudeText, attitudeScore,
+				techniqueText, techniqueScore,
+				gameSenseText, gameSenseScore);
+		
+		notes.add(n);
+		return n;
+	}
+	
+	public Note addNote(Note note){
 		notes.add(note);
+		return note;
 	}
 	
 	public Note getNote(int index){

@@ -24,6 +24,23 @@ public class ScoutingSession implements Serializable {
 		spillere.add(player.getID());
 	}
 	
+	public Note addNote(Player player,
+			String speedText, int speedScore,
+			String attitudeText, int attitudeScore,
+			String techniqueText, int techniqueScore,
+			String gameSenseText, int gameSenseScore){
+		
+		// Construct a new note from the arguments passed
+		Note n = new Note(this, player,
+				speedText, speedScore,
+				attitudeText, attitudeScore,
+				techniqueText, techniqueScore,
+				gameSenseText, gameSenseScore);
+		
+		player.addNote(n);
+		return n;
+	}
+	
 	public Note makeNote(Player player){
 		Note note = new Note(this, player);
 		player.addNote(note);
@@ -68,15 +85,8 @@ public class ScoutingSession implements Serializable {
 	public int getSessionID(){
 		return sessionID;
 	}
-
-	/*public void setSessionID(String sessionID) {
-		this.sessionID = sessionID;
-	}*/
 	
 	public ArrayList<Player> getList(){
 		return players;
 	}
-	
-	
-
 }
