@@ -9,7 +9,8 @@ public class Player implements Serializable {
 	private int age;
 	private String club;
 	private ArrayList <Note> notes;
-	private boolean isActive;
+	private boolean isActive; //TODO may be renamed to reflect "player discarded"
+	public enum parameters {speed, attitude, technique, gamesense};
 	
 	
 	public Player(String name, int age, String club, int id){
@@ -64,12 +65,40 @@ public class Player implements Serializable {
 			displayNote(i);
 		}
 	}
+	
+	public double getAverage(String parameter){ // TODO lav videre på denne case...
+		if(!notes.isEmpty()){
+			switch(parameter){
+			case "speed":
+				double totalSpeed = 0;
+				int j = 0;
+				for(int i = 0; i < notes.size(); i++){
+					if(notes.get(i).getSpeedScore() != 0){
+						j++;
+						totalSpeed = totalSpeed + notes.get(i).getSpeedScore();
+					}
+				}
+				return totalSpeed/j;
+			default:
+				return 0;
+			}
+		} else {
+			return 0;
+		}
+		
+		
+	}
+	
 	/**
 	 * Changed this method to check if any notes have been made before doing the calculation
 	 * @return
 	 */
 	public double displayAverageScore(){
 		double totalScore = 0;
+		double totalSpeed = 0;
+		double totalAttitude = 0;
+		double totalTechnique = 0;
+		double totalGameSense = 0;
 		
 		if(notes.size() > 0){
 			for(int i = 0; i < notes.size(); i++){
