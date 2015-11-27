@@ -35,7 +35,7 @@ public class Note implements Serializable {
 	}
 	
 	public ScoutingSession getSession() {
-		return PersonligTest.a.getSessionByID(sessionID);
+		return TestScout2.a.getSessionByID(sessionID);
 	}
 
 	public void setSession(ScoutingSession session) {
@@ -43,7 +43,7 @@ public class Note implements Serializable {
 	}
 	
 	public Player getPlayer() {
-		return PersonligTest.pdb.getPlayerById(playerID);
+		return TestScout2.pdb.getPlayerById(playerID);
 	}
 
 	public void setPlayer(Player player) {
@@ -115,8 +115,8 @@ public class Note implements Serializable {
 	}
 	
 	public void printNote(){
-		System.out.println("Name: "+PersonligTest.pdb.getPlayerById(playerID).getName()+":");
-		System.out.println("Session: "+PersonligTest.a.getSessionByID(sessionID).getPlace());
+		System.out.println("Name: "+TestScout2.pdb.getPlayerById(playerID).getName()+":");
+		System.out.println("Session: "+TestScout2.a.getSessionByID(sessionID).getPlace());
 		System.out.println("Speed: "+speedText+", "+speedScore+".");
 		System.out.println("Attitude: "+attitudeText+", "+attitudeScore+".");
 		System.out.println("Technique: "+techniqueText+", "+techniqueScore+".");

@@ -54,7 +54,7 @@ public class ScoutingSession implements Serializable {
 	 */
 	public Player getPlayer(int index){
 		//return players.get(index);
-		return PersonligTest.pdb.getPlayerByIndex(spillere.get(index));
+		return TestScout2.pdb.getPlayerByIndex(spillere.get(index));
 		// return PersonligTest.pdb.getPlayerByIndex(spillere.get(index));
 	}
 	
@@ -73,7 +73,7 @@ public class ScoutingSession implements Serializable {
 	}
 	
 	public void displayPlayer(int index){
-		System.out.println(PersonligTest.pdb.getPlayerById(spillere.get(index)));
+		System.out.println(TestScout2.pdb.getPlayerById(spillere.get(index)));
 	}
 
 	public void displayPlayerOverview(){
