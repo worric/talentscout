@@ -6,7 +6,6 @@ public class TestScout2 {
 	static Search s;
 	
 	static PlayerDB pdb;
-	static PlayerDB restoredPdb;
 	
 	static DateManager dmgr;
 	
