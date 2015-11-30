@@ -2,25 +2,21 @@ import java.util.Date;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ScoutingSession implements Serializable {
+public class ScoutingSession implements Serializable, Comparable<ScoutingSession> {
 	
-	private ArrayList <Player> players;
 	private ArrayList<Integer> spillere;
 	private String place;
 	private Date date;
 	private int sessionID;
 	
 	public ScoutingSession(String place, Date date, int sessionID){
-		// TODO kommenteret ud players = new ArrayList <Player>();
 		spillere = new ArrayList<Integer>();
-		
 		this.place = place;
 		this.date = date;
 		this.sessionID = sessionID;
 	}
 	
 	public void addPlayer(Player player){
-		//players.add(player);
 		spillere.add(player.getID());
 	}
 	
@@ -53,13 +49,10 @@ public class ScoutingSession implements Serializable {
 	 * @return Player
 	 */
 	public Player getPlayer(int index){
-		//return players.get(index);
 		return TestScout2.pdb.getPlayerByIndex(spillere.get(index));
-		// return PersonligTest.pdb.getPlayerByIndex(spillere.get(index));
 	}
 	
 	public int getNumberOfPlayers(){
-		//return players.size();
 		return spillere.size();
 	}
 	
@@ -67,9 +60,8 @@ public class ScoutingSession implements Serializable {
 		return place;
 	}
 	
-	public void removePlayer(Player peter){
-		int k = players.indexOf(peter);
-		players.remove(k);
+	public void removePlayer(Player player){
+		spillere.remove(TestScout2.pdb.getPlayerById(player.getID()));
 	}
 	
 	public void displayPlayer(int index){
@@ -77,8 +69,8 @@ public class ScoutingSession implements Serializable {
 	}
 
 	public void displayPlayerOverview(){
-		for(int i = 0; i < players.size(); i++){
-			displayPlayer(i);
+		for(int i = 0; i < spillere.size(); i++){
+			System.out.println(TestScout2.pdb.getPlayerById(spillere.get(i)));
 		}
 	}
 	
@@ -86,7 +78,17 @@ public class ScoutingSession implements Serializable {
 		return sessionID;
 	}
 	
-	public ArrayList<Player> getList(){
-		return players;
+	public Date getDate(){
+		return this.date;
+	}
+	
+	public ArrayList<Integer> getList(){
+		return spillere;
+	}
+
+	@Override
+	public int compareTo(ScoutingSession s) {		
+		//return this.getDate().compareTo(s.getDate());
+		return s.getDate().compareTo(this.getDate());
 	}
 }

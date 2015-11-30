@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 /**The Agenda class holds an ArrayList of ScoutingSessions.
@@ -117,11 +118,6 @@ public class Agenda {
 		return session;
 	}
 	
-	/*public String generateSessionID(){
-		return "Session" + sessions.size();
-	}*/
-	
-	
 	/**This method cancels an already planned ScoutingSession.
 	 * @see #planSession()
 	 * @param
@@ -169,8 +165,10 @@ public class Agenda {
 		}
 	}
 	
-	public ArrayList<ScoutingSession> getList(){
-		return sessions;
+	public ArrayList<ScoutingSession> getSortedList(){
+		ArrayList<ScoutingSession> list = (ArrayList<ScoutingSession>)sessions.clone();
+		Collections.sort(list);
+		return list;
 	}
 	
 	public int getSize(){
@@ -181,7 +179,7 @@ public class Agenda {
      * Checks if the directory for player files is created.
      * If it isn't, we create it using mkdir(). 
      */
-    public void checkDirectoryExist(){
+    private void checkDirectoryExist(){
     	File playerDir = new File("./playerfiles");
         // We check if the directory for the file is created
         if(!playerDir.isDirectory()){
