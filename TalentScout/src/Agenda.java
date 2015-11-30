@@ -171,7 +171,7 @@ public class Agenda {
 		return list;
 	}
 	
-	public int getSize(){
+	public int getNumberOfSessions(){
 		return sessions.size();
 	}
 	

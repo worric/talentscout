@@ -60,7 +60,7 @@ public class TestScout2 {
 				+a.getSessionByIndex(0).getPlayer(0).getName()+" (index 0 in session 0)");
 		
 		System.out.println("----------------");
-		for(int i = 0; i < a.getSize(); i++){
+		for(int i = 0; i < a.getNumberOfSessions(); i++){
 			System.out.println("--------------- 1st...");
 			for(int j = 0; j < a.getSessionByIndex(i).getNumberOfPlayers(); j++){
 				System.out.println("--------------- 2nd...");
@@ -146,7 +146,7 @@ public class TestScout2 {
 		System.out.println(pdb.getPlayerByIndex(0).getName()+"'s object ID: "+pdb.getPlayerByIndex(0)+"\n"+
 				a.getSessionByIndex(0).getPlayer(0).getName()+"'s object ID: "+a.getSessionByIndex(0).getPlayer(0));
 		System.out.println("----------------");
-		for(int i = 0; i < a.getSize(); i++){
+		for(int i = 0; i < a.getNumberOfSessions(); i++){
 			System.out.println("--------------- 1st...");
 			for(int j = 0; j < a.getSessionByIndex(i).getNumberOfPlayers(); j++){
 				System.out.println("--------------- 2nd...");
