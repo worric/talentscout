@@ -154,7 +154,7 @@ public class testScout {
 		agenda.planSession("Odense", new Date());
 		agenda.planSession("Aalborg", new Date());
 		
-		System.out.println(agenda.findSession("Session0").getPlace());
+		System.out.println(agenda.findSession("Session0").getLocation());
 	}
 	
 	private static void testDisplaySessions(){

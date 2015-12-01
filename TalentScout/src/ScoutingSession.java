@@ -4,20 +4,20 @@ import java.util.ArrayList;
 
 public class ScoutingSession implements Serializable, Comparable<ScoutingSession> {
 	
-	private ArrayList<Integer> spillere;
-	private String place;
+	private ArrayList<Integer> players;
+	private String location;
 	private Date date;
 	private int sessionID;
 	
 	public ScoutingSession(String place, Date date, int sessionID){
-		spillere = new ArrayList<Integer>();
-		this.place = place;
+		players = new ArrayList<Integer>();
+		this.location = place;
 		this.date = date;
 		this.sessionID = sessionID;
 	}
 	
 	public void addPlayer(Player player){
-		spillere.add(player.getID());
+		players.add(player.getID());
 	}
 	
 	public Note addNote(Player player,
@@ -49,28 +49,28 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 	 * @return Player
 	 */
 	public Player getPlayer(int index){
-		return TestScout2.pdb.getPlayerByIndex(spillere.get(index));
+		return TestScout2.pdb.getPlayerById(players.get(index));
 	}
 	
 	public int getNumberOfPlayers(){
-		return spillere.size();
+		return players.size();
 	}
 	
-	public String getPlace(){
-		return place;
+	public String getLocation(){
+		return location;
 	}
 	
 	public void removePlayer(Player player){
-		spillere.remove(TestScout2.pdb.getPlayerById(player.getID()));
+		players.remove(TestScout2.pdb.getPlayerById(player.getID()));
 	}
 	
 	public void displayPlayer(int index){
-		System.out.println(TestScout2.pdb.getPlayerById(spillere.get(index)));
+		System.out.println(TestScout2.pdb.getPlayerById(players.get(index)));
 	}
 
 	public void displayPlayerOverview(){
-		for(int i = 0; i < spillere.size(); i++){
-			System.out.println(TestScout2.pdb.getPlayerById(spillere.get(i)));
+		for(int i = 0; i < players.size(); i++){
+			System.out.println(TestScout2.pdb.getPlayerById(players.get(i)));
 		}
 	}
 	
@@ -83,7 +83,7 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 	}
 	
 	public ArrayList<Integer> getList(){
-		return spillere;
+		return players;
 	}
 
 	@Override

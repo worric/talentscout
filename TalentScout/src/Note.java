@@ -116,7 +116,7 @@ public class Note implements Serializable {
 	
 	public void printNote(){
 		System.out.println("Name: "+TestScout2.pdb.getPlayerById(playerID).getName()+":");
-		System.out.println("Session: "+TestScout2.a.getSessionByID(sessionID).getPlace());
+		System.out.println("Session: "+TestScout2.a.getSessionByID(sessionID).getLocation());
 		System.out.println("Speed: "+speedText+", "+speedScore+".");
 		System.out.println("Attitude: "+attitudeText+", "+attitudeScore+".");
 		System.out.println("Technique: "+techniqueText+", "+techniqueScore+".");
