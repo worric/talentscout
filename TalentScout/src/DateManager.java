@@ -31,7 +31,7 @@ public class DateManager {
 		this("dd-MM-yyyy", Locale.forLanguageTag("da"));
 	}
 	/**
-	 * Takes a date and checks if it is an actual date in the calendar system
+	 * Takes a date and checks if it is an actual date in the current calendar system
 	 * @param date
 	 * @return boolean
 	 */
@@ -45,6 +45,19 @@ public class DateManager {
 			return false;
 		}
 	}
+	
+	/**
+	 * Method that takes a String and returns a Date object holding the same information
+	 */
+	public Date fromStringToDate(String date){
+		try {
+			return df.parse(date);
+		} catch (ParseException p) {
+			p.printStackTrace();
+			return null;
+		}
+	}
+	
 	/**
 	 * Function that can take a date object and return the date in the
 	 * same notation as the pattern specified in the constructor 
@@ -54,5 +67,4 @@ public class DateManager {
 	public String fromDateToString(Date date){
 		return df.format(date);
 	}
-
 }
