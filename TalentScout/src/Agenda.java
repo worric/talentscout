@@ -173,7 +173,7 @@ public class Agenda {
 		// Perform the actual sorting of the list, based on date
 		Collections.sort(list);
 		
-		// Return the sortes list
+		// Return the sorted list
 		return list;
 	}
 	
@@ -183,7 +183,18 @@ public class Agenda {
 	public int getNumberOfSessions(){
 		return sessions.size();
 	}
-
 	
-
+	private void checkDirectoryExist(){
+    	File playerDir = new File("./playerfiles");
+        // We check if the directory for the file is created
+        if(!playerDir.isDirectory()){
+            // If it doesn't exist, we create it with mkdir().
+            playerDir.mkdir();
+            /*
+            if(!preference.getPlayerDir().isDirectory()){
+            String lol = System.getProperty("user.dir");
+            System.out.println(lol);
+            }*/
+        }
+    }
 }

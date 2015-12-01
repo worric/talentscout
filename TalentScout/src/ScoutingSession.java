@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author Bjørn Alsted Nielsen 
  */
 
-public class ScoutingSession Serializable, Comparable<ScoutingSession> {
+public class ScoutingSession implements Serializable, Comparable<ScoutingSession> {
 	
 	/** A list of the class Player added to a ScoutingSession*/
 	private ArrayList<Integer> players;
@@ -26,7 +26,7 @@ public class ScoutingSession Serializable, Comparable<ScoutingSession> {
 	private Date date;
 	
 	/** A ScoutingSession's ID*/
-	private String sessionID;
+	private int sessionID;
 	
 	
 	/**
@@ -85,7 +85,7 @@ public class ScoutingSession Serializable, Comparable<ScoutingSession> {
 	 * @see #setSessionID(String)
 	 */
 	
-	public String getSessionID(){
+	public int getSessionID(){
 		return sessionID;
 	}
 	

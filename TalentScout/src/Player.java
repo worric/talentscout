@@ -42,7 +42,7 @@ public class Player implements Serializable {
 	 * @param age is an integer with the Player's age
 	 * @param club is a String with the Player's club
 	 */
-	public Player(String name, int age, String club){
+	public Player(String name, int age, String club, int id){
 		this.setName(name);
 		this.setAge(age);
 		this.setClub(club);

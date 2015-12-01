@@ -29,11 +29,11 @@ public class TestScout2 {
 	 */
 	public static void main(String[] args) {
 		// Run these 2 together
-		//initializeDB();
-		//saveDB();
+		initializeDB();
+		saveDB();
 		
 		// or run this by itself
-		testRestoredDB();
+		//testRestoredDB();
 
 	}
 

@@ -2,8 +2,8 @@ import java.io.Serializable;
 
 public class Note implements Serializable {
 
-	private ScoutingSession session;
-	private Player player;
+	private int sessionID;
+	private int playerID;
 	private String speedText;
 	private int speedScore;
 	private String attitudeText;
@@ -33,6 +33,10 @@ public class Note implements Serializable {
 		this.techniqueScore = techniqueScore;
 		this.gameSenseText = gameSenseText;
 		this.gameSenseScore = gameSenseScore;
+	}
+	
+	public Note(ScoutingSession session, Player player){
+		this(session, player, "", 0, "", 0, "", 0, "", 0);
 	}
 	
 	public ScoutingSession getSession() {
@@ -120,7 +124,7 @@ public class Note implements Serializable {
 	 */
 	public void printNote(){
 		System.out.println("Name: "+TestScout2.pdb.getPlayerById(playerID).getName()+":");
-		System.out.println("Session: "+TestScout2.a.getSessionByID(sessionID).getPlace());
+		System.out.println("Session: "+TestScout2.a.getSessionByID(sessionID).getLocation());
 		System.out.println("Speed: "+speedText+", "+speedScore+".");
 		System.out.println("Attitude: "+attitudeText+", "+attitudeScore+".");
 		System.out.println("Technique: "+techniqueText+", "+techniqueScore+".");
