@@ -6,11 +6,11 @@ import java.util.Date;
  *It can also show an overview of all the planned ScoutingSessions.
  *
  * @author Frederik Frode Nygart
- * @author Mikkel Mørch
+ * @author Mikkel MÃ¸rch
  * @author Jacob Krag Hansen
  * @author Robin Damsgaard Larsen
- * @author Lotte Selnø
- * @author Bjørn Alsted Nielsen 
+ * @author Lotte SelnÃ¸
+ * @author BjÃ¸rn Alsted Nielsen 
  */
 
 public class Agenda {
@@ -20,6 +20,15 @@ public class Agenda {
 	 
 	///** A generic ScoutingSession referred to as "session".*/
 	//private ScoutingSession session;
+	
+	private String path;
+	private String fileName;
+	private String pathForFile;
+	
+	// Class variable for generating ID for the planned session
+	private static int idCounter = 0;
+	
+	private PlayerDB pdb;
 	
 	
 	/**Creates an agenda which ties the reference variable "sessions" to a new ArrayList*/
