@@ -1,4 +1,5 @@
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -20,7 +21,6 @@ import javax.swing.DefaultComboBoxModel;
  * @author mikkelmoerch
  */
 public class UserInterface extends javax.swing.JFrame {
-    function function;
     Agenda agenda;
     PlayerDB plrDB;
     DateManager datemanager;
@@ -32,11 +32,10 @@ public class UserInterface extends javax.swing.JFrame {
     public UserInterface() {
         initComponents();
         model = (DefaultTableModel) plrTable.getModel();
-        this.function = new function(plrDB, agenda);
-    	this.agenda = new Agenda();
         this.datemanager = new DateManager();
         this.plrDB = new PlayerDB();
-        plrDB.loadPlayerDB();
+        this.agenda = new Agenda(plrDB);
+        
     }
 
     /**
@@ -501,7 +500,7 @@ public class UserInterface extends javax.swing.JFrame {
         //return this.sessionPlayerBox.getText();
     }
     */
-    private ComboBoxModel getComboBoxModel(){
+    private ComboBoxModel<String> getComboBoxModel(){
         // current Player Objects in database
         ArrayList<Player> players = plrDB.getArrayListPlayer();
         // new ArrayList to hold all Player names
@@ -520,12 +519,31 @@ public class UserInterface extends javax.swing.JFrame {
         
         // return a new instance of the DefaultComboBoxModel which takes the
         // String array of player names as argument. 
-        return new DefaultComboBoxModel(strArray);
+        return new DefaultComboBoxModel<String>(strArray);
+    }
+    
+    /** Function concerning the GUI
+     * Changes the card in a cardLayout container
+     * @param parent the container in which we want to change layout
+     * @param child the component (the layout) which we want to add to the container
+     */
+    public void changeCard(Container parent, Component child){
+        // remove all components from the container
+        // the method invalidates the component hierarchy, which is why 
+        // the hierarchy must be validated to reflect the changes - this is done
+        // with revalidate().
+        parent.removeAll();
+        // adds a component to the container
+        parent.add(child);
+        // 
+        parent.repaint();
+        // revalidates the component hierarchy
+        parent.revalidate();
     }
     
     
     private void registerPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerPlayerActionPerformed
-        function.changeCard(contentPanel, registerPanel);
+        changeCard(contentPanel, registerPanel);
         
         nameField.setText("");
         ageField.setText("");
@@ -533,7 +551,7 @@ public class UserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_registerPlayerActionPerformed
 
     private void viewAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAgendaActionPerformed
-        function.changeCard(contentPanel, agendaPanel);
+        changeCard(contentPanel, agendaPanel);
 
     }//GEN-LAST:event_viewAgendaActionPerformed
 
@@ -546,7 +564,7 @@ public class UserInterface extends javax.swing.JFrame {
      * displays players in a table 
      */
     public void viewPlayerList(){
-        function.changeCard(contentPanel, playerListPanel);
+        changeCard(contentPanel, playerListPanel);
         
         // Clear table from content 
         model.setRowCount(0);
@@ -604,7 +622,7 @@ public class UserInterface extends javax.swing.JFrame {
         try{
             model.setRowCount(0);
             //function.InsertSearchResultToTable(getSearchFieldNameText(), getSearchFieldClubText(), getSearchFieldAgeText(), model);
-            function.InsertSearchResultToTableName(getSearchFieldNameText(), model);
+           // function.InsertSearchResultToTableName(getSearchFieldNameText(), model);
         } catch (Exception e){
             e.getCause();
             e.getClass();
