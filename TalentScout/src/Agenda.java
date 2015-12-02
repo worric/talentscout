@@ -108,7 +108,7 @@ public class Agenda {
 	 * @return ScoutingSession(location, date)
 	 * */
 	public ScoutingSession planSession(String location, Date date){
-		ScoutingSession session = new ScoutingSession(location, date, Agenda.idCounter);
+		ScoutingSession session = new ScoutingSession(location, date, Agenda.idCounter, this.pdb);
 		sessions.add(session);
 		Agenda.idCounter++;
 		return session;
