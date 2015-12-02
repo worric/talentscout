@@ -514,11 +514,7 @@ public class UserInterface extends javax.swing.JFrame {
                 // Check if there are Player Objects in the array
                 if(!list.isEmpty()) {                   
                     // iterate through all Player Objects
-                    for(int i = 0; i < list.size(); i++){
-                        //open each player file
-                        //Player plrRestore = function.open(list[i].getName());
-                    	Player plrRestore = list.get(i);
-                    	
+                    for(int i = 0; i < list.size(); i++){                    	
                     	String plrName = list.get(i).getName();
                     	strNames.add(plrName);
                     }
@@ -661,35 +657,72 @@ public class UserInterface extends javax.swing.JFrame {
         
         //ss.addPlayer();
     }//GEN-LAST:event_sessionAddBtnActionPerformed
-
+/**
+ * Adds a selected player to a TextField, which shows the players whom the user want to add
+ * to his session. 
+ * @param evt 
+ */
     private void sessionAddPlayerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionAddPlayerBtnActionPerformed
-        // ArrayList of added players to a session
-        ArrayList<String> players = new ArrayList<>();
+
         // User input containing name of Player
         String inputPlayer = sessionPlayerBox.getSelectedItem().toString();
-        //System.out.println(inputPlayer);
-        
-        for(int i = 0; i < players.size(); i++){/*
+        // Getting the content of the JTextField of already added players
+        String playersInTF = sessionPlayersTF.getText();
+
+        // Checking if the TextField is empty.
+        if(playersInTF.isEmpty()){
+
+            // Checking if a player is selected
             if(inputPlayer.isEmpty()) {
+                // Display a message to the user to guide him.
                 sessionPlayerBox.setToolTipText("Please select the player you want to add to the sesison.");
-            } else if (inputPlayer.matches(players.get(i))){
-                sessionPlayerBox.setToolTipText("You've already added that player to the session.");
             } else {
-                players.add(inputPlayer);
-                
-            }*/
-            if(!inputPlayer.isEmpty()){
-                players.add(inputPlayer);
+            sessionPlayersTF.append(inputPlayer + "\n");
             }
-        } 
-        
-        if(!players.isEmpty()){
-            for(int i = 0; i < players.size(); i++){
-                sessionPlayersTF.append(players.get(i) + "\n");
-                System.out.println(players.get(i));
+        // If the JTextField isn't empty
+        } else {
+            // Check if a player already has been added to the TextField
+            if(!PlayerAlreadyAdded()){
+                // If the player isn't added already, we append him to the TextField.
+                sessionPlayersTF.append(inputPlayer + "\n");
+            } else {
+                // If the player already has been added, we display a message informing the user.
+                System.out.println("Player has already been added to the session.");
+                sessionPlayerBox.setToolTipText("You've already added that player to the session.");
             }
         }
     }//GEN-LAST:event_sessionAddPlayerBtnActionPerformed
+    
+    /**
+     * Returns true if a Player already has been added to the TextField.
+     * @return true or false
+     */
+    public boolean PlayerAlreadyAdded(){
+
+   // User input containing name of Player
+    String inputPlayer = sessionPlayerBox.getSelectedItem().toString();
+    // Getting the content of the JTextField of already added players
+    String playersInTF = sessionPlayersTF.getText();
+    System.out.println("The player the user wants to add: " + inputPlayer);
+
+        // Check if the TextField is empty
+        if(!playersInTF.isEmpty()){
+
+        // String array of the JTextField content is created
+        String[] plrArray = playersInTF.split("\n");
+
+            // Checking if a player already has been added to the session
+            // by looping through the String array of player names.
+                for(int i = 0; i < plrArray.length; i++) {
+                        // If the input match one of the players already added, return true
+                        if (inputPlayer.equals(plrArray[i])) {
+                            return true;
+                        }
+                }
+        }
+        // Otherwise return false
+        return false;
+    }
     
     /**
      * @param args the command line arguments
