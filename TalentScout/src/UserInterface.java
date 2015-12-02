@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -35,7 +36,6 @@ public class UserInterface extends javax.swing.JFrame {
         this.datemanager = new DateManager();
         this.plrDB = new PlayerDB();
         this.agenda = new Agenda(plrDB);
-        
     }
 
     /**
@@ -320,7 +320,7 @@ public class UserInterface extends javax.swing.JFrame {
         sessionPlayersTF.setToolTipText("");
         jScrollPane4.setViewportView(sessionPlayersTF);
 
-        sessionPlayerBox.setModel(getComboBoxModel());
+        //sessionPlayerBox.setModel(getComboBoxModel());
 
         javax.swing.GroupLayout agendaPanelLayout = new javax.swing.GroupLayout(agendaPanel);
         agendaPanel.setLayout(agendaPanelLayout);
@@ -500,27 +500,34 @@ public class UserInterface extends javax.swing.JFrame {
         //return this.sessionPlayerBox.getText();
     }
     */
-    private ComboBoxModel<String> getComboBoxModel(){
-        // current Player Objects in database
-        ArrayList<Player> players = plrDB.getArrayListPlayer();
-        // new ArrayList to hold all Player names
-        ArrayList<String> playerNames = new ArrayList<String>();
-        // number of Player Objects in database
-        int length = players.size();
-        // String array which DefaultComboBoxModel will take as an argument
-        String[] strArray = new String[length];
-        
-        // Loop through Player Objects and add their names to the new ArrayList
-        for(int i = 0; i < players.size(); i++){
-            playerNames.add(plrDB.getPlayerByIndex(i).getName());
-        }
-        // Add the player names to the new String array
-        strArray = (String[]) playerNames.toArray();
-        
-        // return a new instance of the DefaultComboBoxModel which takes the
-        // String array of player names as argument. 
-        return new DefaultComboBoxModel<String>(strArray);
+    public String[] getPlayerNamesArray(){
+    	//new ArrayList of Player names 
+    	ArrayList<String> strNames = new ArrayList<String>();
+            // Get current ArrayList of all Player Objects
+            ArrayList<Player> list = plrDB.getArrayListPlayer();
+                // Check if there are Player Objects in the array
+                if(list.size() != 0) {                   
+                    // iterate through all Player Objects
+                    for(int i = 0; i < list.size(); i++){
+                        //open each player file
+                        //Player plrRestore = function.open(list[i].getName());
+                    	Player plrRestore = list.get(i);
+                    	// print the list to the console as a test
+                    	System.out.println(list.get(i).getName());
+                    	String plrName = list.get(i).getName();
+                    	strNames.add(plrName);
+                    }
+                }
+
+                // new String array
+                String[] strArray = new String[list.size()];
+                strNames.toArray(strArray);
+                Arrays.sort(strArray);
+                return strArray;
     }
+    
+    
+    
     
     /** Function concerning the GUI
      * Changes the card in a cardLayout container
@@ -552,6 +559,8 @@ public class UserInterface extends javax.swing.JFrame {
 
     private void viewAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAgendaActionPerformed
         changeCard(contentPanel, agendaPanel);
+        // sets the ComboBox content
+        sessionPlayerBox.setModel(new DefaultComboBoxModel<String>(getPlayerNamesArray()));
 
     }//GEN-LAST:event_viewAgendaActionPerformed
 
