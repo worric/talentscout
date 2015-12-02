@@ -8,8 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -687,8 +686,7 @@ public class UserInterface extends javax.swing.JFrame {
                 sessionPlayersTF.append(inputPlayer + "\n");
             } else {
                 // If the player already has been added, we display a message informing the user.
-                System.out.println("Player has already been added to the session.");
-                sessionPlayerBox.setToolTipText("You've already added that player to the session.");
+                JOptionPane.showMessageDialog(new JDialog(), "You've already added that player to the session.");
             }
         }
     }//GEN-LAST:event_sessionAddPlayerBtnActionPerformed
