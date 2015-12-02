@@ -556,19 +556,46 @@ public class UserInterface extends javax.swing.JFrame {
         parent.revalidate();
     }
     
+    /**
+     * Returns the current visible card in the CardLayout of the contentPanel
+     * @return JPanel
+     */
+    public JPanel getCurrentCard(){
+        JPanel card = null;
+        for(Component comp : contentPanel.getComponents()){
+            if(comp.isVisible()){
+                card = (JPanel) comp;
+            }
+
+        }
+        System.out.println(card.getName());
+        return card;
+    }
+    
+    /**
+     * Checks if the already visible card is different from the card the user wants to be displayed
+     * @param comp The component we wish to compare to the current visible card.
+     * @return TRUE if they are different
+     */
+    public boolean checkVisibleCard(Component comp){
+        return !getCurrentCard().equals(comp);
+    }
+    
     
     private void registerPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerPlayerActionPerformed
-        if(warningUnsavedSessionDetailsToBeLost()){
-            changeCard(contentPanel, registerPanel);
+        if(checkVisibleCard(registerPanel)){
+            if(warningUnsavedSessionDetailsToBeLost()){
+                changeCard(contentPanel, registerPanel);
 
-            nameField.setText("");
-            ageField.setText("");
-            clubField.setText("");
+                nameField.setText("");
+                ageField.setText("");
+                clubField.setText("");
+            }
         }
     }//GEN-LAST:event_registerPlayerActionPerformed
 
     private void viewAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAgendaActionPerformed
-        if(warningUnsavedSessionDetailsToBeLost()){
+        if(checkVisibleCard(agendaPanel)){
             changeCard(contentPanel, agendaPanel);
             sessionDateField.setText("");
             sessionPlaceField.setText("");
@@ -579,8 +606,10 @@ public class UserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_viewAgendaActionPerformed
 
     private void viewPlayerListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewPlayerListActionPerformed
-        if(warningUnsavedSessionDetailsToBeLost()){
-            viewPlayerList();
+        if(checkVisibleCard(playerListPanel)){
+            if(warningUnsavedSessionDetailsToBeLost()){
+                viewPlayerList();
+            }
         }
     }//GEN-LAST:event_viewPlayerListActionPerformed
 
