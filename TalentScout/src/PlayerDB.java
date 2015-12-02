@@ -146,6 +146,15 @@ public class PlayerDB {
 		}
 		return null;
 	}
+        
+        public Player getPlayerByName(String name){
+            for(Player p : playerDB){
+                if(p.getName().equals(name)){
+                    return p;
+                }
+            }
+            return null;
+        }
 	
 	public ArrayList<Player> getArrayListPlayer(){
 		return this.playerDB;
