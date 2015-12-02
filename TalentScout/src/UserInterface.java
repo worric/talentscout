@@ -512,14 +512,13 @@ public class UserInterface extends javax.swing.JFrame {
             // Get current ArrayList of all Player Objects
             ArrayList<Player> list = plrDB.getArrayListPlayer();
                 // Check if there are Player Objects in the array
-                if(list.size() != 0) {                   
+                if(!list.isEmpty()) {                   
                     // iterate through all Player Objects
                     for(int i = 0; i < list.size(); i++){
                         //open each player file
                         //Player plrRestore = function.open(list[i].getName());
                     	Player plrRestore = list.get(i);
-                    	// print the list to the console as a test
-                    	System.out.println(list.get(i).getName());
+                    	
                     	String plrName = list.get(i).getName();
                     	strNames.add(plrName);
                     }
@@ -664,13 +663,32 @@ public class UserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_sessionAddBtnActionPerformed
 
     private void sessionAddPlayerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionAddPlayerBtnActionPerformed
-        /*String inputPlayer = getSessionPlayerField();
-        if(!inputPlayer.isEmpty()){
-            sessionPlayersTF.append(inputPlayer + "\n");
-        } else {
-            
+        // ArrayList of added players to a session
+        ArrayList<String> players = new ArrayList<>();
+        // User input containing name of Player
+        String inputPlayer = sessionPlayerBox.getSelectedItem().toString();
+        //System.out.println(inputPlayer);
+        
+        for(int i = 0; i < players.size(); i++){/*
+            if(inputPlayer.isEmpty()) {
+                sessionPlayerBox.setToolTipText("Please select the player you want to add to the sesison.");
+            } else if (inputPlayer.matches(players.get(i))){
+                sessionPlayerBox.setToolTipText("You've already added that player to the session.");
+            } else {
+                players.add(inputPlayer);
+                
+            }*/
+            if(!inputPlayer.isEmpty()){
+                players.add(inputPlayer);
+            }
+        } 
+        
+        if(!players.isEmpty()){
+            for(int i = 0; i < players.size(); i++){
+                sessionPlayersTF.append(players.get(i) + "\n");
+                System.out.println(players.get(i));
+            }
         }
-        //sessionPlayerField.setText("");*/
     }//GEN-LAST:event_sessionAddPlayerBtnActionPerformed
     
     /**
