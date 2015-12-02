@@ -497,8 +497,16 @@ public class UserInterface extends javax.swing.JFrame {
         return this.sessionDateField.getText();
     }
     
+    public void setSessionDateField(String str){
+        this.sessionDateField.setText(str);
+    }
+    
     public String getSessionPlaceField(){
         return this.sessionPlaceField.getText();
+    }
+    
+    public void setSessionPlaceField(String str){
+        this.sessionPlaceField.setText(str);
     }
     
     /*public String getSessionPlayerField(){
@@ -550,23 +558,30 @@ public class UserInterface extends javax.swing.JFrame {
     
     
     private void registerPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerPlayerActionPerformed
-        changeCard(contentPanel, registerPanel);
-        
-        nameField.setText("");
-        ageField.setText("");
-        clubField.setText("");
+        if(warningUnsavedSessionDetailsToBeLost()){
+            changeCard(contentPanel, registerPanel);
+
+            nameField.setText("");
+            ageField.setText("");
+            clubField.setText("");
+        }
     }//GEN-LAST:event_registerPlayerActionPerformed
 
     private void viewAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAgendaActionPerformed
-        changeCard(contentPanel, agendaPanel);
-        // sets the ComboBox content
-        sessionPlayerBox.setModel(new DefaultComboBoxModel<String>(getPlayerNamesArray()));
+        if(warningUnsavedSessionDetailsToBeLost()){
+            changeCard(contentPanel, agendaPanel);
+            sessionDateField.setText("");
+            sessionPlaceField.setText("");
 
+            // sets the ComboBox content
+            sessionPlayerBox.setModel(new DefaultComboBoxModel<String>(getPlayerNamesArray()));
+        }
     }//GEN-LAST:event_viewAgendaActionPerformed
 
     private void viewPlayerListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewPlayerListActionPerformed
-        viewPlayerList();
-        
+        if(warningUnsavedSessionDetailsToBeLost()){
+            viewPlayerList();
+        }
     }//GEN-LAST:event_viewPlayerListActionPerformed
 
     /**
@@ -574,6 +589,7 @@ public class UserInterface extends javax.swing.JFrame {
      */
     public void viewPlayerList(){
         changeCard(contentPanel, playerListPanel);
+        
         
         // Clear table from content 
         model.setRowCount(0);
@@ -696,7 +712,6 @@ public class UserInterface extends javax.swing.JFrame {
      * @return true or false
      */
     public boolean PlayerAlreadyAdded(){
-
    // User input containing name of Player
     String inputPlayer = sessionPlayerBox.getSelectedItem().toString();
     // Getting the content of the JTextField of already added players
@@ -720,6 +735,43 @@ public class UserInterface extends javax.swing.JFrame {
         // Otherwise return false
         return false;
     }
+    
+    /**
+     * Checks if there's any unsaved user input in the JTextFields under the agenda.
+     * @return TRUE in case there is and asks the user if he wants to continue anyway.
+     */
+    public boolean warningUnsavedSessionDetailsToBeLost(){
+        if(!sessionDateField.getText().isEmpty()){
+            int i = JOptionPane.showConfirmDialog(new JDialog(), "Your data has not been saved and will be lost. Do you wish to continue?", "Data will be lost", JOptionPane.YES_NO_OPTION);
+                if(i == 0){
+                    this.setSessionDateField("");
+                    return true;
+                } else {
+                    return false;
+                }
+        }
+        if(!sessionPlaceField.getText().isEmpty()){
+            int i = JOptionPane.showConfirmDialog(new JDialog(), "Your data has not been saved and will be lost. Do you wish to continue?", "Data will be lost",JOptionPane.YES_NO_OPTION);
+                if(i == 0){
+                    this.setSessionPlaceField("");
+                    return true;
+                } else {
+                    return false;
+                }
+        }
+        if(!sessionPlayersTF.getText().isEmpty()){
+            int i = JOptionPane.showConfirmDialog(new JDialog(), "Your data has not been saved and will be lost. Do you wish to continue?", "Data will be lost",JOptionPane.YES_NO_OPTION);
+                if(i == 0){
+                    sessionPlayersTF.setText("");
+                    return true;
+                } else {
+                    return false;
+                }
+        }
+        // Is true by default as we want the page to load if there is no warning anyway.
+        return true;
+    }
+    
     
     /**
      * @param args the command line arguments
