@@ -3,9 +3,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PlayerDB {
+public class PlayerDB implements Serializable {
 	
 	private static int idCounter = 0;
 	private ArrayList<Player> playerDB;
