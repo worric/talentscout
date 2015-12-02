@@ -674,7 +674,7 @@ public class UserInterface extends javax.swing.JFrame {
             // Checking if a player is selected
             if(inputPlayer.isEmpty()) {
                 // Display a message to the user to guide him.
-                sessionPlayerBox.setToolTipText("Please select the player you want to add to the sesison.");
+                JOptionPane.showMessageDialog(new JDialog(), "Please select a player from the list.");
             } else {
             sessionPlayersTF.append(inputPlayer + "\n");
             }
@@ -701,7 +701,6 @@ public class UserInterface extends javax.swing.JFrame {
     String inputPlayer = sessionPlayerBox.getSelectedItem().toString();
     // Getting the content of the JTextField of already added players
     String playersInTF = sessionPlayersTF.getText();
-    System.out.println("The player the user wants to add: " + inputPlayer);
 
         // Check if the TextField is empty
         if(!playersInTF.isEmpty()){
