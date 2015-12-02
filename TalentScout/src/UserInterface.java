@@ -28,10 +28,12 @@ public class UserInterface extends javax.swing.JFrame {
     /**
      * Creates new form UserInterface
      */
-    DefaultTableModel model;
+    DefaultTableModel playerListModel;
+    DefaultTableModel agendaModel;
     public UserInterface() {
         initComponents();
-        model = (DefaultTableModel) plrTable.getModel();
+        playerListModel = (DefaultTableModel) plrTable.getModel();
+        agendaModel = (DefaultTableModel) upcomingTable.getModel();
         this.datemanager = new DateManager();
         this.plrDB = new PlayerDB();
         this.agenda = new Agenda(plrDB);
@@ -592,12 +594,12 @@ public class UserInterface extends javax.swing.JFrame {
     }
     
      /**
-     * displays players in a table in the playerListPanel
+     * displays List of Players in a table in the playerListPanel
      */
     public void viewPlayerList(){
         changeCard(contentPanel, playerListPanel);
         // Clear table from content 
-        model.setRowCount(0);
+        playerListModel.setRowCount(0);
         
         try{
             // Get current ArrayList of all Player Objects
@@ -618,7 +620,42 @@ public class UserInterface extends javax.swing.JFrame {
                         String[] data = {plrRestore.getName(), age, plrRestore.getClub()};
                         
                         // insert the array into the table 
-                        model.addRow(data);
+                        playerListModel.addRow(data);
+                    }
+                }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+     /**
+     * displays List of Players in a table in the playerListPanel
+     */
+    public void viewAgenda(){
+        changeCard(contentPanel, agendaPanel);
+        // Clear table from content 
+        agendaModel.setRowCount(0);
+        
+        try{
+            // Get current ArrayList of all Scouting Session Objects
+            ArrayList<ScoutingSession> list = agenda.getArrayList();
+                // Check if there are Player Objects in the array
+                if(!list.isEmpty()) {                   
+                    // iterate through all Scouting Session Objects
+                    for(int i = 0; i < list.size(); i++){
+                    	ScoutingSession ssRestore = list.get(i);
+                    	// print the list to the console as a test
+                    	System.out.println(list.get(i).getSessionID());
+                        //convert the Date to a String
+                        String date = datemanager.fromDateToString(ssRestore.getDate());
+                        //convert the int to a String
+                        String id = Integer.toString(ssRestore.getSessionID());
+                       
+                        // create array containing player attributes
+                        String[] data = {date, ssRestore.getLocation(), ssRestore.getPlayer(0).getName(), id};
+                        
+                        // insert the array into the table 
+                        agendaModel.addRow(data);
                     }
                 }
         } catch (Exception e){
@@ -661,6 +698,7 @@ public class UserInterface extends javax.swing.JFrame {
             changeCard(contentPanel, agendaPanel);
             sessionDateField.setText("");
             sessionPlaceField.setText("");
+                viewAgenda();
 
             // sets the ComboBox content
             sessionPlayerBox.setModel(new DefaultComboBoxModel<String>(getPlayerNamesArray()));
@@ -699,7 +737,7 @@ public class UserInterface extends javax.swing.JFrame {
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         
         try{
-            model.setRowCount(0);
+            playerListModel.setRowCount(0);
             //function.InsertSearchResultToTable(getSearchFieldNameText(), getSearchFieldClubText(), getSearchFieldAgeText(), model);
            // function.InsertSearchResultToTableName(getSearchFieldNameText(), model);
         } catch (Exception e){
@@ -714,17 +752,27 @@ public class UserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_searchFieldClubActionPerformed
 
     private void sessionAddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionAddBtnActionPerformed
+        // User given date, which is a String
         String strDate = getSessionDateField();
+        // Convertion of the String to Date
         Date date = datemanager.fromStringToDate(strDate);
+        // User given location
         String place = getSessionPlaceField();
         
+        // Scouting session added to the agenda ArrayList
         ScoutingSession ss = agenda.planSession(place, date);
-        
-        /**
-         * Søgefunktion skal implementeres her
-         */
-        
-        //ss.addPlayer();
+
+        // Adding the seleced players to the Scouting session
+        String[] players = getPlayerFromTF();
+        for(String name : players){
+            Player player = plrDB.getPlayerByName(name);
+            // adds the player to the session with the ID of the player
+            ss.addPlayer(player);
+        }
+        viewAgenda();
+        sessionDateField.setText("");
+        sessionPlaceField.setText("");
+        sessionPlayersTF.setText("");
     }//GEN-LAST:event_sessionAddBtnActionPerformed
 /**
  * Adds a selected player to a TextField, which shows the players whom the user want to add
@@ -807,6 +855,17 @@ public class UserInterface extends javax.swing.JFrame {
         }
         // Otherwise return false
         return false;
+    }
+    
+    /**
+     * Retrieves the players from the TextField of players wished to be added to a session
+     * @return String array of Player names
+     */
+    public String[] getPlayerFromTF(){
+        String playersInTF = sessionPlayersTF.getText();
+        String[] plrArray = playersInTF.split("\n");
+        
+        return plrArray;
     }
     
     /**
