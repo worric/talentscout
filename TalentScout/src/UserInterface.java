@@ -240,7 +240,7 @@ public class UserInterface extends javax.swing.JFrame {
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return false;
             }
         });
         upcomingTable.setMaximumSize(new java.awt.Dimension(300, 64));
@@ -407,8 +407,12 @@ public class UserInterface extends javax.swing.JFrame {
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+            public boolean isCellEditable(int row, int col){
+                return false;
+            }
         });
         plrTable.setColumnSelectionAllowed(true);
+        plrTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jScrollPane1.setViewportView(plrTable);
         plrTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -467,11 +471,11 @@ public class UserInterface extends javax.swing.JFrame {
                 .addGroup(playerListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchFieldAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addComponent(searchBtn)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         contentPanel.add(playerListPanel, "card2");
@@ -534,10 +538,17 @@ public class UserInterface extends javax.swing.JFrame {
                 return strArray;
     }
     
+    /**
+     * 
+     * 
+     * 
+     *        GUI FUNCTIONS
+     *          BEGINNING
+     * 
+     * 
+     */
     
-    
-    
-    /** Function concerning the GUI
+    /**
      * Changes the card in a cardLayout container
      * @param parent the container in which we want to change layout
      * @param child the component (the layout) which we want to add to the container
@@ -568,7 +579,6 @@ public class UserInterface extends javax.swing.JFrame {
             }
 
         }
-        System.out.println(card.getName());
         return card;
     }
     
@@ -581,6 +591,58 @@ public class UserInterface extends javax.swing.JFrame {
         return !getCurrentCard().equals(comp);
     }
     
+     /**
+     * displays players in a table in the playerListPanel
+     */
+    public void viewPlayerList(){
+        changeCard(contentPanel, playerListPanel);
+        // Clear table from content 
+        model.setRowCount(0);
+        
+        try{
+            // Get current ArrayList of all Player Objects
+            ArrayList<Player> list = plrDB.getArrayListPlayer();
+                // Check if there are Player Objects in the array
+                if(!list.isEmpty()) {                   
+                    // iterate through all Player Objects
+                    for(int i = 0; i < list.size(); i++){
+                        //open each player file
+                        //Player plrRestore = function.open(list[i].getName());
+                    	Player plrRestore = list.get(i);
+                    	// print the list to the console as a test
+                    	System.out.println(list.get(i).getName());
+                        //convert the int age to a String
+                        String age = Integer.toString(plrRestore.getAge());
+
+                        // create array containing player attributes
+                        String[] data = {plrRestore.getName(), age, plrRestore.getClub()};
+                        
+                        // insert the array into the table 
+                        model.addRow(data);
+                    }
+                }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * 
+     * 
+     * 
+     *         GUI FUNCTIONS
+     *              END
+     * 
+     * 
+     */
+    
+     /**
+     * 
+     * 
+     *  ACTIONLISTENERS
+     *    BEGINNING
+     * 
+     */
     
     private void registerPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerPlayerActionPerformed
         if(checkVisibleCard(registerPanel)){
@@ -612,43 +674,6 @@ public class UserInterface extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_viewPlayerListActionPerformed
-
-    /**
-     * displays players in a table 
-     */
-    public void viewPlayerList(){
-        changeCard(contentPanel, playerListPanel);
-        
-        
-        // Clear table from content 
-        model.setRowCount(0);
-        
-        try{
-            // Get current ArrayList of all Player Objects
-            ArrayList<Player> list = plrDB.getArrayListPlayer();
-                // Check if there are Player Objects in the array
-                if(list.size() != 0) {                   
-                    // iterate through all Player Objects
-                    for(int i = 0; i < list.size(); i++){
-                        //open each player file
-                        //Player plrRestore = function.open(list[i].getName());
-                    	Player plrRestore = list.get(i);
-                    	// print the list to the console as a test
-                    	System.out.println(list.get(i).getName());
-                        //convert the int age to a String
-                        String age = Integer.toString(plrRestore.getAge());
-
-                        // create array containing player attributes
-                        String[] data = {plrRestore.getName(), age, plrRestore.getClub()};
-                        
-                        // insert the array into the table 
-                        model.addRow(data);
-                    }
-                }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
     
     private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
         String name = nameField.getText();
@@ -668,7 +693,7 @@ public class UserInterface extends javax.swing.JFrame {
     	// til filen. 
     	
     	plrDB.savePlayerDB();
-    	
+    	agenda.saveAgenda();
     }//GEN-LAST:event_saveAllBtnActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
@@ -731,10 +756,29 @@ public class UserInterface extends javax.swing.JFrame {
                 sessionPlayersTF.append(inputPlayer + "\n");
             } else {
                 // If the player already has been added, we display a message informing the user.
-                JOptionPane.showMessageDialog(new JDialog(), "You've already added that player to the session.");
+                JOptionPane.showMessageDialog(new JDialog(), "The player has already been added to the session.");
             }
         }
     }//GEN-LAST:event_sessionAddPlayerBtnActionPerformed
+    
+     /**
+     * 
+     * 
+     *  ACTIONLISTENERS
+     *       END
+     * 
+     */
+    
+    
+    /**
+     * 
+     * 
+     * 
+     * INPUT OUTPUT FUNCTIONS
+     *      BEGINNING
+     * 
+     * 
+     */
     
     /**
      * Returns true if a Player already has been added to the TextField.
@@ -800,6 +844,16 @@ public class UserInterface extends javax.swing.JFrame {
         // Is true by default as we want the page to load if there is no warning anyway.
         return true;
     }
+    
+    /**
+     * 
+     * 
+     * 
+     * INPUT OUTPUT FUNCTIONS
+     *         END
+     * 
+     * 
+     */
     
     
     /**
