@@ -22,7 +22,7 @@ import java.util.Date;
 public class Agenda {
 	
 	/**ArrayList with ScoutingSessions referred to as "sessions".*/
-	private ArrayList <ScoutingSession> sessions;
+	private ArrayList<ScoutingSession> sessions;
 	
 	// Delare the variables needed for reading/writing data to/from disk
 	private String path;
@@ -144,6 +144,10 @@ public class Agenda {
 		}
 		return null;
 	}
+        
+        public ArrayList<ScoutingSession> getArrayList(){
+            return this.sessions;
+        }
 	
 	/**
 	 * Displays a ScoutingSession at a chosen index.
