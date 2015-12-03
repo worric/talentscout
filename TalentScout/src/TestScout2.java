@@ -1,3 +1,5 @@
+import java.util.Date;
+
 
 public class TestScout2 {
 	
@@ -21,7 +23,7 @@ public class TestScout2 {
 	static Note note2;
 	static Note note3;
 	
-	static String dato;
+	static Date dato;
 
 	/**
 	 * Run either "initializeDB" together with "saveDB" - OR - "testRestoredDB" by itself
@@ -39,7 +41,7 @@ public class TestScout2 {
 
 	private static void testRestoredDB() {
 		pdb = new PlayerDB();
-		a = new Agenda(pdb);
+		a = new Agenda();
 		s = new Search(pdb);
 		
 		System.out.println("Test if equal...");
@@ -80,21 +82,21 @@ public class TestScout2 {
 
 	private static void initializeDB() {
 		pdb = new PlayerDB();
-		a = new Agenda(pdb);
+		a = new Agenda();
 		s = new Search(pdb);
 		// new UserInterface(s) skal indsættes her.
 		dmgr = new DateManager();
 			
-		dato = "27-11-2015";
+		dato = dmgr.fromStringToDate("27-11-2015");
 		
 		// 3 sessions initialiseres hvis deres dato er valid
-		if (dmgr.isValid(dato)){
+		if (!dato.equals(null)){
 			System.out.println("Adding all 3 sessions...");
-			session1 = a.planSession("Fredericia", dmgr.fromStringToDate(dato));
+			session1 = a.planSession("Fredericia", dato);
 			System.out.println(a.getSessionByIndex(0).getSessionID());
-			session2 = a.planSession("Skive", dmgr.fromStringToDate(dato));
+			session2 = a.planSession("Skive", dato);
 			System.out.println(a.getSessionByIndex(1).getSessionID());
-			session3 = a.planSession("Elling", dmgr.fromStringToDate(dato));
+			session3 = a.planSession("Elling", dato);
 			System.out.println(a.getSessionByIndex(2).getSessionID());
 			
 		}
