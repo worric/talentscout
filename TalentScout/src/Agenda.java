@@ -32,19 +32,13 @@ public class Agenda {
 	// Class variable for generating ID for the planned session
 	private static int idCounter = 0;
 	
-	// Enables the class to access operations in PlayerDB class
-	private PlayerDB pdb;
-	
 	
 	/**Creates an agenda which ties the reference variable "sessions" to a new ArrayList*/
-	public Agenda(PlayerDB pdb){
+	public Agenda(){
 		// Initializing the variables needed for reading/writing data to/from disk
 		path = "./playerfiles";
 		fileName = "agendadb";
 		pathForFile = path+"/"+fileName;
-		
-		// enables the class to access operations in PlayerDB class
-		this.pdb = pdb;
 		
 		// Loads the previously saved databases on the hard drive, if any
 		sessions = this.loadAgenda();
@@ -108,7 +102,7 @@ public class Agenda {
 	 * @return ScoutingSession(location, date)
 	 * */
 	public ScoutingSession planSession(String location, Date date){
-		ScoutingSession session = new ScoutingSession(location, date, Agenda.idCounter, this.pdb);
+		ScoutingSession session = new ScoutingSession(location, date, Agenda.idCounter);
 		sessions.add(session);
 		Agenda.idCounter++;
 		return session;

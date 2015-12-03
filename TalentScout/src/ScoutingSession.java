@@ -16,8 +16,6 @@ import java.util.ArrayList;
 
 public class ScoutingSession implements Serializable, Comparable<ScoutingSession> {
 	
-        /** Object instance of the PlayerDB class */
-        private PlayerDB pdb;
 	/** A list of the class Player added to a ScoutingSession*/
 	private ArrayList<Integer> players;
 	
@@ -37,12 +35,11 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 	 * @param date holds the date of the ScoutingSession
 	 * @param sessionID holds the ScoutinSession's unique ID
 	 */
-	public ScoutingSession(String location, Date date, int sessionID, PlayerDB pdb){
+	public ScoutingSession(String location, Date date, int sessionID){
 		players = new ArrayList<Integer>();
 		this.location = location;
 		this.setDate(date);
 		this.sessionID = sessionID;
-                this.pdb = pdb;
 	}
 	
 	/**
@@ -108,7 +105,7 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 	 */
 	public Player getPlayer(int index){
 		//return TestScout2.pdb.getPlayerById(players.get(index));
-                return pdb.getPlayerById(players.get(index));
+                return UserInterface.pdb.getPlayerById(players.get(index));
 	}
 	
 	public int getNumberOfPlayers(){

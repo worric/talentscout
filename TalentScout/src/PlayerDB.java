@@ -6,7 +6,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PlayerDB implements Serializable {
+public class PlayerDB {
 	
 	private static int idCounter = 0;
 	private ArrayList<Player> playerDB;
