@@ -23,6 +23,7 @@ public class UserInterface extends javax.swing.JFrame {
     static final Agenda AGENDA = new Agenda();
     static final PlayerDB PDB = new PlayerDB();
     static final DateManager DATEMANAGER = new DateManager();
+    JDialog sessionFrame = new JDialog();
     
     /**
      * Creates new form UserInterface
@@ -43,13 +44,31 @@ public class UserInterface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        sessionFrame = new javax.swing.JFrame();
         sessionPanel = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        sessionPlayersBox = new javax.swing.JComboBox<>();
+        sessionDateLabel = new javax.swing.JLabel();
+        sessionPlaceLabel = new javax.swing.JLabel();
+        sessionCreateNoteBtn = new javax.swing.JButton();
+        sessionViewProfileBtn = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        sessionCreateNotePanel = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        sessionNoteSpeed = new javax.swing.JTextField();
+        sessionNoteAttitude = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        sessionNoteTechnique = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        sessionNoteGamesense = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        sessionRatingSpeed = new javax.swing.JComboBox<>();
+        sessionRatingAttitude = new javax.swing.JComboBox<>();
+        sessionRatingTechnique = new javax.swing.JComboBox<>();
+        sessionRatingGamesense = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         menuPanel = new javax.swing.JPanel();
         saveAllBtn = new javax.swing.JButton();
         registerPlayer = new javax.swing.JButton();
@@ -106,72 +125,164 @@ public class UserInterface extends javax.swing.JFrame {
 
         jLabel14.setText("Location:");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
+        sessionPlayersBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        sessionDateLabel.setText("jLabel17");
+
+        sessionPlaceLabel.setText("jLabel18");
+
+        sessionCreateNoteBtn.setText("Create note");
+        sessionCreateNoteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sessionCreateNoteBtnActionPerformed(evt);
             }
         });
-        jScrollPane2.setViewportView(jTable2);
 
-        jLabel15.setText("Players:");
+        sessionViewProfileBtn.setText("View profile");
+
+        jLabel19.setText("Players:");
 
         javax.swing.GroupLayout sessionPanelLayout = new javax.swing.GroupLayout(sessionPanel);
         sessionPanel.setLayout(sessionPanelLayout);
         sessionPanelLayout.setHorizontalGroup(
             sessionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sessionPanelLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(sessionPanelLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(19, 19, 19)
                 .addGroup(sessionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(sessionPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel15)
+                        .addComponent(jLabel19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(sessionPlayersBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(sessionPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
-                        .addComponent(jLabel14)
-                        .addGap(117, 117, 117))))
+                        .addGroup(sessionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(sessionPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addGap(35, 35, 35)
+                                .addComponent(sessionDateLabel))
+                            .addComponent(sessionCreateNoteBtn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                        .addGroup(sessionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(sessionPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addGap(18, 18, 18)
+                                .addComponent(sessionPlaceLabel))
+                            .addComponent(sessionViewProfileBtn))
+                        .addGap(34, 34, 34))))
         );
         sessionPanelLayout.setVerticalGroup(
             sessionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sessionPanelLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(19, 19, 19)
                 .addGroup(sessionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jLabel14))
-                .addGap(19, 19, 19)
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
+                    .addComponent(jLabel14)
+                    .addComponent(sessionDateLabel)
+                    .addComponent(sessionPlaceLabel))
+                .addGap(18, 18, 18)
+                .addGroup(sessionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sessionPlayersBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(sessionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sessionCreateNoteBtn)
+                    .addComponent(sessionViewProfileBtn))
+                .addGap(22, 22, 22))
         );
 
-        javax.swing.GroupLayout sessionFrameLayout = new javax.swing.GroupLayout(sessionFrame.getContentPane());
-        sessionFrame.getContentPane().setLayout(sessionFrameLayout);
-        sessionFrameLayout.setHorizontalGroup(
-            sessionFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sessionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jLabel15.setText("New note");
+
+        jLabel17.setText("Speed:");
+
+        sessionNoteSpeed.setText("jTextField1");
+
+        sessionNoteAttitude.setText("jTextField1");
+
+        jLabel18.setText("Attitude:");
+
+        sessionNoteTechnique.setText("jTextField1");
+
+        jLabel20.setText("Technique");
+
+        sessionNoteGamesense.setText("jTextField1");
+
+        jLabel21.setText("Gamesense");
+
+        jLabel22.setText("Ratings:");
+
+        sessionRatingSpeed.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
+
+        sessionRatingAttitude.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
+
+        sessionRatingTechnique.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
+
+        sessionRatingGamesense.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
+
+        jButton1.setText("Create note");
+
+        javax.swing.GroupLayout sessionCreateNotePanelLayout = new javax.swing.GroupLayout(sessionCreateNotePanel);
+        sessionCreateNotePanel.setLayout(sessionCreateNotePanelLayout);
+        sessionCreateNotePanelLayout.setHorizontalGroup(
+            sessionCreateNotePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sessionCreateNotePanelLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(sessionCreateNotePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15)
+                    .addComponent(sessionNoteSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18)
+                    .addComponent(sessionNoteAttitude, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20)
+                    .addComponent(sessionNoteTechnique, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21)
+                    .addComponent(sessionNoteGamesense, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                .addGroup(sessionCreateNotePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22)
+                    .addComponent(sessionRatingSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sessionRatingAttitude, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sessionRatingTechnique, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sessionRatingGamesense, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sessionCreateNotePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(48, 48, 48))
         );
-        sessionFrameLayout.setVerticalGroup(
-            sessionFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sessionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        sessionCreateNotePanelLayout.setVerticalGroup(
+            sessionCreateNotePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sessionCreateNotePanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(sessionCreateNotePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel22))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(sessionCreateNotePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sessionNoteSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sessionRatingSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(sessionCreateNotePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sessionNoteAttitude, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sessionRatingAttitude, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(sessionCreateNotePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sessionNoteTechnique, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sessionRatingTechnique, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(sessionCreateNotePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sessionNoteGamesense, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sessionRatingGamesense, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -418,13 +529,13 @@ public class UserInterface extends javax.swing.JFrame {
                 return false;
             }
         });
-        upcomingTable.removeColumn(upcomingTable.getColumnModel().getColumn(4));
         upcomingTable.getTableHeader().setReorderingAllowed(false);
         upcomingTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 upcomingTableMousePressed(evt);
             }
         });
+        upcomingTable.removeColumn(upcomingTable.getColumnModel().getColumn(3));
         jScrollPane5.setViewportView(upcomingTable);
 
         javax.swing.GroupLayout playerPanelBottomBlankLayout = new javax.swing.GroupLayout(playerPanelBottomBlank);
@@ -694,7 +805,7 @@ public class UserInterface extends javax.swing.JFrame {
         //return this.sessionPlayerBox.getText();
     }
     */
-    public String[] getPlayerNamesArray(){
+    public String[] getAllPlayerNames(){
     	//new ArrayList of Player names 
     	ArrayList<String> strNames = new ArrayList<String>();
             // Get current ArrayList of all Player Objects
@@ -861,13 +972,31 @@ public class UserInterface extends javax.swing.JFrame {
     }
     
     public void viewSession(int sessionID){
-        JWindow sessionWindow = new JWindow();
-        JPanel sessionPanel = new JPanel();
+        sessionFrame.getContentPane().add(sessionPanel);
+        sessionFrame.pack();
+        sessionFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        sessionFrame.setVisible(true);
         
+        ScoutingSession ss = AGENDA.getSessionByID(sessionID);
+        String date = DATEMANAGER.fromDateToString(ss.getDate());
+        sessionDateLabel.setText(date);
+        sessionPlaceLabel.setText(ss.getLocation());
         
+        //Retrieving players associated with the Scouting Session
+        String[] players = new String[ss.getNumberOfPlayers()];
+        for(int i = 0; i < players.length; i++){
+            players[i] = ss.getPlayer(i).getName();
+        }
         
-        //Adding the JPanel to the Window
-        sessionWindow.getContentPane().add(sessionPanel);
+        //Exporting players into the ComboBox
+        sessionPlayersBox.setModel(new DefaultComboBoxModel<String>(players));
+    }
+    
+    public void viewCreateNoteInSession(){
+        sessionPanel.add(Box.createVerticalGlue());
+        sessionFrame.setLayout(new FlowLayout());
+        sessionFrame.getContentPane().add(sessionCreateNotePanel);
+        sessionFrame.pack();
     }
     
     /**
@@ -906,9 +1035,10 @@ public class UserInterface extends javax.swing.JFrame {
             sessionDateField.setText("");
             sessionPlaceField.setText("");
                 viewAgenda();
+                System.out.println(upcomingTable.getColumnCount());
 
             // sets the ComboBox content
-            sessionPlayerBox.setModel(new DefaultComboBoxModel<String>(getPlayerNamesArray()));
+            sessionPlayerBox.setModel(new DefaultComboBoxModel<String>(getAllPlayerNames()));
         }
     }//GEN-LAST:event_viewAgendaActionPerformed
 
@@ -1024,13 +1154,20 @@ public class UserInterface extends javax.swing.JFrame {
     private void upcomingTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_upcomingTableMousePressed
             if(evt.getClickCount() == 2){
             int row = upcomingTable.getSelectedRow();
-            Object ssID = upcomingTable.getValueAt(row, 4);
+            // Important to use getModel() as we have to access the model in order 
+            // to get the value at the 'hidden' column. 
+            Object ssID = upcomingTable.getModel().getValueAt(row, 3);
             int sessionID = (int) ssID;
-            
+            viewSession(sessionID);
             // Implement function here which takes the sessionID
             //      it should open a new JWindow containing the information of the session
         }
     }//GEN-LAST:event_upcomingTableMousePressed
+
+    private void sessionCreateNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionCreateNoteBtnActionPerformed
+        viewCreateNoteInSession();
+        
+    }//GEN-LAST:event_sessionCreateNoteBtnActionPerformed
     
      /**
      * 
@@ -1154,6 +1291,8 @@ public class UserInterface extends javax.swing.JFrame {
         return true;
     }
     
+    
+    
     /**
      * 
      * 
@@ -1205,6 +1344,7 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JPanel agendaPanel;
     private javax.swing.JTextField clubField;
     private javax.swing.JPanel contentPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1214,7 +1354,13 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1223,12 +1369,10 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel playerAgeLabel;
@@ -1249,12 +1393,25 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JTextField searchFieldName;
     private javax.swing.JButton sessionAddBtn;
     private javax.swing.JButton sessionAddPlayerBtn;
+    private javax.swing.JButton sessionCreateNoteBtn;
+    private javax.swing.JPanel sessionCreateNotePanel;
     private javax.swing.JFormattedTextField sessionDateField;
-    private javax.swing.JFrame sessionFrame;
+    private javax.swing.JLabel sessionDateLabel;
+    private javax.swing.JTextField sessionNoteAttitude;
+    private javax.swing.JTextField sessionNoteGamesense;
+    private javax.swing.JTextField sessionNoteSpeed;
+    private javax.swing.JTextField sessionNoteTechnique;
     private javax.swing.JPanel sessionPanel;
     private javax.swing.JTextField sessionPlaceField;
+    private javax.swing.JLabel sessionPlaceLabel;
     private javax.swing.JComboBox<String> sessionPlayerBox;
+    private javax.swing.JComboBox<String> sessionPlayersBox;
     private javax.swing.JTextArea sessionPlayersTF;
+    private javax.swing.JComboBox<String> sessionRatingAttitude;
+    private javax.swing.JComboBox<String> sessionRatingGamesense;
+    private javax.swing.JComboBox<String> sessionRatingSpeed;
+    private javax.swing.JComboBox<String> sessionRatingTechnique;
+    private javax.swing.JButton sessionViewProfileBtn;
     private javax.swing.JLabel upcomingLabel;
     private org.jdesktop.swingx.JXTable upcomingTable;
     private javax.swing.JButton viewAgenda;
