@@ -140,7 +140,7 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 	}*/
 	
 	public void removePlayer(Player player){
-		players.remove(TestScout2.pdb.getPlayerById(player.getID()));
+		players.remove(UserInterface.PDB.getPlayerById(player.getID()));
 	}
 	
 	
@@ -149,7 +149,7 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 	 * @param index is an integer value which decides the place of action in the ArrayList
 	 */
 	public void displayPlayer(int index){
-		System.out.println(TestScout2.pdb.getPlayerById(players.get(index)));
+		System.out.println(UserInterface.PDB.getPlayerById(players.get(index)));
 	}
 	
 	/**
@@ -157,7 +157,7 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 	 */
 	public void displayPlayerOverview(){
 		for(int i = 0; i < players.size(); i++){
-			System.out.println(TestScout2.pdb.getPlayerById(players.get(i)));
+			System.out.println(UserInterface.PDB.getPlayerById(players.get(i)));
 		}
 	}
 	
