@@ -30,21 +30,6 @@ public class DateManager {
 	public DateManager(){
 		this("dd-MM-yyyy", Locale.forLanguageTag("da"));
 	}
-	/**
-	 * Takes a date and checks if it is an actual date in the current calendar system
-	 * @param date
-	 * @return boolean
-	 */
-	public boolean isValid(String date){
-		
-		try {
-			df.parse(date);
-			return true;
-		} catch (ParseException p) {
-			p.printStackTrace();
-			return false;
-		}
-	}
 	
 	/**
 	 * Method that takes a String and returns a Date object holding the same information

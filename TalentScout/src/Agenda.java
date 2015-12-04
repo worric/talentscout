@@ -114,8 +114,7 @@ public class Agenda {
 	 * @param
 	 * */
 	public void cancelSession(ScoutingSession session){
-		int index = sessions.indexOf(session);
-		sessions.remove(index);
+		sessions.remove(session);
 	}
 	
 	/**
@@ -138,10 +137,6 @@ public class Agenda {
 		}
 		return null;
 	}
-        
-        public ArrayList<ScoutingSession> getArrayList(){
-            return this.sessions;
-        }
 	
 	/**
 	 * Displays a ScoutingSession at a chosen index.
