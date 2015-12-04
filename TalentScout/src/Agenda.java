@@ -86,6 +86,15 @@ public class Agenda {
     	
     			//Closing the stream
     			oi.close();
+    			
+    			int highestNumber = 0;
+    			for(ScoutingSession s : agendaArray){
+    				if(s.getSessionID() > highestNumber){
+    					highestNumber = s.getSessionID();
+    				}
+    			}
+    			
+    			Agenda.idCounter = highestNumber + 1;
     		
     			return agendaArray;
     	

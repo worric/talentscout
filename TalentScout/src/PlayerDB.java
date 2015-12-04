@@ -88,6 +88,14 @@ public class PlayerDB {
     	//Closing the stream
     	oi.close();
     	
+		int highestNumber = 0;
+		for(Player p : arrayOfPlayers){
+			if(p.getID() > highestNumber){
+				highestNumber = p.getID();
+			}
+		}
+		
+		PlayerDB.idCounter = highestNumber + 1;
     	/* Print to console for test
     	for(int i = 0; i < arrayOfPlayers.size(); i++){
     		// prints Player Objects
