@@ -140,7 +140,8 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 	}*/
 	
 	public void removePlayer(Player player){
-		players.remove(UserInterface.PDB.getPlayerById(player.getID()));
+		// wraps the integer ID in an object to make us of the remove object function of the ArrayList
+		players.remove(new Integer(player.getID()));
 	}
 	
 	
@@ -167,7 +168,7 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 	 * @param player is a generic instance of the class Player
 	 * @return The Note with this ScoutingSession and the Player stated in the parameter
 	 */
-	public Note makeNote(Player player){
+	public Note makeNote(Player player){ // TODO ved ikke om den er overflødig.
 			Note note = new Note(this, player);
 			player.addNote(note);
 			return note;
