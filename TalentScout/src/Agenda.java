@@ -139,25 +139,7 @@ public class Agenda {
 	}
 	
 	/**
-	 * Displays a ScoutingSession at a chosen index.
-	 * @param index is the chosen index which the method should display
-	 */
-	public void displaySession(int index){
-		System.out.println(sessions.get(index));
-	}
-	
-	
-	/**
-	 * Displays the entire ArrayList "sessions".
-	 */
-	public void displaySessionOverview(){
-		for(int i = 0; i < sessions.size(); i = i + 1){
-			displaySession(i);
-		}
-	}
-	
-	/**
-	 * Returns an ArrayList of scouting sessions sorted by date to be presented in the GUI
+	 * Returns an ArrayList of scouting sessions, sorted by date, to be presented in the GUI
 	 */
 	public ArrayList<ScoutingSession> getSortedList(){
 		// Clone the current list of scouting sessions
@@ -171,7 +153,8 @@ public class Agenda {
 	}
 	
 	/**
-	 * Returns the total number of sessions in the ArrayList - primarily used by other classes when iterating through scouting sessions.
+	 * Returns the total number of sessions in the ArrayList.
+	 * Primarily used by other classes when iterating through scouting sessions.
 	 */
 	public int getNumberOfSessions(){
 		return sessions.size();

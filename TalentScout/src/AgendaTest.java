@@ -1,15 +1,11 @@
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.junit.Test;
 
 public class AgendaTest {
-
-	@Test
-	public final void testAgenda() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public final void testSaveAgenda() {
@@ -81,28 +77,38 @@ public class AgendaTest {
 	}
 
 	@Test
-	public final void testGetArrayList() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public final void testDisplaySession() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public final void testDisplaySessionOverview() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public final void testGetSortedList() {
-		fail("Not yet implemented");
+		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-11-2015");
+		Date date0 = UserInterface.DATEMANAGER.fromStringToDate("01-05-2014");
+		Date date1 = UserInterface.DATEMANAGER.fromStringToDate("12-05-2016");
+		String location = "Skodsborg";
+		String location0 = "Frederiksberg";
+		String location1 = "Bornholm";
+		ArrayList<ScoutingSession> nonSortedList = new ArrayList<ScoutingSession>();
+		ArrayList<ScoutingSession> selfSortedList = new ArrayList<ScoutingSession>();
+		ArrayList<ScoutingSession> sortedList;
+
+		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
+		nonSortedList.add(s);
+		ScoutingSession s0 = UserInterface.AGENDA.planSession(location0, date0);
+		nonSortedList.add(s0);
+		ScoutingSession s1 = UserInterface.AGENDA.planSession(location1, date1);
+		nonSortedList.add(s1);
+		
+		selfSortedList.add(s1);
+		selfSortedList.add(s);
+		selfSortedList.add(s0);
+		
+		sortedList = UserInterface.AGENDA.getSortedList();
+		
+		assertEquals(selfSortedList, sortedList);
 	}
 
 	@Test
 	public final void testGetNumberOfSessions() {
-		fail("Not yet implemented");
+		int numberOfSessions = UserInterface.AGENDA.getNumberOfSessions();
+		
+		assertEquals(0, numberOfSessions);
 	}
 
 }
