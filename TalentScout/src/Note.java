@@ -40,7 +40,7 @@ public class Note implements Serializable {
 	}
 	
 	public ScoutingSession getSession() {
-		return TestScout2.a.getSessionByID(sessionID);
+		return UserInterface.AGENDA.getSessionByID(this.sessionID);
 	}
 
 	public void setSession(ScoutingSession session) {
