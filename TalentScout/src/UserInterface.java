@@ -20,9 +20,9 @@ import javax.swing.*;
  * @author mikkelmoerch
  */
 public class UserInterface extends javax.swing.JFrame {
-    Agenda agenda;
-    static PlayerDB pdb;
-    DateManager datemanager;
+    static final Agenda AGENDA = new Agenda();
+    static final PlayerDB PDB = new PlayerDB();
+    static final DateManager DATEMANAGER = new DateManager();
     
     /**
      * Creates new form UserInterface
@@ -33,9 +33,6 @@ public class UserInterface extends javax.swing.JFrame {
         initComponents();
         playerListModel = (DefaultTableModel) plrTable.getModel();
         agendaModel = (DefaultTableModel) upcomingTable.getModel();
-        this.datemanager = new DateManager();
-        this.pdb = new PlayerDB();
-        this.agenda = new Agenda();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,6 +43,13 @@ public class UserInterface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        sessionFrame = new javax.swing.JFrame();
+        sessionPanel = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel15 = new javax.swing.JLabel();
         menuPanel = new javax.swing.JPanel();
         saveAllBtn = new javax.swing.JButton();
         registerPlayer = new javax.swing.JButton();
@@ -73,10 +77,10 @@ public class UserInterface extends javax.swing.JFrame {
         agendaPanel = new javax.swing.JPanel();
         playerPanelBottom = new javax.swing.JPanel();
         playerPanelBottomBlank = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        upcomingTable = new javax.swing.JTable();
         upcomingLabel = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        upcomingTable = new org.jdesktop.swingx.JXTable();
         sessionAddBtn = new javax.swing.JButton();
         sessionPlaceField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -97,6 +101,78 @@ public class UserInterface extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
+
+        jLabel13.setText("Date:");
+
+        jLabel14.setText("Location:");
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        jLabel15.setText("Players:");
+
+        javax.swing.GroupLayout sessionPanelLayout = new javax.swing.GroupLayout(sessionPanel);
+        sessionPanel.setLayout(sessionPanelLayout);
+        sessionPanelLayout.setHorizontalGroup(
+            sessionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sessionPanelLayout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(sessionPanelLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(sessionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(sessionPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(sessionPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                        .addComponent(jLabel14)
+                        .addGap(117, 117, 117))))
+        );
+        sessionPanelLayout.setVerticalGroup(
+            sessionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sessionPanelLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(sessionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14))
+                .addGap(19, 19, 19)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(73, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout sessionFrameLayout = new javax.swing.GroupLayout(sessionFrame.getContentPane());
+        sessionFrame.getContentPane().setLayout(sessionFrameLayout);
+        sessionFrameLayout.setHorizontalGroup(
+            sessionFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sessionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        sessionFrameLayout.setVerticalGroup(
+            sessionFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sessionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -164,7 +240,7 @@ public class UserInterface extends javax.swing.JFrame {
                 .addComponent(viewPlayerList)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(saveAllBtn)
-                .addContainerGap(365, Short.MAX_VALUE))
+                .addContainerGap(392, Short.MAX_VALUE))
         );
 
         getContentPane().add(menuPanel, java.awt.BorderLayout.LINE_START);
@@ -232,7 +308,7 @@ public class UserInterface extends javax.swing.JFrame {
                             .addComponent(searchFieldName, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                             .addComponent(searchFieldClub)
                             .addComponent(searchFieldAge))))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         playerListPanelLayout.setVerticalGroup(
             playerListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,7 +329,7 @@ public class UserInterface extends javax.swing.JFrame {
                 .addComponent(searchBtn)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
 
         contentPanel.add(playerListPanel, "card2");
@@ -278,15 +354,14 @@ public class UserInterface extends javax.swing.JFrame {
         registerPanelLayout.setHorizontalGroup(
             registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registerPanelLayout.createSequentialGroup()
-                .addContainerGap(197, Short.MAX_VALUE)
+                .addContainerGap(239, Short.MAX_VALUE)
                 .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(registerBtn)
                     .addGroup(registerPanelLayout.createSequentialGroup()
                         .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
-                            .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(clubField, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
@@ -311,7 +386,7 @@ public class UserInterface extends javax.swing.JFrame {
                     .addComponent(clubField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(registerBtn)
-                .addContainerGap(328, Short.MAX_VALUE))
+                .addContainerGap(355, Short.MAX_VALUE))
         );
 
         contentPanel.add(registerPanel, "card4");
@@ -319,6 +394,10 @@ public class UserInterface extends javax.swing.JFrame {
         agendaPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         playerPanelBottomBlank.setPreferredSize(new java.awt.Dimension(418, 418));
+
+        upcomingLabel.setText("Upcoming events");
+
+        jButton2.setText("Clear all");
 
         upcomingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -328,7 +407,7 @@ public class UserInterface extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Date", "Place", "Players", "Session ID"
+                "Date", "Location", "Players", "SessionID"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -339,35 +418,32 @@ public class UserInterface extends javax.swing.JFrame {
                 return false;
             }
         });
-        upcomingTable.setMaximumSize(new java.awt.Dimension(300, 64));
+        upcomingTable.removeColumn(upcomingTable.getColumnModel().getColumn(4));
+        upcomingTable.getTableHeader().setReorderingAllowed(false);
         upcomingTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 upcomingTableMousePressed(evt);
             }
         });
-        jScrollPane2.setViewportView(upcomingTable);
-        if (upcomingTable.getColumnModel().getColumnCount() > 0) {
-            upcomingTable.getColumnModel().getColumn(0).setResizable(false);
-            upcomingTable.getColumnModel().getColumn(1).setResizable(false);
-            upcomingTable.getColumnModel().getColumn(2).setResizable(false);
-            upcomingTable.getColumnModel().getColumn(3).setResizable(false);
-        }
-
-        upcomingLabel.setText("Upcoming events");
-
-        jButton2.setText("Clear all");
+        jScrollPane5.setViewportView(upcomingTable);
 
         javax.swing.GroupLayout playerPanelBottomBlankLayout = new javax.swing.GroupLayout(playerPanelBottomBlank);
         playerPanelBottomBlank.setLayout(playerPanelBottomBlankLayout);
         playerPanelBottomBlankLayout.setHorizontalGroup(
             playerPanelBottomBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(playerPanelBottomBlankLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerPanelBottomBlankLayout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(playerPanelBottomBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(upcomingLabel))
-                .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerPanelBottomBlankLayout.createSequentialGroup()
+                        .addComponent(upcomingLabel)
+                        .addGap(380, 380, 380))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerPanelBottomBlankLayout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(41, 41, 41))))
         );
         playerPanelBottomBlankLayout.setVerticalGroup(
             playerPanelBottomBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -375,11 +451,9 @@ public class UserInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(upcomingLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(playerPanelBottomBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(playerPanelBottomBlankLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))
-                    .addComponent(jButton2))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jButton2)
                 .addContainerGap(141, Short.MAX_VALUE))
         );
 
@@ -387,7 +461,7 @@ public class UserInterface extends javax.swing.JFrame {
         playerPanelBottom.setLayout(playerPanelBottomLayout);
         playerPanelBottomLayout.setHorizontalGroup(
             playerPanelBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(playerPanelBottomBlank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(playerPanelBottomBlank, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
         );
         playerPanelBottomLayout.setVerticalGroup(
             playerPanelBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -421,6 +495,11 @@ public class UserInterface extends javax.swing.JFrame {
         sessionPlayersTF.setColumns(20);
         sessionPlayersTF.setRows(5);
         sessionPlayersTF.setToolTipText("");
+        sessionPlayersTF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                sessionPlayersTFMousePressed(evt);
+            }
+        });
         jScrollPane4.setViewportView(sessionPlayersTF);
 
         sessionPlayerBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -441,7 +520,7 @@ public class UserInterface extends javax.swing.JFrame {
                     .addComponent(sessionPlaceField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, agendaPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(103, Short.MAX_VALUE)
                 .addGroup(agendaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(agendaPanelLayout.createSequentialGroup()
                         .addComponent(jLabel9)
@@ -479,7 +558,7 @@ public class UserInterface extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(sessionAddBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(playerPanelBottom, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -537,7 +616,7 @@ public class UserInterface extends javax.swing.JFrame {
                     .addGroup(playerPanelLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jLabel16)))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         playerPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel10, jLabel11, jLabel12});
@@ -561,7 +640,7 @@ public class UserInterface extends javax.swing.JFrame {
                 .addComponent(jLabel16)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         playerPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel10, jLabel11, jLabel12});
@@ -619,7 +698,7 @@ public class UserInterface extends javax.swing.JFrame {
     	//new ArrayList of Player names 
     	ArrayList<String> strNames = new ArrayList<String>();
             // Get current ArrayList of all Player Objects
-            ArrayList<Player> list = pdb.getArrayListPlayer();
+            ArrayList<Player> list = PDB.getArrayListPlayer();
                 // Check if there are Player Objects in the array
                 if(!list.isEmpty()) {                   
                     // iterate through all Player Objects
@@ -709,7 +788,7 @@ public class UserInterface extends javax.swing.JFrame {
         
         try{
             // Get current ArrayList of all Player Objects
-            ArrayList<Player> list = pdb.getArrayListPlayer();
+            ArrayList<Player> list = PDB.getArrayListPlayer();
                 // Check if there are Player Objects in the array
                 if(!list.isEmpty()) {                   
                     // iterate through all Player Objects
@@ -744,7 +823,7 @@ public class UserInterface extends javax.swing.JFrame {
         
         try{
             // Get current ArrayList of all Scouting Session Objects
-            ArrayList<ScoutingSession> list = agenda.getArrayList();
+            ArrayList<ScoutingSession> list = AGENDA.getArrayList();
                 // Check if there are Player Objects in the array
                 if(!list.isEmpty()) {                   
                     // iterate through all Scouting Session Objects
@@ -753,20 +832,42 @@ public class UserInterface extends javax.swing.JFrame {
                     	// print the list to the console as a test
                     	System.out.println(list.get(i).getSessionID());
                         //convert the Date to a String
-                        String date = datemanager.fromDateToString(ssRestore.getDate());
+                        String date = DATEMANAGER.fromDateToString(ssRestore.getDate());
                         //convert the int to a String
-                        String id = Integer.toString(ssRestore.getSessionID());
-                       
+                        int id = ssRestore.getSessionID();
+                        
+                        // Number of players in the array
+                        int lengthOfPlayerStrArray = ssRestore.getNumberOfPlayers();
+                        // Merging the players into one String where each player is divided by a newline
+                        StringBuilder players = new StringBuilder();
+                        for(int k = 0; k < lengthOfPlayerStrArray; k++){
+                            players.append(ssRestore.getPlayer(k).getName());
+                            if(k < lengthOfPlayerStrArray-1){
+                            players.append(", ");
+                            }
+                        }
+                        //String players = Arrays.toString(playersInSession);
+                        System.out.println(players);
                         // create array containing player attributes
-                        String[] data = {date, ssRestore.getLocation(), ssRestore.getPlayer(0).getName(), id};
+                        Object[] data = {date, ssRestore.getLocation(), players.toString(), id};
                         
                         // insert the array into the table 
                         agendaModel.addRow(data);
                     }
                 }
-        } catch (Exception e){
+        } catch (NullPointerException e){
             e.printStackTrace();
         }
+    }
+    
+    public void viewSession(int sessionID){
+        JWindow sessionWindow = new JWindow();
+        JPanel sessionPanel = new JPanel();
+        
+        
+        
+        //Adding the JPanel to the Window
+        sessionWindow.getContentPane().add(sessionPanel);
     }
     
     /**
@@ -826,7 +927,7 @@ public class UserInterface extends javax.swing.JFrame {
         String club = clubField.getText();
         
         // Saving the player object in a file
-        pdb.register(name, age, club);
+        PDB.register(name, age, club);
         
         // Let the user view the player list
         viewPlayerList();
@@ -836,8 +937,8 @@ public class UserInterface extends javax.swing.JFrame {
     	// Erstattet med savePlayerDB, som skriver alle Player Objects i ArrayListen
     	// til filen. 
     	
-    	pdb.savePlayerDB();
-    	agenda.saveAgenda();
+    	PDB.savePlayerDB();
+    	AGENDA.saveAgenda();
     }//GEN-LAST:event_saveAllBtnActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
@@ -861,17 +962,17 @@ public class UserInterface extends javax.swing.JFrame {
         // User given date, which is a String
         String strDate = getSessionDateField();
         // Convertion of the String to Date
-        Date date = datemanager.fromStringToDate(strDate);
+        Date date = DATEMANAGER.fromStringToDate(strDate);
         // User given location
         String place = getSessionPlaceField();
         
         // Scouting session added to the agenda ArrayList
-        ScoutingSession ss = agenda.planSession(place, date);
+        ScoutingSession ss = AGENDA.planSession(place, date);
 
         // Adding the seleced players to the Scouting session
         String[] players = getPlayerFromTF();
         for(String name : players){
-            Player player = pdb.getPlayerByName(name);
+            Player player = PDB.getPlayerByName(name);
             // adds the player to the session with the ID of the player
             ss.addPlayer(player);
         }
@@ -879,6 +980,7 @@ public class UserInterface extends javax.swing.JFrame {
         sessionDateField.setText("");
         sessionPlaceField.setText("");
         sessionPlayersTF.setText("");
+        upcomingTable.packAll();
     }//GEN-LAST:event_sessionAddBtnActionPerformed
 /**
  * Adds a selected player to a TextField, which shows the players whom the user want to add
@@ -915,17 +1017,18 @@ public class UserInterface extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_sessionAddPlayerBtnActionPerformed
 
-    private void upcomingTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_upcomingTableMousePressed
-        // If double click
-        if(evt.getClickCount() == 2){
-            // Gets the object which was pressed
-            JTable table = (JTable) evt.getSource();
-            // Gets the row which was pressed
-            int row = table.getSelectedRow();
-            // Gets the column which was pressed
-            int col = table.getSelectedColumn();
+    private void sessionPlayersTFMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sessionPlayersTFMousePressed
 
-            insertCellValueToPanel(table, row, col);
+    }//GEN-LAST:event_sessionPlayersTFMousePressed
+
+    private void upcomingTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_upcomingTableMousePressed
+            if(evt.getClickCount() == 2){
+            int row = upcomingTable.getSelectedRow();
+            Object ssID = upcomingTable.getValueAt(row, 4);
+            int sessionID = (int) ssID;
+            
+            // Implement function here which takes the sessionID
+            //      it should open a new JWindow containing the information of the session
         }
     }//GEN-LAST:event_upcomingTableMousePressed
     
@@ -960,17 +1063,17 @@ public class UserInterface extends javax.swing.JFrame {
         // Gets the player name that was pressed
         String playerName = table.getValueAt(row, col).toString();
         // Finds the Player in the database
-        for(int i = 0; i < pdb.getArrayListPlayer().size(); i++){
-            if(playerName.matches(pdb.getPlayerByIndex(i).getName())){
+        for(int i = 0; i < PDB.getArrayListPlayer().size(); i++){
+            if(playerName.matches(PDB.getPlayerByIndex(i).getName())){
                 //Change card to playerPanel
                 changeCard(contentPanel, playerPanel);
                 //Set player name
-                playerNameLabel.setText(pdb.getPlayerByIndex(i).getName());
+                playerNameLabel.setText(PDB.getPlayerByIndex(i).getName());
                 //Set player age
-                String age = Integer.toString(pdb.getPlayerByIndex(i).getAge());
+                String age = Integer.toString(PDB.getPlayerByIndex(i).getAge());
                 playerAgeLabel.setText(age);
                 //Set player club
-                playerClubLabel.setText(pdb.getPlayerByIndex(i).getClub());
+                playerClubLabel.setText(PDB.getPlayerByIndex(i).getClub());
             }
         }
     }
@@ -1107,6 +1210,9 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1120,7 +1226,9 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel playerAgeLabel;
@@ -1142,11 +1250,13 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JButton sessionAddBtn;
     private javax.swing.JButton sessionAddPlayerBtn;
     private javax.swing.JFormattedTextField sessionDateField;
+    private javax.swing.JFrame sessionFrame;
+    private javax.swing.JPanel sessionPanel;
     private javax.swing.JTextField sessionPlaceField;
     private javax.swing.JComboBox<String> sessionPlayerBox;
     private javax.swing.JTextArea sessionPlayersTF;
     private javax.swing.JLabel upcomingLabel;
-    private javax.swing.JTable upcomingTable;
+    private org.jdesktop.swingx.JXTable upcomingTable;
     private javax.swing.JButton viewAgenda;
     private javax.swing.JButton viewPlayerList;
     // End of variables declaration//GEN-END:variables

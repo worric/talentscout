@@ -105,7 +105,7 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 	 */
 	public Player getPlayer(int index){
 		//return TestScout2.pdb.getPlayerById(players.get(index));
-                return UserInterface.pdb.getPlayerById(players.get(index));
+                return UserInterface.PDB.getPlayerById(players.get(index));
 	}
 	
 	public int getNumberOfPlayers(){
