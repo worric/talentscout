@@ -130,38 +130,12 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 	}
 	
 	
-	/**
-	 * Removes a Player from the ArrayList "players"
-	 * @param player is a specific instance of the class Player which should be removed
-	 *
 	public void removePlayer(Player player){
-		int index = players.indexOf(player);
-		players.remove(index);
-	}*/
-	
-	public void removePlayer(Player player){
-		// wraps the integer ID in an object to make us of the remove object function of the ArrayList
+		/* wraps the integer ID in an object to make us of the remove object function of the ArrayList,
+		 * which would otherwise just remove the object at the index provided
+		 */
 		players.remove(new Integer(player.getID()));
 	}
-	
-	
-	/**
-	 * Displays a Player from the ArrayList players
-	 * @param index is an integer value which decides the place of action in the ArrayList
-	 */
-	public void displayPlayer(int index){
-		System.out.println(UserInterface.PDB.getPlayerById(players.get(index)));
-	}
-	
-	/**
-	 * Displays an entire overview of Player objects in the ArrayList "players" 
-	 */
-	public void displayPlayerOverview(){
-		for(int i = 0; i < players.size(); i++){
-			System.out.println(UserInterface.PDB.getPlayerById(players.get(i)));
-		}
-	}
-	
 	
 	/**
 	 * Creates a new note and adds it to the ArrayList "notes" in the class Player
@@ -172,10 +146,6 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 			Note note = new Note(this, player);
 			player.addNote(note);
 			return note;
-	}
-	
-	public ArrayList<Integer> getList(){
-		return players;
 	}
 	
 	@Override
