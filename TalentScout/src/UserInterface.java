@@ -1417,6 +1417,8 @@ public class UserInterface extends javax.swing.JFrame {
                 attitudeText, attitudeScore,
                 techniqueText, techniqueScore,
                 gamesenseText, gamesenseScore);
+        viewPlayerProfile(player.getName());
+        sessionFrame.dispose();
     }//GEN-LAST:event_sessionAddNoteActionPerformed
     
      /**
