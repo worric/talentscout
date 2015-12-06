@@ -48,7 +48,7 @@ public class Note implements Serializable {
 	}
 	
 	public Player getPlayer() {
-		return TestScout2.pdb.getPlayerById(playerID);
+		return UserInterface.PDB.getPlayerById(playerID);
 	}
 
 	public void setPlayer(Player player) {
