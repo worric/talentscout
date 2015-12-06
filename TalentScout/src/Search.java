@@ -24,17 +24,26 @@ public class Search {
 		ArrayList<Player> searchedList = new ArrayList<Player>();
 		
 		// Loop through the database one player at a time and add it to a list to be returned to the GUI if it matches
-		for(int i = 0; i < pdb.getSize(); i++){
+		for(int i = 0; i < UserInterface.PDB.getSize(); i++){
 			// Local player variable initialized
-			Player p = pdb.getPlayerByIndex(i);
+			Player p = UserInterface.PDB.getPlayerByIndex(i);
 			
 			// Check if the player matches the search criteria
-			if (p.getName().toLowerCase().matches(".*" + searchStringName.toLowerCase() + ".*") &&
+			/*if (p.getName().toLowerCase().matches(".*" + searchStringName.toLowerCase() + ".*") &&
 					p.getClub().toLowerCase().matches(".*" + searchStringClub.toLowerCase() + ".*")){
 				
 				// Add it to a a local list if it does.
 				searchedList.add(p);
+			}*/
+			
+			if (p.getName().toLowerCase().contains(searchStringName.toLowerCase()) &&
+					p.getClub().toLowerCase().contains(searchStringClub.toLowerCase())){
+				
+				// Add it to a a local list if it does.
+				searchedList.add(p);
 			}
+			
+			
 		}
 		// Always return the list even though it may be empty.
 		return searchedList;
