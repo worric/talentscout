@@ -24,7 +24,6 @@ public class UserInterface extends javax.swing.JFrame {
     static final PlayerDB PDB = new PlayerDB();
     static final DateManager DATEMANAGER = new DateManager();
     JDialog sessionFrame = new JDialog();
-    
     /**
      * Creates new form UserInterface
      */
@@ -123,6 +122,7 @@ public class UserInterface extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         sessionNotesTable = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
+        playerIDLabel = new javax.swing.JLabel();
         notePanel = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
@@ -134,7 +134,6 @@ public class UserInterface extends javax.swing.JFrame {
         noteTFGamesense = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        noteEditBtn = new javax.swing.JButton();
         notePlayerNameLabel = new javax.swing.JLabel();
         noteRatingSpeed = new javax.swing.JLabel();
         noteRatingAttitude = new javax.swing.JLabel();
@@ -144,6 +143,31 @@ public class UserInterface extends javax.swing.JFrame {
         jLabel30 = new javax.swing.JLabel();
         noteDateLabel = new javax.swing.JLabel();
         noteLocationLabel = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        noteEditBtn = new javax.swing.JButton();
+        notePanelEdit = new javax.swing.JPanel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        noteTFSpeed1 = new javax.swing.JTextField();
+        noteTFAttitude1 = new javax.swing.JTextField();
+        jLabel33 = new javax.swing.JLabel();
+        noteTFTechnique1 = new javax.swing.JTextField();
+        jLabel34 = new javax.swing.JLabel();
+        noteTFGamesense1 = new javax.swing.JTextField();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        notePlayerNameLabel1 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        noteDateLabel1 = new javax.swing.JLabel();
+        noteLocationLabel1 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        noteRatingSpeedEdit = new javax.swing.JComboBox<>();
+        noteRatingAttitudeEdit = new javax.swing.JComboBox<>();
+        noteRatingTechniqueEdit = new javax.swing.JComboBox<>();
+        noteRatingGamesenseEdit = new javax.swing.JComboBox<>();
+        cancelNoteEditBtn = new javax.swing.JButton();
+        noteSaveBtn = new javax.swing.JButton();
 
         jLabel13.setText("Date:");
 
@@ -414,7 +438,7 @@ public class UserInterface extends javax.swing.JFrame {
         registerPanelLayout.setHorizontalGroup(
             registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registerPanelLayout.createSequentialGroup()
-                .addContainerGap(239, Short.MAX_VALUE)
+                .addContainerGap(271, Short.MAX_VALUE)
                 .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(registerBtn)
                     .addGroup(registerPanelLayout.createSequentialGroup()
@@ -521,7 +545,7 @@ public class UserInterface extends javax.swing.JFrame {
         playerPanelBottom.setLayout(playerPanelBottomLayout);
         playerPanelBottomLayout.setHorizontalGroup(
             playerPanelBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(playerPanelBottomBlank, javax.swing.GroupLayout.PREFERRED_SIZE, 460, Short.MAX_VALUE)
+            .addComponent(playerPanelBottomBlank, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
         );
         playerPanelBottomLayout.setVerticalGroup(
             playerPanelBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -580,7 +604,7 @@ public class UserInterface extends javax.swing.JFrame {
                     .addComponent(sessionPlaceField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, agendaPanelLayout.createSequentialGroup()
-                .addContainerGap(103, Short.MAX_VALUE)
+                .addContainerGap(135, Short.MAX_VALUE)
                 .addGroup(agendaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(agendaPanelLayout.createSequentialGroup()
                         .addComponent(jLabel9)
@@ -687,7 +711,7 @@ public class UserInterface extends javax.swing.JFrame {
                             .addComponent(searchFieldName, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                             .addComponent(searchFieldClub)
                             .addComponent(searchFieldAge))))
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
         playerListPanelLayout.setVerticalGroup(
             playerListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -745,10 +769,18 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
         sessionNotesTable.getTableHeader().setReorderingAllowed(false);
-        sessionNotesTable.removeColumn(upcomingTable.getColumnModel().getColumn(2));
+        sessionNotesTable.removeColumn(sessionNotesTable.getColumnModel().getColumn(2));
+        sessionNotesTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                sessionNotesTableMousePressed(evt);
+            }
+        });
         jScrollPane3.setViewportView(sessionNotesTable);
 
         jLabel16.setText("Session notes");
+
+        playerIDLabel.setText("playerID");
+        playerIDLabel.setVisible(false);
 
         javax.swing.GroupLayout playerPanelLayout = new javax.swing.GroupLayout(playerPanel);
         playerPanel.setLayout(playerPanelLayout);
@@ -768,11 +800,14 @@ public class UserInterface extends javax.swing.JFrame {
                                     .addComponent(jLabel10))
                                 .addGap(53, 53, 53)
                                 .addGroup(playerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(playerNameLabel)
+                                    .addGroup(playerPanelLayout.createSequentialGroup()
+                                        .addComponent(playerNameLabel)
+                                        .addGap(84, 84, 84)
+                                        .addComponent(playerIDLabel))
                                     .addComponent(playerAgeLabel)
                                     .addComponent(playerClubLabel)))))
                     .addComponent(jLabel16))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         playerPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel10, jLabel11, jLabel12});
@@ -783,7 +818,8 @@ public class UserInterface extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(playerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(playerNameLabel))
+                    .addComponent(playerNameLabel)
+                    .addComponent(playerIDLabel))
                 .addGap(18, 18, 18)
                 .addGroup(playerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -802,6 +838,12 @@ public class UserInterface extends javax.swing.JFrame {
         playerPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel10, jLabel11, jLabel12});
 
         contentPanel.add(playerPanel, "card5");
+
+        notePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                notePanelMousePressed(evt);
+            }
+        });
 
         jLabel23.setText("Player:");
 
@@ -827,8 +869,6 @@ public class UserInterface extends javax.swing.JFrame {
 
         jLabel28.setText("Ratings:");
 
-        noteEditBtn.setText("Edit note");
-
         notePlayerNameLabel.setText("jLabel29");
 
         noteRatingSpeed.setText("jLabel29");
@@ -847,35 +887,23 @@ public class UserInterface extends javax.swing.JFrame {
 
         noteLocationLabel.setText("jLabel31");
 
+        jButton1.setText("Return to profile");
+
+        noteEditBtn.setText("Edit note");
+        noteEditBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noteEditBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout notePanelLayout = new javax.swing.GroupLayout(notePanel);
         notePanel.setLayout(notePanelLayout);
         notePanelLayout.setHorizontalGroup(
             notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(notePanelLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(notePanelLayout.createSequentialGroup()
-                        .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, notePanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 301, Short.MAX_VALUE)
-                                .addComponent(noteEditBtn)
-                                .addGap(17, 17, 17))
-                            .addGroup(notePanelLayout.createSequentialGroup()
-                                .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel23)
-                                    .addComponent(jLabel29))
-                                .addGap(18, 18, 18)
-                                .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(notePlayerNameLabel)
-                                    .addGroup(notePanelLayout.createSequentialGroup()
-                                        .addComponent(noteDateLabel)
-                                        .addGap(39, 39, 39)
-                                        .addComponent(jLabel30)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(noteLocationLabel)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(notePanelLayout.createSequentialGroup()
+                .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, notePanelLayout.createSequentialGroup()
                         .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(noteTFSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel25)
@@ -885,62 +913,244 @@ public class UserInterface extends javax.swing.JFrame {
                             .addComponent(jLabel27)
                             .addComponent(noteTFGamesense, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel24))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(notePanelLayout.createSequentialGroup()
+                        .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel23)
+                            .addComponent(jLabel29))
+                        .addGap(18, 18, 18)
+                        .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(notePlayerNameLabel)
+                            .addGroup(notePanelLayout.createSequentialGroup()
+                                .addComponent(noteDateLabel)
+                                .addGap(39, 39, 39)
+                                .addComponent(jLabel30)
+                                .addGap(18, 18, 18)
+                                .addComponent(noteLocationLabel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel28)
-                            .addComponent(noteRatingSpeed)
-                            .addComponent(noteRatingAttitude)
-                            .addComponent(noteRatingTechnique)
-                            .addComponent(noteRatingGamesense))
-                        .addGap(59, 59, 59))))
+                            .addComponent(jButton1)
+                            .addGroup(notePanelLayout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel28)
+                                    .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(noteRatingGamesense)
+                                        .addComponent(noteRatingTechnique)
+                                        .addComponent(noteRatingAttitude)
+                                        .addComponent(noteRatingSpeed))
+                                    .addComponent(noteEditBtn))))
+                        .addGap(17, 17, 17))))
         );
         notePanelLayout.setVerticalGroup(
             notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(notePanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(13, 13, 13)
                 .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
-                    .addComponent(notePlayerNameLabel))
+                    .addComponent(notePlayerNameLabel)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
                     .addComponent(jLabel30)
                     .addComponent(noteDateLabel)
                     .addComponent(noteLocationLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(notePanelLayout.createSequentialGroup()
-                        .addComponent(jLabel24)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(noteTFSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel25)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(noteTFAttitude, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel26)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(noteTFTechnique, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel27)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(noteTFGamesense, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(noteEditBtn))
-                    .addGroup(notePanelLayout.createSequentialGroup()
-                        .addComponent(jLabel28)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(noteRatingSpeed)
-                        .addGap(40, 40, 40)
-                        .addComponent(noteRatingAttitude)
-                        .addGap(40, 40, 40)
-                        .addComponent(noteRatingTechnique)
-                        .addGap(40, 40, 40)
-                        .addComponent(noteRatingGamesense)))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel28))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(noteTFSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(noteRatingSpeed))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(noteTFAttitude, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(noteRatingAttitude))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(noteTFTechnique, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(noteRatingTechnique))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(noteTFGamesense, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(noteRatingGamesense))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(noteEditBtn)
+                .addGap(18, 18, 18))
         );
 
         contentPanel.add(notePanel, "card7");
+
+        jLabel31.setText("Player:");
+
+        jLabel32.setText("Speed:");
+
+        noteTFSpeed1.setText("jTextField1");
+
+        noteTFAttitude1.setText("jTextField1");
+
+        jLabel33.setText("Attitude:");
+
+        noteTFTechnique1.setText("jTextField1");
+
+        jLabel34.setText("Technique");
+
+        noteTFGamesense1.setText("jTextField1");
+
+        jLabel35.setText("Gamesense");
+
+        jLabel36.setText("Ratings:");
+
+        notePlayerNameLabel1.setText("jLabel29");
+
+        jLabel37.setText("Date:");
+
+        jLabel38.setText("Location:");
+
+        noteDateLabel1.setText("jLabel31");
+
+        noteLocationLabel1.setText("jLabel31");
+
+        jButton3.setText("Return to profile");
+
+        noteRatingSpeedEdit.setEditable(true);
+        noteRatingSpeedEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
+
+        noteRatingAttitudeEdit.setEditable(true);
+        noteRatingAttitudeEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
+
+        noteRatingTechniqueEdit.setEditable(true);
+        noteRatingTechniqueEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
+
+        noteRatingGamesenseEdit.setEditable(true);
+        noteRatingGamesenseEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
+
+        cancelNoteEditBtn.setText("Cancel");
+        cancelNoteEditBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelNoteEditBtnActionPerformed(evt);
+            }
+        });
+
+        noteSaveBtn.setText("Save");
+        noteSaveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noteSaveBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout notePanelEditLayout = new javax.swing.GroupLayout(notePanelEdit);
+        notePanelEdit.setLayout(notePanelEditLayout);
+        notePanelEditLayout.setHorizontalGroup(
+            notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(notePanelEditLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(notePanelEditLayout.createSequentialGroup()
+                        .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(noteTFSpeed1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel33)
+                            .addComponent(noteTFAttitude1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel34)
+                            .addComponent(noteTFTechnique1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel35)
+                            .addComponent(noteTFGamesense1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel32))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, notePanelEditLayout.createSequentialGroup()
+                                    .addComponent(noteRatingGamesenseEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(76, 76, 76))
+                                .addGroup(notePanelEditLayout.createSequentialGroup()
+                                    .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(noteRatingTechniqueEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(noteRatingAttitudeEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(noteRatingSpeedEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addContainerGap()))
+                            .addGroup(notePanelEditLayout.createSequentialGroup()
+                                .addComponent(jLabel36)
+                                .addGap(76, 76, 76))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, notePanelEditLayout.createSequentialGroup()
+                        .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(notePanelEditLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(cancelNoteEditBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(noteSaveBtn))
+                            .addGroup(notePanelEditLayout.createSequentialGroup()
+                                .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel31)
+                                    .addComponent(jLabel37))
+                                .addGap(18, 18, 18)
+                                .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(notePlayerNameLabel1)
+                                    .addGroup(notePanelEditLayout.createSequentialGroup()
+                                        .addComponent(noteDateLabel1)
+                                        .addGap(39, 39, 39)
+                                        .addComponent(jLabel38)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(noteLocationLabel1)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton3)))
+                        .addGap(17, 17, 17))))
+        );
+        notePanelEditLayout.setVerticalGroup(
+            notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(notePanelEditLayout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel31)
+                    .addComponent(notePlayerNameLabel1)
+                    .addComponent(jButton3))
+                .addGap(18, 18, 18)
+                .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel37)
+                    .addComponent(jLabel38)
+                    .addComponent(noteDateLabel1)
+                    .addComponent(noteLocationLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel32)
+                    .addComponent(jLabel36))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(noteTFSpeed1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(noteRatingSpeedEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(noteTFAttitude1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(noteRatingAttitudeEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(noteTFTechnique1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(noteRatingTechniqueEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(noteTFGamesense1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(noteRatingGamesenseEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(noteSaveBtn)
+                    .addComponent(cancelNoteEditBtn))
+                .addGap(18, 18, 18))
+        );
+
+        contentPanel.add(notePanelEdit, "card7");
 
         getContentPane().add(contentPanel, java.awt.BorderLayout.CENTER);
 
@@ -1148,6 +1358,7 @@ public class UserInterface extends javax.swing.JFrame {
      * @param sessionID 
      */
     public void viewSession(int sessionID){
+        sessionFrame.getContentPane().removeAll();
         sessionFrame.getContentPane().add(sessionPanel);
         sessionFrame.pack();
         sessionFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -1208,13 +1419,54 @@ public class UserInterface extends javax.swing.JFrame {
         String age = Integer.toString(player.getAge());
         String playerAge = age;
         String playerClub = player.getClub();
+        String playerID = Integer.toString(player.getID());
         
         playerAgeLabel.setText(playerAge);
         playerNameLabel.setText(playerName);
         playerClubLabel.setText(playerClub);
+        playerIDLabel.setText(playerID);
         InsertNoteIntoSessionTable(player);
     }
     
+    public void viewNote(int ssID, Component card){
+        changeCard(contentPanel, card);
+        String pa = card.getParent().getName();
+        System.out.println(pa);
+        ScoutingSession ss = AGENDA.getSessionByID(ssID);
+        
+        //Converting date to String
+        String date = DATEMANAGER.fromDateToString(ss.getDate());
+        noteDateLabel.setText(date);
+        noteLocationLabel.setText(ss.getLocation());
+        notePlayerNameLabel.setText(playerNameLabel.getText());
+        
+        // converting playerID from String to int
+        int plrID = Integer.parseInt(playerIDLabel.getText());
+        Player plr = PDB.getPlayerById(plrID);
+        
+        // Looping through the Notes of the player.
+        for(int i = 0; i < plr.getNumberOfNotes(); i++){
+            // Finding the note which matches the ID of the scouting session
+            if(plr.getNote(i).getSession().getSessionID() == ssID){
+                // Get the text notes
+                noteTFSpeed.setText(plr.getNote(i).getSpeedText());
+                noteTFAttitude.setText(plr.getNote(i).getAttitudeText());
+                noteTFTechnique.setText(plr.getNote(i).getTechniqueText());
+                noteTFGamesense.setText(plr.getNote(i).getGameSenseText());
+                
+                // Get the scores
+                String speed = Integer.toString(plr.getNote(i).getSpeedScore());
+                noteRatingSpeed.setText(speed);
+                String attitude = Integer.toString(plr.getNote(i).getAttitudeScore());
+                noteRatingAttitude.setText(attitude);
+                String tech = Integer.toString(plr.getNote(i).getTechniqueScore());
+                noteRatingTechnique.setText(tech);
+                String gamesense = Integer.toString(plr.getNote(i).getGameSenseScore());
+                noteRatingGamesense.setText(gamesense);
+            } 
+        }
+        
+    }
     /**
      * 
      * 
@@ -1421,6 +1673,66 @@ public class UserInterface extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_upcomingTableMousePressed
 
+    /**
+     * Opens a window containing the notes on the player from that particular session
+     * @param evt 
+     */
+    private void sessionNotesTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sessionNotesTableMousePressed
+        if(evt.getClickCount() == 2){
+            int row = sessionNotesTable.getSelectedRow();
+            Object ssID = sessionNotesTable.getModel().getValueAt(row, 2);
+            int sessionID = (int) ssID;
+            viewNote(sessionID, notePanel);
+        }
+
+    }//GEN-LAST:event_sessionNotesTableMousePressed
+
+
+    private void notePanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notePanelMousePressed
+
+    }//GEN-LAST:event_notePanelMousePressed
+    /** 
+     * Saves changes to the note
+     * @param evt 
+     */
+    private void noteSaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noteSaveBtnActionPerformed
+        noteTFSpeed.setText(noteTFSpeed1.getText());
+        noteTFAttitude.setText(noteTFAttitude1.getText());
+        noteTFTechnique.setText(noteTFTechnique1.getText());
+        noteTFGamesense.setText(noteTFGamesense1.getText());
+
+        noteRatingSpeed.setText(noteRatingSpeedEdit.getSelectedItem().toString());
+        noteRatingAttitude.setText(noteRatingAttitudeEdit.getSelectedItem().toString());
+        noteRatingTechnique.setText(noteRatingTechniqueEdit.getSelectedItem().toString());
+        noteRatingGamesense.setText(noteRatingGamesenseEdit.getSelectedItem().toString());
+        changeCard(contentPanel, notePanel);
+    }//GEN-LAST:event_noteSaveBtnActionPerformed
+
+    private void cancelNoteEditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelNoteEditBtnActionPerformed
+        changeCard(contentPanel, notePanel);
+    }//GEN-LAST:event_cancelNoteEditBtnActionPerformed
+
+    /**
+     * Changes card to a Panel which allows for editing the note
+     * @param evt 
+     */
+    private void noteEditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noteEditBtnActionPerformed
+        noteTFSpeed1.setText(noteTFSpeed.getText());
+        noteTFAttitude1.setText(noteTFAttitude.getText());
+        noteTFTechnique1.setText(noteTFTechnique.getText());
+        noteTFGamesense1.setText(noteTFGamesense.getText());
+        
+        int speedIndex = Integer.parseInt(noteRatingSpeed.getText());
+        noteRatingSpeedEdit.setSelectedIndex(speedIndex-1);
+        int attitudeIndex = Integer.parseInt(noteRatingAttitude.getText());
+        noteRatingAttitudeEdit.setSelectedIndex(attitudeIndex-1);
+        int techniqueIndex = Integer.parseInt(noteRatingTechnique.getText());
+        noteRatingTechniqueEdit.setSelectedIndex(techniqueIndex-1);
+        int gamesenseIndex = Integer.parseInt(noteRatingGamesense.getText());
+        noteRatingGamesenseEdit.setSelectedIndex(gamesenseIndex-1);
+        changeCard(contentPanel, notePanelEdit);
+    }//GEN-LAST:event_noteEditBtnActionPerformed
+
     
      /**
      * 
@@ -1595,9 +1907,12 @@ public class UserInterface extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ageField;
     private javax.swing.JPanel agendaPanel;
+    private javax.swing.JButton cancelNoteEditBtn;
     private javax.swing.JTextField clubField;
     private javax.swing.JPanel contentPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1622,6 +1937,14 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1635,20 +1958,34 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JPanel menuPanel;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel noteDateLabel;
+    private javax.swing.JLabel noteDateLabel1;
     private javax.swing.JButton noteEditBtn;
     private javax.swing.JLabel noteLocationLabel;
+    private javax.swing.JLabel noteLocationLabel1;
     private javax.swing.JPanel notePanel;
+    private javax.swing.JPanel notePanelEdit;
     private javax.swing.JLabel notePlayerNameLabel;
+    private javax.swing.JLabel notePlayerNameLabel1;
     private javax.swing.JLabel noteRatingAttitude;
+    private javax.swing.JComboBox<String> noteRatingAttitudeEdit;
     private javax.swing.JLabel noteRatingGamesense;
+    private javax.swing.JComboBox<String> noteRatingGamesenseEdit;
     private javax.swing.JLabel noteRatingSpeed;
+    private javax.swing.JComboBox<String> noteRatingSpeedEdit;
     private javax.swing.JLabel noteRatingTechnique;
+    private javax.swing.JComboBox<String> noteRatingTechniqueEdit;
+    private javax.swing.JButton noteSaveBtn;
     private javax.swing.JTextField noteTFAttitude;
+    private javax.swing.JTextField noteTFAttitude1;
     private javax.swing.JTextField noteTFGamesense;
+    private javax.swing.JTextField noteTFGamesense1;
     private javax.swing.JTextField noteTFSpeed;
+    private javax.swing.JTextField noteTFSpeed1;
     private javax.swing.JTextField noteTFTechnique;
+    private javax.swing.JTextField noteTFTechnique1;
     private javax.swing.JLabel playerAgeLabel;
     private javax.swing.JLabel playerClubLabel;
+    private javax.swing.JLabel playerIDLabel;
     private javax.swing.JPanel playerListPanel;
     private javax.swing.JLabel playerNameLabel;
     private javax.swing.JPanel playerPanel;
