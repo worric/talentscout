@@ -156,11 +156,11 @@ public class UserInterface extends javax.swing.JFrame {
         noteTFGamesense1 = new javax.swing.JTextField();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
-        notePlayerNameLabel1 = new javax.swing.JLabel();
+        notePlayerNameLabelEdit = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
-        noteDateLabel1 = new javax.swing.JLabel();
-        noteLocationLabel1 = new javax.swing.JLabel();
+        noteDateLabelEdit = new javax.swing.JLabel();
+        noteLocationLabelEdit = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         noteRatingSpeedEdit = new javax.swing.JComboBox<>();
         noteRatingAttitudeEdit = new javax.swing.JComboBox<>();
@@ -545,7 +545,7 @@ public class UserInterface extends javax.swing.JFrame {
         playerPanelBottom.setLayout(playerPanelBottomLayout);
         playerPanelBottomLayout.setHorizontalGroup(
             playerPanelBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(playerPanelBottomBlank, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+            .addComponent(playerPanelBottomBlank, javax.swing.GroupLayout.PREFERRED_SIZE, 492, Short.MAX_VALUE)
         );
         playerPanelBottomLayout.setVerticalGroup(
             playerPanelBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1009,15 +1009,15 @@ public class UserInterface extends javax.swing.JFrame {
 
         jLabel36.setText("Ratings:");
 
-        notePlayerNameLabel1.setText("jLabel29");
+        notePlayerNameLabelEdit.setText("jLabel29");
 
         jLabel37.setText("Date:");
 
         jLabel38.setText("Location:");
 
-        noteDateLabel1.setText("jLabel31");
+        noteDateLabelEdit.setText("jLabel31");
 
-        noteLocationLabel1.setText("jLabel31");
+        noteLocationLabelEdit.setText("jLabel31");
 
         jButton3.setText("Return to profile");
 
@@ -1092,13 +1092,13 @@ public class UserInterface extends javax.swing.JFrame {
                                     .addComponent(jLabel37))
                                 .addGap(18, 18, 18)
                                 .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(notePlayerNameLabel1)
+                                    .addComponent(notePlayerNameLabelEdit)
                                     .addGroup(notePanelEditLayout.createSequentialGroup()
-                                        .addComponent(noteDateLabel1)
+                                        .addComponent(noteDateLabelEdit)
                                         .addGap(39, 39, 39)
                                         .addComponent(jLabel38)
                                         .addGap(18, 18, 18)
-                                        .addComponent(noteLocationLabel1)))
+                                        .addComponent(noteLocationLabelEdit)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton3)))
                         .addGap(17, 17, 17))))
@@ -1109,14 +1109,14 @@ public class UserInterface extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31)
-                    .addComponent(notePlayerNameLabel1)
+                    .addComponent(notePlayerNameLabelEdit)
                     .addComponent(jButton3))
                 .addGap(18, 18, 18)
                 .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel37)
                     .addComponent(jLabel38)
-                    .addComponent(noteDateLabel1)
-                    .addComponent(noteLocationLabel1))
+                    .addComponent(noteDateLabelEdit)
+                    .addComponent(noteLocationLabelEdit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel32)
@@ -1687,7 +1687,6 @@ public class UserInterface extends javax.swing.JFrame {
 
     }//GEN-LAST:event_sessionNotesTableMousePressed
 
-
     private void notePanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notePanelMousePressed
 
     }//GEN-LAST:event_notePanelMousePressed
@@ -1717,6 +1716,10 @@ public class UserInterface extends javax.swing.JFrame {
      * @param evt 
      */
     private void noteEditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noteEditBtnActionPerformed
+        noteDateLabelEdit.setText(noteDateLabel.getText());
+        noteLocationLabelEdit.setText(noteLocationLabel.getText());
+        notePlayerNameLabelEdit.setText(notePlayerNameLabel.getText());
+        
         noteTFSpeed1.setText(noteTFSpeed.getText());
         noteTFAttitude1.setText(noteTFAttitude.getText());
         noteTFTechnique1.setText(noteTFTechnique.getText());
@@ -1733,7 +1736,6 @@ public class UserInterface extends javax.swing.JFrame {
         changeCard(contentPanel, notePanelEdit);
     }//GEN-LAST:event_noteEditBtnActionPerformed
 
-    
      /**
      * 
      * 
@@ -1958,14 +1960,14 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JPanel menuPanel;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel noteDateLabel;
-    private javax.swing.JLabel noteDateLabel1;
+    private javax.swing.JLabel noteDateLabelEdit;
     private javax.swing.JButton noteEditBtn;
     private javax.swing.JLabel noteLocationLabel;
-    private javax.swing.JLabel noteLocationLabel1;
+    private javax.swing.JLabel noteLocationLabelEdit;
     private javax.swing.JPanel notePanel;
     private javax.swing.JPanel notePanelEdit;
     private javax.swing.JLabel notePlayerNameLabel;
-    private javax.swing.JLabel notePlayerNameLabel1;
+    private javax.swing.JLabel notePlayerNameLabelEdit;
     private javax.swing.JLabel noteRatingAttitude;
     private javax.swing.JComboBox<String> noteRatingAttitudeEdit;
     private javax.swing.JLabel noteRatingGamesense;

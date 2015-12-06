@@ -1429,13 +1429,13 @@
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="notePlayerNameLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="notePlayerNameLabelEdit" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="noteDateLabel1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="noteDateLabelEdit" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                                               <Component id="jLabel38" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="noteLocationLabel1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="noteLocationLabelEdit" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
@@ -1454,15 +1454,15 @@
                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel31" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="notePlayerNameLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="notePlayerNameLabelEdit" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="noteDateLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="noteLocationLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="noteDateLabelEdit" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="noteLocationLabelEdit" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="50" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -1556,7 +1556,7 @@
                 <Property name="text" type="java.lang.String" value="Ratings:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="notePlayerNameLabel1">
+            <Component class="javax.swing.JLabel" name="notePlayerNameLabelEdit">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel29"/>
               </Properties>
@@ -1571,12 +1571,12 @@
                 <Property name="text" type="java.lang.String" value="Location:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="noteDateLabel1">
+            <Component class="javax.swing.JLabel" name="noteDateLabelEdit">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel31"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="noteLocationLabel1">
+            <Component class="javax.swing.JLabel" name="noteLocationLabelEdit">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel31"/>
               </Properties>
