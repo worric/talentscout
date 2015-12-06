@@ -91,7 +91,7 @@ public class UserInterface extends javax.swing.JFrame {
         playerPanelBottomBlank = new javax.swing.JPanel();
         upcomingLabel = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jScrollPane5 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         upcomingTable = new org.jdesktop.swingx.JXTable();
         sessionAddBtn = new javax.swing.JButton();
         sessionPlaceField = new javax.swing.JTextField();
@@ -467,7 +467,7 @@ public class UserInterface extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Date", "Location", "Players", "SessionID"
+                "Date", "Location", "Players", "sessionID"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -475,26 +475,22 @@ public class UserInterface extends javax.swing.JFrame {
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return false;
+                return canEdit [columnIndex];
             }
         });
         upcomingTable.getTableHeader().setReorderingAllowed(false);
+        upcomingTable.removeColumn(upcomingTable.getColumnModel().getColumn(3));
         upcomingTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 upcomingTableMousePressed(evt);
             }
         });
-        upcomingTable.removeColumn(upcomingTable.getColumnModel().getColumn(3));
-        jScrollPane5.setViewportView(upcomingTable);
+        jScrollPane2.setViewportView(upcomingTable);
 
         javax.swing.GroupLayout playerPanelBottomBlankLayout = new javax.swing.GroupLayout(playerPanelBottomBlank);
         playerPanelBottomBlank.setLayout(playerPanelBottomBlankLayout);
         playerPanelBottomBlankLayout.setHorizontalGroup(
             playerPanelBottomBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(playerPanelBottomBlankLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerPanelBottomBlankLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(playerPanelBottomBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -504,15 +500,19 @@ public class UserInterface extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerPanelBottomBlankLayout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addGap(41, 41, 41))))
+            .addGroup(playerPanelBottomBlankLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         playerPanelBottomBlankLayout.setVerticalGroup(
             playerPanelBottomBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(playerPanelBottomBlankLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(upcomingLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addContainerGap(141, Short.MAX_VALUE))
         );
@@ -745,7 +745,7 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
         sessionNotesTable.getTableHeader().setReorderingAllowed(false);
-        upcomingTable.removeColumn(upcomingTable.getColumnModel().getColumn(2));
+        sessionNotesTable.removeColumn(upcomingTable.getColumnModel().getColumn(2));
         jScrollPane3.setViewportView(sessionNotesTable);
 
         jLabel16.setText("Session notes");
@@ -1365,19 +1365,7 @@ public class UserInterface extends javax.swing.JFrame {
     private void sessionPlayersTFMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sessionPlayersTFMousePressed
 
     }//GEN-LAST:event_sessionPlayersTFMousePressed
-
-    private void upcomingTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_upcomingTableMousePressed
-            if(evt.getClickCount() == 2){
-            int row = upcomingTable.getSelectedRow();
-            // Important to use getModel() as we have to access the model in order 
-            // to get the value at the 'hidden' column. 
-            Object ssID = upcomingTable.getModel().getValueAt(row, 3);
-            int sessionID = (int) ssID;
-            // JDialog opens with the scouting session which ID match sessionID
-            viewSession(sessionID);
-        }
-    }//GEN-LAST:event_upcomingTableMousePressed
-
+                                     
     private void sessionCreateNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionCreateNoteBtnActionPerformed
         viewCreateNoteInSession();
         
@@ -1420,6 +1408,19 @@ public class UserInterface extends javax.swing.JFrame {
         viewPlayerProfile(player.getName());
         sessionFrame.dispose();
     }//GEN-LAST:event_sessionAddNoteActionPerformed
+
+    private void upcomingTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_upcomingTableMousePressed
+            if(evt.getClickCount() == 2){
+            int row = upcomingTable.getSelectedRow();
+            // Important to use getModel() as we have to access the model in order 
+            // to get the value at the 'hidden' column. 
+            Object ssID = upcomingTable.getModel().getValueAt(row, 3);
+            int sessionID = (int) ssID;
+            // JDialog opens with the scouting session which ID match sessionID
+            viewSession(sessionID);
+            }
+    }//GEN-LAST:event_upcomingTableMousePressed
+
     
      /**
      * 
@@ -1628,9 +1629,9 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel noteDateLabel;

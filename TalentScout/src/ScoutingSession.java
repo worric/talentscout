@@ -2,6 +2,20 @@ import java.util.Date;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
+/*
+            if(evt.getClickCount() == 2){
+            int row = upcomingTable.getSelectedRow();
+            // Important to use getModel() as we have to access the model in order 
+            // to get the value at the 'hidden' column. 
+            Object ssID = upcomingTable.getModel().getValueAt(row, 3);
+            int sessionID = (int) ssID;
+            // JDialog opens with the scouting session which ID match sessionID
+            viewSession(sessionID);
+        }*/
+
+
+
 /**
  * The ScoutingSession class holds an ArrayList of the class Player that are added to a ScoutingSession. 
  * Further it holds information about a specific ScoutingSession's location and date.
