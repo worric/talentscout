@@ -4,8 +4,22 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.junit.Test;
+import org.junit.BeforeClass;
 
 public class AgendaTest {
+	
+	static ScoutingSession s;
+	static int sessionID;
+	static Date date;
+	static String location;
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
+		location = "Skodsborg";
+		s = UserInterface.AGENDA.planSession(location, date);
+		sessionID = s.getSessionID();
+	}
 
 	@Test
 	public final void testSaveAgenda() {
@@ -19,13 +33,6 @@ public class AgendaTest {
 
 	@Test
 	public final void testPlanSession() {
-		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
-		String location = "Skodsborg";
-		int sessionID;
-
-		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
-		sessionID = s.getSessionID();
-		
 		// test if it's the same session in the agenda as in the local variable "output"
 		assertEquals(s, UserInterface.AGENDA.getSessionByID(sessionID));
 		// test if the date of the session matches the one in the local variable "d"
@@ -35,28 +42,7 @@ public class AgendaTest {
 	}
 
 	@Test
-	public final void testCancelSession() {
-		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
-		String location = "Skodsborg";
-		int sessionID;
-
-		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
-		sessionID = s.getSessionID();
-		
-		UserInterface.AGENDA.cancelSession(s);
-		
-		assertNull(UserInterface.AGENDA.getSessionByID(sessionID));
-	}
-
-	@Test
 	public final void testGetSessionByIndex() {
-		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
-		String location = "Skodsborg";
-		int sessionID;
-
-		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
-		sessionID = s.getSessionID();
-		
 		int numberOfSessions = UserInterface.AGENDA.getNumberOfSessions() - 1;
 		
 		assertEquals(s, UserInterface.AGENDA.getSessionByIndex(numberOfSessions));
@@ -64,13 +50,6 @@ public class AgendaTest {
 
 	@Test
 	public final void testGetSessionByID() {
-		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
-		String location = "Skodsborg";
-		int sessionID;
-
-		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
-		sessionID = s.getSessionID();
-		
 		ScoutingSession testS = UserInterface.AGENDA.getSessionByID(sessionID);
 		
 		assertEquals(s, testS);
@@ -88,17 +67,19 @@ public class AgendaTest {
 		ArrayList<ScoutingSession> selfSortedList = new ArrayList<ScoutingSession>();
 		ArrayList<ScoutingSession> sortedList;
 
-		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
-		nonSortedList.add(s);
-		ScoutingSession s0 = UserInterface.AGENDA.planSession(location0, date0);
-		nonSortedList.add(s0);
-		ScoutingSession s1 = UserInterface.AGENDA.planSession(location1, date1);
-		nonSortedList.add(s1);
+		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
+		nonSortedList.add(ss);
+		ScoutingSession ss0 = UserInterface.AGENDA.planSession(location0, date0);
+		nonSortedList.add(ss0);
+		ScoutingSession ss1 = UserInterface.AGENDA.planSession(location1, date1);
+		nonSortedList.add(ss1);
 		
-		selfSortedList.add(s1);
-		selfSortedList.add(s);
-		selfSortedList.add(s0);
+		// setup the self sorted list in the correct order
+		selfSortedList.add(ss1);
+		selfSortedList.add(ss);
+		selfSortedList.add(ss0);
 		
+		// load the sorted list from the Agenda class
 		sortedList = UserInterface.AGENDA.getSortedList();
 		
 		assertEquals(selfSortedList, sortedList);
@@ -108,7 +89,13 @@ public class AgendaTest {
 	public final void testGetNumberOfSessions() {
 		int numberOfSessions = UserInterface.AGENDA.getNumberOfSessions();
 		
-		assertEquals(0, numberOfSessions);
+		assertEquals(1, numberOfSessions);
 	}
-
+	
+	@Test
+	public final void testCancelSession() {
+		UserInterface.AGENDA.cancelSession(s);
+		
+		assertNull(UserInterface.AGENDA.getSessionByID(sessionID));
+	}
 }

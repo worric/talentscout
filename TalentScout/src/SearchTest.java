@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.junit.Test;
+import org.junit.BeforeClass;
 
 public class SearchTest {
-
-	@Test
-	public void testPerformSearch() {
-		Search search = new Search(UserInterface.PDB);
+	
+	static Search search;
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		search = new Search(UserInterface.PDB);
 
 		Player p = UserInterface.PDB.register("Svend", 12, "FC København");
 		Player p0 = UserInterface.PDB.register("Karsten Schröder", 14, "Sæby");
@@ -17,14 +20,17 @@ public class SearchTest {
 		Player p2 = UserInterface.PDB.register("Svend Svendsen", 15, "FC Skive");
 		Player p3 = UserInterface.PDB.register("Jokum", 15, "Aalborg");
 		assertEquals(5, UserInterface.PDB.getSize());
-		
+	}
+
+	@Test
+	public void testPerformSearch() {
 		// no filters - all should match
 		String searchName = "";
 		String searchClub = "";
 		ArrayList<Player> playerList = search.performSearch(searchName, searchClub);
 		assertEquals(5, playerList.size());
 		
-		// filter name svend and club køben - one result expected
+		// filter name "svend" and club "køben" - one result expected
 		searchName = "svend";
 		searchClub = "køben";
 		playerList = search.performSearch(searchName, searchClub);
@@ -72,5 +78,4 @@ public class SearchTest {
 		playerList = search.performSearch(searchName, searchClub);
 		assertEquals(0, playerList.size());
 	}
-
 }
