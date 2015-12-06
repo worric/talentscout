@@ -15,17 +15,10 @@ public class PlayerDB {
 	private String pathForFile;
 	
 	public PlayerDB(){
-		/*try {
-			this.playerDB = loadPlayerDB();
-		} catch (Exception e) {
-			e.printStackTrace();*/
-
-			this.path = "./playerfiles";
-			this.fileName = "playerdb";
-			this.pathForFile = path+"/"+fileName;
-			this.playerDB = loadPlayerDB();
-		//}
-		
+		this.path = "./playerfiles";
+		this.fileName = "playerdb";
+		this.pathForFile = path+"/"+fileName;
+		this.playerDB = loadPlayerDB();
 	}
 	
     /**
