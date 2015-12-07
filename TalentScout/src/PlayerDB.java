@@ -18,7 +18,7 @@ public class PlayerDB {
 		this.path = "./playerfiles";
 		this.fileName = "playerdb";
 		this.pathForFile = path+"/"+fileName;
-		this.playerDB = loadPlayerDB();
+		loadPlayerDB();
 	}
 	
     /**
@@ -28,7 +28,8 @@ public class PlayerDB {
      */
     public void savePlayerDB(){
     	try {
-    		
+    		//we check if the folder/directory exists
+        	checkDirectoryExist();
     		//Connecting to the file
     		FileOutputStream fo = new FileOutputStream(this.pathForFile);
     		
@@ -49,15 +50,8 @@ public class PlayerDB {
      * @return
      */
     @SuppressWarnings("unchecked")
-	public ArrayList<Player> loadPlayerDB(){
+	public void loadPlayerDB(){
     	try {
-    		//we check if the folder/directory exists
-        	checkDirectoryExist();
-
-        	// we check if the file exists
-        	//		- this actually is not necessary as we can resolve this issue in by
-        	//		  catching and handling the FiltNotFoundException.
-        	// checkFileExist();
     	
         	/**
         	 * FileInputStream throws the FileNotFoundException
@@ -90,14 +84,14 @@ public class PlayerDB {
 		
 			PlayerDB.idCounter = highestNumber + 1;
     	
-    		return arrayOfPlayers;
+    		this.playerDB = arrayOfPlayers;
     	
     	} catch (Exception e){
     		e.printStackTrace();
     		// In case the file does not exist - there is not ArrayList to load
     		// we initialize the playerDB ArrayList<Player> and return it. 
     		// playerDB = new ArrayList<Player>();
-    		return new ArrayList<Player>();
+    		this.playerDB = new ArrayList<Player>();
     	}
     }
     
