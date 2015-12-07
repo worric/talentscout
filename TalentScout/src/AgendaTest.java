@@ -83,6 +83,7 @@ public class AgendaTest {
 		sortedList = UserInterface.AGENDA.getSortedList();
 		
 		assertEquals(selfSortedList, sortedList);
+		assertNotEquals(nonSortedList, sortedList);
 	}
 
 	@Test
