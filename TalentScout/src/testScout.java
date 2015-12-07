@@ -17,7 +17,7 @@ public class testScout {
 		//testDisplaySessions();
 		//testFindObject();
 		//testPlayerRegistration();
-		//testProgram();
+		testProgram();
 		
 
 	}
