@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.junit.Test;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
 public class SearchTest {
@@ -20,6 +21,24 @@ public class SearchTest {
 		Player p2 = UserInterface.PDB.register("Svend Svendsen", 15, "FC Skive");
 		Player p3 = UserInterface.PDB.register("Jokum", 15, "Aalborg");
 		assertEquals(5, UserInterface.PDB.getSize());
+	}
+	
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		// clear the arraylist of players
+		UserInterface.PDB.getArrayListPlayer().clear();
+		
+		// define a new arraylist
+		ArrayList<ScoutingSession> list = new ArrayList<ScoutingSession>();
+		// populate it with the same objects as the one in the agenda class
+		for(int i = 0; i < UserInterface.AGENDA.getNumberOfSessions(); i++){
+			ScoutingSession ss = UserInterface.AGENDA.getSessionByIndex(i);
+			list.add(ss);
+		}
+		// remove all the objects
+		for(ScoutingSession ss : list){
+			UserInterface.AGENDA.cancelSession(ss);
+		}
 	}
 
 	@Test

@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.junit.After;
@@ -40,11 +41,19 @@ public class PlayerTest {
 
 	@After
 	public void tearDown() throws Exception {
-		// 
+		// clear the arraylist of players
 		UserInterface.PDB.getArrayListPlayer().clear();
+		
+		// define a new arraylist
+		ArrayList<ScoutingSession> list = new ArrayList<ScoutingSession>();
+		// populate it with the same objects as the one in the agenda class
 		for(int i = 0; i < UserInterface.AGENDA.getNumberOfSessions(); i++){
-			ScoutingSession s = UserInterface.AGENDA.getSessionByIndex(i);
-			UserInterface.AGENDA.cancelSession(s);
+			ScoutingSession ss = UserInterface.AGENDA.getSessionByIndex(i);
+			list.add(ss);
+		}
+		// remove all the objects
+		for(ScoutingSession ss : list){
+			UserInterface.AGENDA.cancelSession(ss);
 		}
 	}
 

@@ -69,5 +69,4 @@ public class DateManagerTest {
 		assertNull(d6);
 		assertNull(d7);
 	}
-
 }

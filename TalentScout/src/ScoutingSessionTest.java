@@ -1,75 +1,111 @@
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ScoutingSessionTest {
+	
+	static String name;
+	static int age;
+	static String club;
+	
+	static String location;
+	static Date date;
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		name = "Karl";
+		age = 14;
+		club ="Aab";
+		
+		date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
+		location = "Skodsborg";
+	}
+	
+	@Before
+	public void setUp() throws Exception {		
+		// setup a default scouting session to be used in some of the tests
+		UserInterface.AGENDA.planSession(location, date);
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+		// clear the arraylist of players
+		UserInterface.PDB.getArrayListPlayer().clear();
+		
+		// clear the Agenda list of scouting sessions
+		// define a new arraylist
+		ArrayList<ScoutingSession> list = new ArrayList<ScoutingSession>();
+		// populate it with the same objects as the one in the agenda class
+		for(int i = 0; i < UserInterface.AGENDA.getNumberOfSessions(); i++){
+			ScoutingSession ss = UserInterface.AGENDA.getSessionByIndex(i);
+			list.add(ss);
+		}
+		// remove all the objects
+		for(ScoutingSession ss : list){
+			UserInterface.AGENDA.cancelSession(ss);
+		}
+	}
 
 	@Test
 	public final void testGetLocation() {
-		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
-		String location = "Skodsborg";
-		int sessionID;
-
-		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
-		sessionID = s.getSessionID();
+		// setup ScoutingSession
+		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
 		
-		assertSame(location, UserInterface.AGENDA.getSessionByID(sessionID).getLocation());
+		assertEquals(0, ss.getSessionID());
+		
+		assertEquals(location, ss.getLocation());
 	}
 
 	@Test
 	public final void testSetLocation() {
-		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
-		String location = "Skodsborg";
-		int sessionID;
-
-		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
-		sessionID = s.getSessionID();
+		// setup ScoutingSession
+		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
 		
+		// create a new location and change it on the session
 		String newLocation = "Frederikshavn";
-		UserInterface.AGENDA.getSessionByID(sessionID).setLocation(newLocation);
+		ss.setLocation(newLocation);
 		
-		assertSame(newLocation, UserInterface.AGENDA.getSessionByID(sessionID).getLocation());
+		assertEquals(newLocation, ss.getLocation());
 	}
 
 	@Test
 	public final void testGetDate() {
-		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
-		String location = "Skodsborg";
-		int sessionID;
-
-		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
-		sessionID = s.getSessionID();
+		// setup ScoutingSession
+		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
 				
-		assertSame(date, UserInterface.AGENDA.getSessionByID(sessionID).getDate());
+		assertEquals(date, ss.getDate());
 	}
 
 	@Test
 	public final void testSetDate() {
-		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
-		String location = "Skodsborg";
-		int sessionID;
-
-		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
-		sessionID = s.getSessionID();
+		// setup ScoutingSession
+		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
 		
+		// create a new date and change it on the session
 		Date newDate = UserInterface.DATEMANAGER.fromStringToDate("28-05-2015");
-		UserInterface.AGENDA.getSessionByID(sessionID).setDate(newDate);
+		ss.setDate(newDate);
 		
-		assertSame(newDate, UserInterface.AGENDA.getSessionByID(sessionID).getDate());
+		assertEquals(newDate, ss.getDate());
 	}
 
 	@Test
 	public final void testGetSessionID() {
-		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
-		String location = "Skodsborg";
-		int sessionID;
-
-		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
-		sessionID = s.getSessionID();
+		// setup ScoutingSession
+		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
 		
-		assertSame(sessionID, UserInterface.AGENDA.getSessionByID(sessionID).getSessionID());
+		assertEquals(2, UserInterface.AGENDA.getNumberOfSessions());
+		
+		// get the ID of the ScoutingSession object. We know it is 0 as the
+		// scouting sesssion is the only one in the list
+		int id = 0;
+		
+		assertEquals(id, ss.getSessionID());
 	}
 
 	@Test
