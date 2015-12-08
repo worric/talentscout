@@ -118,7 +118,7 @@ public class PlayerDB {
 		}
 		return null;
 	}
-        
+        /*
         public Player getPlayerByName(String name){
             for(Player p : playerDB){
                 if(p.getName().equals(name)){
@@ -126,7 +126,7 @@ public class PlayerDB {
                 }
             }
             return null;
-        }
+        }*/
 	
 	public ArrayList<Player> getArrayListPlayer(){
 		return this.playerDB;
