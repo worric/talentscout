@@ -103,9 +103,9 @@ public class Player implements Serializable {
 	}
 	
 	/**
-	 * Get the aveage score from all notes owned by the player based on a single parameter
+	 * Get the average score from all notes owned by the player based on a single parameter
 	 */
-	public double getAverage(Parameters parameters){ // TODO lav videre på denne case...
+	public double getAverage(Parameters parameters){
 		if(!notes.isEmpty()){
 			int j;
 			switch(parameters){
@@ -211,6 +211,10 @@ public class Player implements Serializable {
 		if(!this.isActive == true){
 			this.isActive = true;
 		}
+	}
+	
+	public boolean getActiveState(){
+		return isActive;
 	}
 	
 }

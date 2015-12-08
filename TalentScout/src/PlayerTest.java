@@ -15,9 +15,6 @@ public class PlayerTest {
 	
 	static String location;
 	static Date date;
-	
-	//static ScoutingSession s;
-	//static Player 
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -27,14 +24,10 @@ public class PlayerTest {
 		
 		date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
 		location = "Skodsborg";
-		//s = UserInterface.AGENDA.planSession(location, date);
-		//sessionID = s.getSessionID();
-		
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		
 		// Pre-registering three player objects to simulate the presence
 		// of a few objects in the database already
 		UserInterface.PDB.register(name, age, club);
@@ -56,11 +49,6 @@ public class PlayerTest {
 	}
 
 	@Test
-	public void testPlayer() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testAddNoteScoutingSessionStringIntStringIntStringIntStringInt() {
 		Player p = UserInterface.PDB.register(name, age, club);
 		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
@@ -78,11 +66,14 @@ public class PlayerTest {
 
 	@Test
 	public void testGetNote() {
+		// setup a player, a scouting session and a note 
 		Player p = UserInterface.PDB.register(name, age, club);
 		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
 		Note n = p.addNote(s, "God", 4, "Bakker godt op", 4, "Teknisk svag", 2, 
 				"Står godt på banen", 6);
 		
+		// check if the note is equal to the one created. Since it's the only note
+		// the player has, we know it should be in index 0
 		assertEquals(n, p.getNote(0));
 	}
 
@@ -95,6 +86,7 @@ public class PlayerTest {
 		Note n2 = p.addNote(s, "Middel", 3, "Har temperament", 2, "Teknisk stærk", 5, 
 				"Står lidt galt på banen", 3);
 		
+		assertEquals(2, p.getNumberOfNotes());
 	}
 
 	@Test
@@ -109,7 +101,43 @@ public class PlayerTest {
 
 	@Test
 	public void testGetAverage() {
-		fail("Not yet implemented");
+		// setup a player and a scouting session
+		Player p = UserInterface.PDB.register(name, age, club);
+		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
+		// assert its value of the SPEED parameter equal to 0 with no notes
+		// should return 0.0, as no notes are defined and we wish to avoid dividing by 0
+		assertEquals(0.0, p.getAverage(Player.Parameters.SPEED), 0.0);
+		
+		// setup a new note
+		Note n = p.addNote(s, "God", 4, "Bakker godt op", 4, "Teknisk svag", 2, 
+				"Står godt på banen", 6);
+		// assert the player's average score with regards to the SPEED parameter
+		assertEquals(4.0, p.getAverage(Player.Parameters.SPEED), 0.0);
+		// assert the player's average score with regards to the ATTITUDE parameter
+		assertEquals(4.0, p.getAverage(Player.Parameters.ATTITUDE), 0.0);
+		// assert the player's average score with regards to the TECHNIQUE parameter
+		assertEquals(2.0, p.getAverage(Player.Parameters.TECHNIQUE), 0.0);
+		// assert the player's average score with regards to the GAMESENSE parameter
+		assertEquals(6.0, p.getAverage(Player.Parameters.GAMESENSE), 0.0);
+		
+		// setup a new note with different values
+		Note n2 = p.addNote(s, "God", 3, "Bakker godt op", 5, "Teknisk svag", 1, 
+						"Står godt på banen", 5);
+		
+		// setup the known results
+		double speedResult = (4.0+3.0)/2;
+		double attitudeResult = (4.0+5.0)/2;
+		double techniqueResult = (2.0+1.0)/2;
+		double gameSenseResult = (6.0+5.0)/2;
+		
+		// assert the player's average score with regards to the SPEED parameter
+		assertEquals(speedResult, p.getAverage(Player.Parameters.SPEED), 0.0);
+		// assert the player's average score with regards to the ATTITUDE parameter
+		assertEquals(attitudeResult, p.getAverage(Player.Parameters.ATTITUDE), 0.0);
+		// assert the player's average score with regards to the TECHNIQUE parameter
+		assertEquals(techniqueResult, p.getAverage(Player.Parameters.TECHNIQUE), 0.0);
+		// assert the player's average score with regards to the GAMESENSE parameter
+		assertEquals(gameSenseResult, p.getAverage(Player.Parameters.GAMESENSE), 0.0);
 	}
 
 	@Test
@@ -119,47 +147,108 @@ public class PlayerTest {
 
 	@Test
 	public void testGetName() {
-		fail("Not yet implemented");
+		// setup a player
+		Player p = UserInterface.PDB.register(name, age, club);
+		
+		assertEquals(p.getName(), name);
 	}
 
 	@Test
 	public void testSetName() {
-		fail("Not yet implemented");
+		// setup a player
+		Player p = UserInterface.PDB.register(name, age, club);
+		
+		// setup a new name and change it on the player
+		String newName = "Karsten";
+		p.setName(newName);
+		
+		assertEquals(newName, p.getName());
+		assertNotEquals(name, p.getName());
 	}
 
 	@Test
 	public void testGetAge() {
-		fail("Not yet implemented");
+		// setup a player
+		Player p = UserInterface.PDB.register(name, age, club);
+		
+		assertEquals(age, p.getAge());
 	}
 
 	@Test
 	public void testSetAge() {
-		fail("Not yet implemented");
+		// setup a player
+		Player p = UserInterface.PDB.register(name, age, club);
+		
+		// setup the new age and change it on the player
+		int newAge = 15;
+		p.setAge(newAge);
+		
+		assertEquals(newAge, p.getAge());
+		assertNotEquals(age, p.getAge());
 	}
 
 	@Test
 	public void testGetClub() {
-		fail("Not yet implemented");
+		// setup a player
+		Player p = UserInterface.PDB.register(name, age, club);
+		
+		assertEquals(club, p.getClub());
 	}
 
 	@Test
 	public void testSetClub() {
-		fail("Not yet implemented");
+		// setup a player
+		Player p = UserInterface.PDB.register(name, age, club);
+		
+		// setup the new club and change it on the player
+		String newClub = "FC Odense";
+		p.setClub(newClub);
+		
+		assertEquals(newClub, p.getClub());
+		assertNotEquals(club, p.getClub());
 	}
 
 	@Test
 	public void testGetID() {
-		fail("Not yet implemented");
+		Player p = UserInterface.PDB.register(name, age, club);
+		
+		// setup the known value for the ID, which is 3 because 4 players exist in the arraylist 
+		int id = 3;
+		
+		assertEquals(3, p.getID());
+	}
+	
+	@Test
+	public void testGetActiveState() {
+		// setup a player
+		Player p = UserInterface.PDB.register(name, age, club);
+		
+		// a player is initialized with an activeState = true, so we check for that
+		assertTrue(p.getActiveState());
 	}
 
 	@Test
 	public void testSetInactive() {
-		fail("Not yet implemented");
+		// setup a player
+		Player p = UserInterface.PDB.register(name, age, club);
+		
+		// set the player inactive
+		p.setInactive();
+		
+		assertFalse(p.getActiveState());
 	}
 
 	@Test
 	public void testSetActive() {
-		fail("Not yet implemented");
+		// setup a player
+		Player p = UserInterface.PDB.register(name, age, club);
+		
+		// set the player inactive and check if it changes
+		p.setInactive();
+		assertFalse(p.getActiveState());
+		
+		// set the player active again and check again
+		p.setActive();
+		assertTrue(p.getActiveState());
 	}
-
 }
