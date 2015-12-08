@@ -2,6 +2,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import org.junit.BeforeClass;
 import org.junit.Before;
@@ -55,7 +56,7 @@ public class PlayerDBTest {
 		// Creating a new Player Object
 		Player p = UserInterface.PDB.register(name, age, club);
 		// Get the Player Object's ID
-		int id = p.getID();
+		UUID id = p.getID();
 		// Writing to the playerdb file
 		UserInterface.PDB.savePlayerDB();
 		// Checking if the playerdb file has been created
@@ -66,7 +67,7 @@ public class PlayerDBTest {
 		// Retrieving the Player Object by the before declared ID creating a new Player Object
 		Player p2 = UserInterface.PDB.getPlayerById(id);
 		// Get the new Player Object's ID
-		int id2 = p2.getID();
+		UUID id2 = p2.getID();
 		// Comparing the two IDs 
 		assertEquals(id, id2);
 		// Comparing the two Player objects, which is expected to be different due to Serialization
@@ -83,7 +84,7 @@ public class PlayerDBTest {
 		// new Player object
 		Player p = UserInterface.PDB.register(name, age, club);
 		// get ID of that Player object
-		int id = p.getID();
+		UUID id = p.getID();
 		// Comparing name
 		assertEquals(name, UserInterface.PDB.getPlayerById(id).getName());
 		// Comparing age
@@ -104,7 +105,7 @@ public class PlayerDBTest {
 		// Adding a player to the database
 		Player p1 = UserInterface.PDB.register(name, age, club);
 		// get ID
-		int id = p1.getID();
+		UUID id = p1.getID();
 		// remove Player from the database
 		UserInterface.PDB.removePlayer(p1);
 		
@@ -129,7 +130,7 @@ public class PlayerDBTest {
 		// Adding a player to the database
 		Player p1 = UserInterface.PDB.register(name, age, club);
 		// Get ID
-		int id1 = p1.getID();
+		UUID id1 = p1.getID();
 		// Retrieve Player object via the getPlayerByID()
 		Player p2 = UserInterface.PDB.getPlayerById(id1);
 		// Checking if we're getting the same Player objects

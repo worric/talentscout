@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.UUID;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ import java.util.ArrayList;
 public class ScoutingSession implements Serializable, Comparable<ScoutingSession> {
 	
 	/** A list of the class Player added to a ScoutingSession*/
-	private ArrayList<Integer> players;
+	private ArrayList<UUID> players;
 	
 	/** A ScoutingSession's location*/
 	private String location;
@@ -40,20 +41,20 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 	private Date date;
 	
 	/** A ScoutingSession's ID*/
-	private int sessionID;
+	private UUID sessionID;
 	
 	
 	/**
 	 * Creates a ScoutingSession with an ArrayList of player IDs, a location and a date.
 	 * @param location holds the location of the ScoutingSession
 	 * @param date holds the date of the ScoutingSession
-	 * @param sessionID holds the ScoutinSession's unique ID
+	 * @param uuid holds the ScoutinSession's unique ID
 	 */
-	public ScoutingSession(String location, Date date, int sessionID){
-		players = new ArrayList<Integer>();
+	public ScoutingSession(String location, Date date, UUID uuid){
+		players = new ArrayList<UUID>();
 		this.location = location;
 		this.setDate(date);
-		this.sessionID = sessionID;
+		this.sessionID = uuid;
 	}
 	
 	/**
@@ -99,7 +100,7 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 	 * @see #setSessionID(String)
 	 */
 	
-	public int getSessionID(){
+	public UUID getSessionID(){
 		return sessionID;
 	}
 	
@@ -119,7 +120,7 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 	 */
 	public Player getPlayer(int index){
 		//return TestScout2.pdb.getPlayerById(players.get(index));
-                return UserInterface.PDB.getPlayerById(players.get(index));
+		return UserInterface.PDB.getPlayerById(players.get(index));
 	}
 	
 	public int getNumberOfPlayers(){
@@ -148,7 +149,7 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 		/* wraps the integer ID in an object to make us of the remove object function of the ArrayList,
 		 * which would otherwise just remove the object at the index provided
 		 */
-		players.remove(new Integer(player.getID()));
+		players.remove(player.getID());
 	}
 	
 	/**

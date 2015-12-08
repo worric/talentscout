@@ -1,9 +1,10 @@
 import java.io.Serializable;
+import java.util.UUID;
 
 public class Note implements Serializable {
 
-	private int sessionID;
-	private int playerID;
+	private UUID sessionID;
+	private UUID playerID;
 	private String speedText;
 	private int speedScore;
 	private String attitudeText;

@@ -3,12 +3,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class PlayerDB {
 	
-	private static int idCounter = 0;
 	private ArrayList<Player> playerDB;
 	private String path;
 	private String fileName;
@@ -74,16 +73,6 @@ public class PlayerDB {
         	// Closing the stream
         	oi.close();
     	
-        	// adjust the ID generating feature to the objects loaded into the memory.
-        	int highestNumber = 0;
-        	for(Player p : arrayOfPlayers){
-        		if(p.getID() > highestNumber){
-        			highestNumber = p.getID();
-        		}
-        	}
-		
-			PlayerDB.idCounter = highestNumber + 1;
-    	
     		this.playerDB = arrayOfPlayers;
     	
     	} catch (Exception e){
@@ -102,8 +91,7 @@ public class PlayerDB {
      * @param club club of the player
      */
     public Player register(String name, int age, String club){
-        Player plr = new Player(name, age, club, PlayerDB.idCounter);
-        PlayerDB.idCounter++;
+        Player plr = new Player(name, age, club, UUID.randomUUID());
         playerDB.add(plr);
         return plr;
     }
@@ -120,11 +108,11 @@ public class PlayerDB {
 		return playerDB.get(i);
 	}
 	
-	public Player getPlayerById(int id){
+	public Player getPlayerById(UUID uuid){
 		
 		// Iterate through all players and if ID matches, return that player
 		for(Player p : playerDB){
-			if (p.getID() == id){
+			if (p.getID().equals(uuid)){
 				return p;
 			}
 		}

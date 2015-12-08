@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import org.junit.Test;
 import org.junit.After;
@@ -64,7 +65,7 @@ public class AgendaTest {
 		// Creating a new Player Object
 		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
 		// Get the Player Object's ID
-		int id = ss.getSessionID();
+		UUID id = ss.getSessionID();
 		// Writing to the agendadb file
 		UserInterface.AGENDA.saveAgenda();
 		// Checking if the agendadb file has been created
@@ -76,7 +77,7 @@ public class AgendaTest {
 		// a new ScoutingSession Object
 		ScoutingSession ss2 = UserInterface.AGENDA.getSessionByID(id);
 		// Get the new ScoutingSession Object's ID
-		int id2 = ss2.getSessionID();
+		UUID id2 = ss2.getSessionID();
 		// Comparing the two IDs 
 		assertEquals(id, id2);
 		// Comparing the two ScoutingSession objects, which is expected to be
@@ -93,7 +94,7 @@ public class AgendaTest {
 	public final void testPlanSession() {
 		// setup a scouting session
 		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
-		int id = ss.getSessionID();
+		UUID id = ss.getSessionID();
 		
 		// test if it's the same session in the database
 		assertEquals(ss, UserInterface.AGENDA.getSessionByID(id));
@@ -118,7 +119,7 @@ public class AgendaTest {
 	public final void testGetSessionByID() {
 		// setup a scouting session and save its id
 		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
-		int id = ss.getSessionID();
+		UUID id = ss.getSessionID();
 		
 		// create a new ScoutingSession object and 
 		ScoutingSession ss2 = UserInterface.AGENDA.getSessionByID(id);
@@ -191,7 +192,7 @@ public class AgendaTest {
 	public final void testCancelSession() {
 		// setup a scouting session and save its id
 		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
-		int id = ss.getSessionID();
+		UUID id = ss.getSessionID();
 		
 		// try removing the same scouting session
 		UserInterface.AGENDA.cancelSession(ss);

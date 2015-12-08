@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.UUID;
 
 /**The Agenda class holds an ArrayList of ScoutingSessions.
  *The class is responsible for planning ScoutingSessions or canceling planned ScoutingSessions. 
@@ -48,25 +49,25 @@ public class Agenda {
 	 * Save the current list of scouting session to disk
 	 **/
 	public void saveAgenda(){
-    		try {
-        		// we check if the folder/directory exists
-        		checkDirectoryExist();
-        		
-    			//Connecting to the file
-    			FileOutputStream fo = new FileOutputStream(pathForFile);
+		try {
+    		// we check if the folder/directory exists
+    		checkDirectoryExist();
     		
-    			//Opening the file
-    			ObjectOutputStream oo = new ObjectOutputStream(fo);
-    		
-    			// Writing to the file 
-    			oo.writeObject(this.sessions);
-    			
-    			// Close the stream
-    			oo.close();
-    		} catch (Exception e){
-    			e.printStackTrace();
-    		}
-    	}
+			//Connecting to the file
+			FileOutputStream fo = new FileOutputStream(pathForFile);
+		
+			//Opening the file
+			ObjectOutputStream oo = new ObjectOutputStream(fo);
+		
+			// Writing to the file 
+			oo.writeObject(this.sessions);
+			
+			// Close the stream
+			oo.close();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+	}
     
 	/**
 	* Load a file which contains all agenda objects
@@ -74,35 +75,26 @@ public class Agenda {
 	*/
 	public void loadAgenda(){
 		try {
-    			// Connection established to the file
-    			FileInputStream fi = new FileInputStream(pathForFile);
-    	
-    			// Preparing for reading of file
-    			ObjectInputStream oi = new ObjectInputStream(fi);
-    	
-    			// Reading the file 
-    			@SuppressWarnings("unchecked")
-    			ArrayList<ScoutingSession> agendaArray = (ArrayList<ScoutingSession>) oi.readObject();
-    	
-    			//Closing the stream
-    			oi.close();
-    			
-    			int highestNumber = 0;
-    			for(ScoutingSession s : agendaArray){
-    				if(s.getSessionID() > highestNumber){
-    					highestNumber = s.getSessionID();
-    				}
-    			}
-    			
-    			Agenda.idCounter = highestNumber + 1;
-    		
-    			sessions = agendaArray;
-    	
-    		} catch (Exception e){
-    			e.printStackTrace();
-    			sessions = new ArrayList<ScoutingSession>();
-    		}
-    	}
+			// Connection established to the file
+			FileInputStream fi = new FileInputStream(pathForFile);
+	
+			// Preparing for reading of file
+			ObjectInputStream oi = new ObjectInputStream(fi);
+	
+			// Reading the file 
+			@SuppressWarnings("unchecked")
+			ArrayList<ScoutingSession> agendaArray = (ArrayList<ScoutingSession>) oi.readObject();
+	
+			//Closing the stream
+			oi.close();
+		
+			sessions = agendaArray;
+	
+		} catch (Exception e){
+			e.printStackTrace();
+			sessions = new ArrayList<ScoutingSession>();
+		}
+	}
 	
 	/**
 	 * Plans a ScoutingSession by creating a new ScoutingSession and thereafter adding it to the ArrayList "sessions". It also initiates a new ScoutingSession with an unique sessionID.
@@ -111,7 +103,7 @@ public class Agenda {
 	 * @return ScoutingSession(location, date)
 	 * */
 	public ScoutingSession planSession(String location, Date date){
-		ScoutingSession session = new ScoutingSession(location, date, Agenda.idCounter);
+		ScoutingSession session = new ScoutingSession(location, date, UUID.randomUUID());
 		sessions.add(session);
 		Agenda.idCounter++;
 		return session;
@@ -138,9 +130,9 @@ public class Agenda {
 	/**
 	 * Gets a ScoutingSession from the ArrayList "sessions" based on the ID of the object
 	 */
-	public ScoutingSession getSessionByID(int id){
+	public ScoutingSession getSessionByID(UUID uuid){
 		for(ScoutingSession s : sessions){
-			if (s.getSessionID() == id){
+			if (s.getSessionID().equals(uuid)){
 				return s;
 			}
 		}

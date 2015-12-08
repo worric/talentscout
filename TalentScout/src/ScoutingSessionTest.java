@@ -2,6 +2,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import org.junit.After;
 import org.junit.Before;
@@ -57,8 +58,6 @@ public class ScoutingSessionTest {
 		// setup ScoutingSession
 		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
 		
-		assertEquals(0, ss.getSessionID());
-		
 		assertEquals(location, ss.getLocation());
 	}
 
@@ -98,12 +97,7 @@ public class ScoutingSessionTest {
 	public final void testGetSessionID() {
 		// setup ScoutingSession
 		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
-		
-		assertEquals(2, UserInterface.AGENDA.getNumberOfSessions());
-		
-		// get the ID of the ScoutingSession object. We know it is 0 as the
-		// scouting sesssion is the only one in the list
-		int id = 0;
+		UUID id = ss.getSessionID();
 		
 		assertEquals(id, ss.getSessionID());
 	}
@@ -112,8 +106,8 @@ public class ScoutingSessionTest {
 	public final void testAddPlayer() {
 		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
 		String location = "Skodsborg";
-		int sessionID;
-		int playerID;
+		UUID sessionID;
+		UUID playerID;
 
 		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
 		sessionID = s.getSessionID();
@@ -131,8 +125,8 @@ public class ScoutingSessionTest {
 	public final void testGetPlayer() {
 		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
 		String location = "Skodsborg";
-		int sessionID;
-		int playerID;
+		UUID sessionID;
+		UUID playerID;
 
 		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
 		sessionID = s.getSessionID();
@@ -153,7 +147,7 @@ public class ScoutingSessionTest {
 	public final void testGetNumberOfPlayers() {
 		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
 		String location = "Skodsborg";
-		int sessionID;
+		UUID sessionID;
 
 		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
 		sessionID = s.getSessionID();
@@ -172,8 +166,8 @@ public class ScoutingSessionTest {
 	public final void testAddNote() {
 		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
 		String location = "Skodsborg";
-		int sessionID;
-		int playerID;
+		UUID sessionID;
+		UUID playerID;
 
 		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
 		sessionID = s.getSessionID();
@@ -199,7 +193,7 @@ public class ScoutingSessionTest {
 	public final void testRemovePlayer() {
 		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
 		String location = "Skodsborg";
-		int sessionID;
+		UUID sessionID;
 
 		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
 		sessionID = s.getSessionID();

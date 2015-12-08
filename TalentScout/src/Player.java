@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.UUID;
 import java.io.Serializable;
 
 /**
@@ -27,7 +28,7 @@ public class Player implements Serializable {
 	private ArrayList <Note> notes;
 	
 	// Player's ID
-	private int playerID;
+	private UUID playerID;
 	
 	// Track if the player is active or not
 	private boolean isActive; //TODO may be renamed to reflect "player discarded"
@@ -42,11 +43,11 @@ public class Player implements Serializable {
 	 * @param age is an integer with the Player's age
 	 * @param club is a String with the Player's club
 	 */
-	public Player(String name, int age, String club, int id){
+	public Player(String name, int age, String club, UUID uuid){
 		this.setName(name);
 		this.setAge(age);
 		this.setClub(club);
-		this.playerID = id;
+		this.playerID = uuid;
 		this.isActive = true;
 		notes = new ArrayList<Note>();
 	}
@@ -197,7 +198,7 @@ public class Player implements Serializable {
 		this.club = club;
 	}
 	
-	public int getID(){
+	public UUID getID(){
 		return this.playerID;
 	}
 	
