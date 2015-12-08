@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.UUID;
 import javax.swing.*;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,7 +25,8 @@ public class UserInterface extends javax.swing.JFrame {
     static final PlayerDB PDB = new PlayerDB();
     static final DateManager DATEMANAGER = new DateManager();
     JDialog sessionFrame = new JDialog();
-    private int currentPlayerID;
+    private UUID currentPlayerID;
+    private UUID currentSessionID;
     /**
      * Creates new form UserInterface
      */
@@ -1206,13 +1208,14 @@ public class UserInterface extends javax.swing.JFrame {
         this.sessionPlaceField.setText(str);
     }
     
-    public int getPlayerID(){
+    public UUID getPlayerID(){
         return this.currentPlayerID;
     }
-    /*public String getSessionPlayerField(){
-        //return this.sessionPlayerBox.getText();
+    
+    public UUID getSessionID(){
+        return this.currentSessionID;
     }
-    */
+    
     public String[] getAllPlayerNames(){
     	//new ArrayList of Player names 
     	ArrayList<String> strNames = new ArrayList<String>();
@@ -1345,7 +1348,7 @@ public class UserInterface extends javax.swing.JFrame {
             for(int i = 0; i < AGENDA.getNumberOfSessions(); i++){
                 ScoutingSession ss = AGENDA.getSessionByIndex(i);
                 String date = DATEMANAGER.fromDateToString(ss.getDate());
-                int id = ss.getSessionID();
+                UUID id = ss.getSessionID();
                 // Number of players in the array
                 int lengthOfPlayerStrArray = ss.getNumberOfPlayers();
                 // Merging the players into one String where each player is divided by a comma and whitespace
@@ -1371,7 +1374,7 @@ public class UserInterface extends javax.swing.JFrame {
      * 
      * @param sessionID 
      */
-    public void viewSession(int sessionID){
+    public void viewSession(UUID sessionID){
         sessionFrame.getContentPane().removeAll();
         sessionFrame.getContentPane().add(sessionPanel);
         sessionFrame.pack();
@@ -1382,7 +1385,7 @@ public class UserInterface extends javax.swing.JFrame {
         String date = DATEMANAGER.fromDateToString(ss.getDate());
         sessionDateLabel.setText(date);
         sessionPlaceLabel.setText(ss.getLocation());
-        String id = Integer.toString(ss.getSessionID());
+        String id = ss.getSessionID().toString();
         sessionIDLabel.setText(id);
         
         //Retrieving players associated with the Scouting Session
@@ -1412,7 +1415,7 @@ public class UserInterface extends javax.swing.JFrame {
                 ScoutingSession ss = player.getNote(i).getSession();
                 String date = DATEMANAGER.fromDateToString(ss.getDate());
                 String location = ss.getLocation();
-                int sessionID = ss.getSessionID();
+                UUID sessionID = ss.getSessionID();
                 Object[] data = { date, location, sessionID};
                 sessionModel.addRow(data);
             }
@@ -1433,7 +1436,7 @@ public class UserInterface extends javax.swing.JFrame {
         String age = Integer.toString(player.getAge());
         String playerAge = age;
         String playerClub = player.getClub();
-        String playerID = Integer.toString(player.getID());
+        String playerID = player.getID().toString();
         
         playerAgeLabel.setText(playerAge);
         playerNameLabel.setText(playerName);
@@ -1442,7 +1445,7 @@ public class UserInterface extends javax.swing.JFrame {
         InsertNoteIntoSessionTable(player);
     }
     
-    public void viewPlayerProfileByID(int id){
+    public void viewPlayerProfileByID(UUID id){
         changeCard(contentPanel, playerPanel);
         currentPlayerID = id;
         Player player = PDB.getPlayerById(id);
@@ -1451,16 +1454,15 @@ public class UserInterface extends javax.swing.JFrame {
         String age = Integer.toString(player.getAge());
         String playerAge = age;
         String playerClub = player.getClub();
-        String playerID = Integer.toString(player.getID());
+        this.currentPlayerID = player.getID();
         
         playerAgeLabel.setText(playerAge);
         playerNameLabel.setText(playerName);
         playerClubLabel.setText(playerClub);
-        playerIDLabel.setText(playerID);
         InsertNoteIntoSessionTable(player);
     }
     
-    public void viewNote(int ssID){
+    public void viewNote(UUID ssID){
         changeCard(contentPanel, notePanel);
         ScoutingSession ss = AGENDA.getSessionByID(ssID);
         
@@ -1471,7 +1473,7 @@ public class UserInterface extends javax.swing.JFrame {
         notePlayerNameLabel.setText(playerNameLabel.getText());
         
         // converting playerID from String to int
-        int plrID = Integer.parseInt(playerIDLabel.getText());
+        UUID plrID = this.getPlayerID();
         Player plr = PDB.getPlayerById(plrID);
         
         // Looping through the Notes of the player.
@@ -1653,6 +1655,10 @@ public class UserInterface extends javax.swing.JFrame {
         
     }//GEN-LAST:event_sessionCreateNoteBtnActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void sessionViewProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionViewProfileBtnActionPerformed
         String player = sessionPlayersBox.getSelectedItem().toString();
         viewPlayerProfile(player);
@@ -1670,7 +1676,7 @@ public class UserInterface extends javax.swing.JFrame {
     private void sessionAddNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionAddNoteActionPerformed
         String playerName = sessionPlayersBox.getSelectedItem().toString();
         Player player = PDB.getPlayerByName(playerName);
-        int ssID = Integer.parseInt(sessionIDLabel.getText());
+        UUID ssID = this.currentSessionID;
         ScoutingSession ss = AGENDA.getSessionByID(ssID);
         
         String speedText = sessionNoteSpeed.getText();
@@ -1697,31 +1703,36 @@ public class UserInterface extends javax.swing.JFrame {
             // Important to use getModel() as we have to access the model in order 
             // to get the value at the 'hidden' column. 
             Object ssID = upcomingTable.getModel().getValueAt(row, 3);
-            int sessionID = (int) ssID;
+            UUID sessionID = (UUID) ssID;
+            this.currentSessionID = sessionID;
             // JDialog opens with the scouting session which ID match sessionID
             viewSession(sessionID);
             }
     }//GEN-LAST:event_upcomingTableMousePressed
 
     /**
-     * Opens a window containing the notes on the player from that particular session
+     * Detects when the table is clicked and identifies the row that is clicked.
+     * Subsequently, the value of the cell which contains sessionID in the selected row 
+     * is retrieved and passed to the viewNote() method.
      * @param evt 
      */
     private void sessionNotesTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sessionNotesTableMousePressed
         if(evt.getClickCount() == 2){
             int row = sessionNotesTable.getSelectedRow();
             Object ssID = sessionNotesTable.getModel().getValueAt(row, 2);
-            int sessionID = (int) ssID;
+            UUID sessionID = (UUID) ssID;
+            this.currentSessionID = sessionID;
             viewNote(sessionID);
         }
-
     }//GEN-LAST:event_sessionNotesTableMousePressed
 
+    // Function not used
     private void notePanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notePanelMousePressed
 
     }//GEN-LAST:event_notePanelMousePressed
     /** 
-     * Saves changes to the note
+     * Saves changes to the note.
+     * Updates the JTextFields and JLabels with the edits made by the user.
      * @param evt 
      */
     private void noteSaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noteSaveBtnActionPerformed
@@ -1736,13 +1747,20 @@ public class UserInterface extends javax.swing.JFrame {
         noteRatingGamesense.setText(noteRatingGamesenseEdit.getSelectedItem().toString());
         changeCard(contentPanel, notePanel);
     }//GEN-LAST:event_noteSaveBtnActionPerformed
-
+    
+    /**
+     * Cancels the edit of a note.
+     * Changes the card in the JPanel 'contentPanel' to notePanel.
+     * @param evt 
+     */
     private void cancelNoteEditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelNoteEditBtnActionPerformed
         changeCard(contentPanel, notePanel);
     }//GEN-LAST:event_cancelNoteEditBtnActionPerformed
 
     /**
-     * Changes card to a Panel which allows for editing the note
+     * Changes card to a Panel which allows for editing the note.
+     * Furthermore, the JTextFields and JComboBoxes, which are to be edited, 
+     * are updated with the current values of the existing note.
      * @param evt 
      */
     private void noteEditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noteEditBtnActionPerformed
@@ -1765,12 +1783,18 @@ public class UserInterface extends javax.swing.JFrame {
         noteRatingGamesenseEdit.setSelectedIndex(gamesenseIndex-1);
         changeCard(contentPanel, notePanelEdit);
     }//GEN-LAST:event_noteEditBtnActionPerformed
-
+    /**
+     * Detects when the table is clicked and identifies the row that is clicked.
+     * Subsequently, the value of the cell which contains playerID in the selected row 
+     * is retrieved and passed to the viewPlayerProfileByID() method.
+     * @param evt 
+     */
     private void plrTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_plrTableMousePressed
         if(evt.getClickCount() == 2){
             int row = plrTable.getSelectedRow();
             Object Objid = plrTable.getModel().getValueAt(row, 3);
-            int id = (int) Objid;
+            UUID id = (UUID) Objid;
+            this.currentPlayerID = id;
             viewPlayerProfileByID(id);
         }
     }//GEN-LAST:event_plrTableMousePressed
