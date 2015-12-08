@@ -29,11 +29,7 @@ public class Agenda {
 	private String path;
 	private String fileName;
 	private String pathForFile;
-	
-	// Class variable for generating ID for the planned session
-	private static int idCounter = 0;
-	
-	
+		
 	/**Creates an agenda which ties the reference variable "sessions" to a new ArrayList*/
 	public Agenda(){
 		// Initializing the variables needed for reading/writing data to/from disk
@@ -105,7 +101,6 @@ public class Agenda {
 	public ScoutingSession planSession(String location, Date date){
 		ScoutingSession session = new ScoutingSession(location, date, UUID.randomUUID());
 		sessions.add(session);
-		Agenda.idCounter++;
 		return session;
 	}
 	
