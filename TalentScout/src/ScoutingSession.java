@@ -1,22 +1,37 @@
 import java.util.Date;
+import java.io.Serializable;
 import java.util.ArrayList;
+
+
+/*
+            if(evt.getClickCount() == 2){
+            int row = upcomingTable.getSelectedRow();
+            // Important to use getModel() as we have to access the model in order 
+            // to get the value at the 'hidden' column. 
+            Object ssID = upcomingTable.getModel().getValueAt(row, 3);
+            int sessionID = (int) ssID;
+            // JDialog opens with the scouting session which ID match sessionID
+            viewSession(sessionID);
+        }*/
+
+
 
 /**
  * The ScoutingSession class holds an ArrayList of the class Player that are added to a ScoutingSession. 
  * Further it holds information about a specific ScoutingSession's location and date.
  * 
  * @author Frederik Frode Nygart
- * @author Mikkel Mørch
+ * @author Mikkel MÃ¸rch
  * @author Jacob Krag Hansen
  * @author Robin Damsgaard Larsen
- * @author Lotte Selnø
- * @author Bjørn Alsted Nielsen 
+ * @author Lotte SelnÃ¸
+ * @author BjÃ¸rn Alsted Nielsen 
  */
 
-public class ScoutingSession {
+public class ScoutingSession implements Serializable, Comparable<ScoutingSession> {
 	
 	/** A list of the class Player added to a ScoutingSession*/
-	private ArrayList <Player> players;
+	private ArrayList<Integer> players;
 	
 	/** A ScoutingSession's location*/
 	private String location;
@@ -25,22 +40,21 @@ public class ScoutingSession {
 	private Date date;
 	
 	/** A ScoutingSession's ID*/
-	private String sessionID;
+	private int sessionID;
 	
 	
 	/**
-	 * Creates a ScoutingSession with an ArrayList "players", a location and a date.
+	 * Creates a ScoutingSession with an ArrayList of player IDs, a location and a date.
 	 * @param location holds the location of the ScoutingSession
 	 * @param date holds the date of the ScoutingSession
 	 * @param sessionID holds the ScoutinSession's unique ID
 	 */
-	public ScoutingSession(String location, Date date, String sessionID){
-		players = new ArrayList <Player>();
-		this.setLocation(location);;
+	public ScoutingSession(String location, Date date, int sessionID){
+		players = new ArrayList<Integer>();
+		this.location = location;
 		this.setDate(date);
-		this.setSessionID(sessionID);
+		this.sessionID = sessionID;
 	}
-	
 	
 	/**
 	 * Gets a ScoutingSession's location
@@ -50,7 +64,6 @@ public class ScoutingSession {
 	public String getLocation(){
 		return location;
 	}
-	
 	
 	/**
 	 * Sets a ScoutingSession's location
@@ -71,7 +84,6 @@ public class ScoutingSession {
 		return date;
 	}
 
-
 	/**
 	 * Sets a ScoutingSession's date
 	 * @param date is of the type Date and should be the exact time of when the ScoutingSession takes place
@@ -81,27 +93,15 @@ public class ScoutingSession {
 		this.date = date;
 	}
 	
-	
 	/**
 	 * Gets a ScoutingSession's ID
 	 * @return the ScoutingSession's ID
 	 * @see #setSessionID(String)
 	 */
 	
-	public String getSessionID(){
+	public int getSessionID(){
 		return sessionID;
 	}
-
-	
-	/**
-	 * Sets a ScoutingSession's ID
-	 * @param sessionID is a String which should be an unique ID for this ScoutingSession
-	 * @see #getSessionID
-	 */
-	public void setSessionID(String sessionID) {
-		this.sessionID = sessionID;
-	}
-	
 	
 	/**
 	 * Adds a class Player to the ArrayList "players".
@@ -109,9 +109,8 @@ public class ScoutingSession {
 	 * @see #players
 	 */
 	public void addPlayer(Player player){
-		players.add(player);
+		players.add(player.getID());
 	}
-	
 	
 	/**
 	 * Gets a Player from the ArrayList "players"
@@ -119,49 +118,53 @@ public class ScoutingSession {
 	 * @return A player from the index in the ArrayList "players"
 	 */
 	public Player getPlayer(int index){
-		return players.get(index);
+		//return TestScout2.pdb.getPlayerById(players.get(index));
+                return UserInterface.PDB.getPlayerById(players.get(index));
+	}
+	
+	public int getNumberOfPlayers(){
+		return players.size();
+	}
+	
+	public Note addNote(Player player,
+			String speedText, int speedScore,
+			String attitudeText, int attitudeScore,
+			String techniqueText, int techniqueScore,
+			String gameSenseText, int gameSenseScore){
+		
+		// Construct a new note from the arguments passed
+		Note n = new Note(this, player,
+				speedText, speedScore,
+				attitudeText, attitudeScore,
+				techniqueText, techniqueScore,
+				gameSenseText, gameSenseScore);
+		
+		player.addNote(n);
+		return n;
 	}
 	
 	
-	/**
-	 * Removes a Player from the ArrayList "players"
-	 * @param player is a specific instance of the class Player which should be removed
-	 */
 	public void removePlayer(Player player){
-		int index = players.indexOf(player);
-		players.remove(index);
+		/* wraps the integer ID in an object to make us of the remove object function of the ArrayList,
+		 * which would otherwise just remove the object at the index provided
+		 */
+		players.remove(new Integer(player.getID()));
 	}
-	
-	
-	/**
-	 * Displays a Player from the ArrayList players
-	 * @param index is an integer value which decides the place of action in the ArrayList
-	 */
-	public void displayPlayer(int index){
-		System.out.println(players.get(index));
-	}
-
-	
-	/**
-	 * Displays an entire overview of Player objects in the ArrayList "players" 
-	 */
-	public void displayPlayerOverview(){
-		for(int i = 0; i < players.size(); i++){
-			displayPlayer(i);
-		}
-	}
-	
 	
 	/**
 	 * Creates a new note and adds it to the ArrayList "notes" in the class Player
 	 * @param player is a generic instance of the class Player
 	 * @return The Note with this ScoutingSession and the Player stated in the parameter
 	 */
-	public Note makeNote(Player player){
+	public Note makeNote(Player player){ // TODO ved ikke om den er overflÃ¸dig.
 			Note note = new Note(this, player);
 			player.addNote(note);
 			return note;
 	}
 	
-
+	@Override
+	public int compareTo(ScoutingSession s) {		
+		//return this.getDate().compareTo(s.getDate());
+		return s.getDate().compareTo(this.getDate());
+	}
 }

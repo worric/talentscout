@@ -1,17 +1,18 @@
 import java.util.ArrayList;
+import java.io.Serializable;
 
 /**
  * The Player class holds information about a Player's name, age and club.
  * It furthermore holds an ArrayList of notes of type Note, which is all the notes written about a Player.
  *  
  * @author Frederik Frode Nygart
- * @author Mikkel Mørch
+ * @author Mikkel MÃ¸rch
  * @author Jacob Krag Hansen
  * @author Robin Damsgaard Larsen
- * @author Lotte Selnø
- * @author Bjørn Alsted Nielsen 
+ * @author Lotte SelnÃ¸
+ * @author BjÃ¸rn Alsted Nielsen 
  */
-public class Player {
+public class Player implements Serializable {
 	
 	/** The Player's name */
 	private String name;
@@ -25,6 +26,14 @@ public class Player {
 	/** An ArrayList "notes" with all the Player's notes */
 	private ArrayList <Note> notes;
 	
+	// Player's ID
+	private int playerID;
+	
+	// Track if the player is active or not
+	private boolean isActive; //TODO may be renamed to reflect "player discarded"
+	
+	// Initializes an enum with the four parameters
+	public enum Parameters {SPEED, ATTITUDE, TECHNIQUE, GAMESENSE};
 	
 	/**
 	 * Constructs a new instance of the class Player, and ties up all the 
@@ -33,13 +42,31 @@ public class Player {
 	 * @param age is an integer with the Player's age
 	 * @param club is a String with the Player's club
 	 */
-	public Player(String name, int age, String club){
+	public Player(String name, int age, String club, int id){
 		this.setName(name);
 		this.setAge(age);
 		this.setClub(club);
+		this.playerID = id;
+		this.isActive = true;
 		notes = new ArrayList<Note>();
 	}
 	
+	public Note addNote(ScoutingSession session,
+			String speedText, int speedScore,
+			String attitudeText, int attitudeScore,
+			String techniqueText, int techniqueScore,
+			String gameSenseText, int gameSenseScore){
+		
+		// Construct a new note from the arguments passed
+		Note n = new Note(session, this,
+				speedText, speedScore,
+				attitudeText, attitudeScore,
+				techniqueText, techniqueScore,
+				gameSenseText, gameSenseScore);
+		
+		notes.add(n);
+		return n;
+	}
 	
 	/**
 	 * Adds an instance of a Note to the ArrayList "notes"
@@ -48,8 +75,6 @@ public class Player {
 	public void addNote(Note note){
 		notes.add(note);
 	}
-	
-	
 	/**
 	 * Gets a specific Note from the ArrayList "notes"
 	 * @param index is the chosen index position in "notes"
@@ -58,8 +83,14 @@ public class Player {
 	public Note getNote(int index){
 		return notes.get(index);
 	}
-	
-	
+	/**
+	 * Adds the functionality to check the size of the ArrayList
+	 * used for iteration in other classes
+	 * @return
+	 */
+	public int getNumberOfNotes(){
+		return notes.size();
+	}
 	
 	public void displayNote(int index){
 		System.out.println(notes.get(index));
@@ -68,6 +99,61 @@ public class Player {
 	public void displayNoteOverview(){
 		for(int i = 0; i < notes.size(); i++){
 			displayNote(i);
+		}
+	}
+	
+	/**
+	 * Get the average score from all notes owned by the player based on a single parameter
+	 */
+	public double getAverage(Parameters parameters){
+		if(!notes.isEmpty()){
+			int j;
+			switch(parameters){
+			case SPEED:
+				double totalSpeed = 0;
+				j = 0;
+				for(int i = 0; i < notes.size(); i++){
+					if(notes.get(i).getSpeedScore() != 0){
+						j++;
+						totalSpeed = totalSpeed + notes.get(i).getSpeedScore();
+					}
+				}
+				return totalSpeed/j;
+			case ATTITUDE:
+				double totalAttitude = 0;
+				j = 0;
+				for(int i = 0; i < notes.size(); i++){
+					if(notes.get(i).getAttitudeScore() != 0){
+						j++;
+						totalAttitude = totalAttitude + notes.get(i).getAttitudeScore();
+					}
+				}
+				return totalAttitude/j;
+			case TECHNIQUE:
+				double totalTechnique = 0;
+				j = 0;
+				for(int i = 0; i < notes.size(); i++){
+					if(notes.get(i).getTechniqueScore() != 0){
+						j++;
+						totalTechnique = totalTechnique + notes.get(i).getTechniqueScore();
+					}
+				}
+				return totalTechnique/j;
+			case GAMESENSE:
+				double totalGameSense = 0;
+				j = 0;
+				for(int i = 0; i < notes.size(); i++){
+					if(notes.get(i).getGameSenseScore() != 0){
+						j++;
+						totalGameSense = totalGameSense + notes.get(i).getGameSenseScore();
+					}
+				}
+				return totalGameSense/j;
+			default:
+				return 0;
+			}
+		} else {
+			return 0;
 		}
 	}
 	
@@ -109,6 +195,26 @@ public class Player {
 
 	public void setClub(String club) {
 		this.club = club;
+	}
+	
+	public int getID(){
+		return this.playerID;
+	}
+	
+	public void setInactive(){
+		if(!this.isActive == false){
+			this.isActive = false;
+		}
+	}
+	
+	public void setActive(){
+		if(!this.isActive == true){
+			this.isActive = true;
+		}
+	}
+	
+	public boolean getActiveState(){
+		return isActive;
 	}
 	
 }

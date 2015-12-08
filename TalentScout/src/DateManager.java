@@ -30,21 +30,19 @@ public class DateManager {
 	public DateManager(){
 		this("dd-MM-yyyy", Locale.forLanguageTag("da"));
 	}
+	
 	/**
-	 * Takes a date and checks if it is an actual date in the calendar system
-	 * @param date
-	 * @return boolean
+	 * Method that takes a String and returns a Date object holding the same information
 	 */
-	public boolean isValid(String date){
-		
+	public Date fromStringToDate(String date){
 		try {
-			df.parse(date);
-			return true;
+			return df.parse(date);
 		} catch (ParseException p) {
 			p.printStackTrace();
-			return false;
+			return null;
 		}
 	}
+	
 	/**
 	 * Function that can take a date object and return the date in the
 	 * same notation as the pattern specified in the constructor 
@@ -54,5 +52,4 @@ public class DateManager {
 	public String fromDateToString(Date date){
 		return df.format(date);
 	}
-
 }

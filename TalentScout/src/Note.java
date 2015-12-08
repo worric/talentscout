@@ -1,8 +1,9 @@
+import java.io.Serializable;
 
-public class Note {
+public class Note implements Serializable {
 
-	private ScoutingSession session;
-	private Player player;
+	private int sessionID;
+	private int playerID;
 	private String speedText;
 	private int speedScore;
 	private String attitudeText;
@@ -12,25 +13,46 @@ public class Note {
 	private String gameSenseText;
 	private int gameSenseScore;
 	
-	public Note(ScoutingSession session, Player player){
+	/*public Note(ScoutingSession session, Player player){
 		this.setSession(session);
 		this.setPlayer(player);
+	}*/
+	
+	public Note(ScoutingSession session, Player player,
+		String speedText, int speedScore,
+		String attitudeText, int attitudeScore,
+		String techniqueText, int techniqueScore,
+		String gameSenseText, int gameSenseScore){
+		this.sessionID = session.getSessionID();
+		this.playerID = player.getID();
+		this.speedText = speedText;
+		this.speedScore = speedScore;
+		this.attitudeText = attitudeText;
+		this.attitudeScore = attitudeScore;
+		this.techniqueText = techniqueText;
+		this.techniqueScore = techniqueScore;
+		this.gameSenseText = gameSenseText;
+		this.gameSenseScore = gameSenseScore;
+	}
+	
+	public Note(ScoutingSession session, Player player){
+		this(session, player, "", 0, "", 0, "", 0, "", 0);
 	}
 	
 	public ScoutingSession getSession() {
-		return session;
+		return UserInterface.AGENDA.getSessionByID(this.sessionID);
 	}
 
 	public void setSession(ScoutingSession session) {
-		this.session = session;
+		this.sessionID = session.getSessionID();
 	}
 	
 	public Player getPlayer() {
-		return player;
+		return UserInterface.PDB.getPlayerById(playerID);
 	}
 
 	public void setPlayer(Player player) {
-		this.player = player;
+		this.playerID = player.getID();
 	}
 
 	public String getSpeedText() {
@@ -96,5 +118,16 @@ public class Note {
 	public void setGameSenseScore(int gameSenseScore) {
 		this.gameSenseScore = gameSenseScore;
 	}
-
+	
+	/**
+	 * Method mostly for testing purposes
+	 */
+	public void printNote(){
+		System.out.println("Name: "+TestScout2.pdb.getPlayerById(playerID).getName()+":");
+		System.out.println("Session: "+TestScout2.a.getSessionByID(sessionID).getLocation());
+		System.out.println("Speed: "+speedText+", "+speedScore+".");
+		System.out.println("Attitude: "+attitudeText+", "+attitudeScore+".");
+		System.out.println("Technique: "+techniqueText+", "+techniqueScore+".");
+		System.out.println("Game Sense: "+gameSenseText+", "+gameSenseScore+".");
+	}
 }
