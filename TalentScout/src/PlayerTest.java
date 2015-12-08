@@ -2,6 +2,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import org.junit.After;
 import org.junit.Before;
@@ -59,8 +60,9 @@ public class PlayerTest {
 
 	@Test
 	public void testAddNoteScoutingSessionStringIntStringIntStringIntStringInt() {
-		Player p = UserInterface.PDB.register(name, age, club);
+		// setup ScoutingSession, a Player and a Note, and add the note to the player
 		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
+		Player p = UserInterface.PDB.register(name, age, club);
 		Note n = p.addNote(s, "God", 4, "Bakker godt op", 4, "Teknisk svag", 2, 
 				"Står godt på banen", 6);
 		
@@ -75,9 +77,9 @@ public class PlayerTest {
 
 	@Test
 	public void testGetNote() {
-		// setup a player, a scouting session and a note 
-		Player p = UserInterface.PDB.register(name, age, club);
+		// setup ScoutingSession, a Player and a Note, and add the note to the player
 		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
+		Player p = UserInterface.PDB.register(name, age, club);
 		Note n = p.addNote(s, "God", 4, "Bakker godt op", 4, "Teknisk svag", 2, 
 				"Står godt på banen", 6);
 		
@@ -88,8 +90,9 @@ public class PlayerTest {
 
 	@Test
 	public void testGetNumberOfNotes() {
-		Player p = UserInterface.PDB.register(name, age, club);
+		// setup ScoutingSession, a Player and 2 Notes, and add the notes to the player
 		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
+		Player p = UserInterface.PDB.register(name, age, club);
 		Note n = p.addNote(s, "God", 4, "Bakker godt op", 4, "Teknisk svag", 2, 
 				"Står godt på banen", 6);
 		Note n2 = p.addNote(s, "Middel", 3, "Har temperament", 2, "Teknisk stærk", 5, 
@@ -220,11 +223,9 @@ public class PlayerTest {
 	@Test
 	public void testGetID() {
 		Player p = UserInterface.PDB.register(name, age, club);
+		UUID id = p.getID(); 
 		
-		// setup the known value for the ID, which is 3 because 4 players exist in the arraylist 
-		int id = 3;
-		
-		assertEquals(3, p.getID());
+		assertEquals(id, p.getID());
 	}
 	
 	@Test

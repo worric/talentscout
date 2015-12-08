@@ -104,106 +104,96 @@ public class ScoutingSessionTest {
 
 	@Test
 	public final void testAddPlayer() {
-		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
-		String location = "Skodsborg";
-		UUID sessionID;
-		UUID playerID;
-
-		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
-		sessionID = s.getSessionID();
+		// setup ScoutingSession
+		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
 		
-		Player p = UserInterface.PDB.register("Svend", 12, "FC København");
-		playerID = p.getID();
+		// setup player
+		Player p = UserInterface.PDB.register(name, age, club);
 		
-		s.addPlayer(p);
+		// add player to the scouting session and specify the index 0, which
+		// we know the player has because it's the only one in the session
+		ss.addPlayer(p);
 		int placeInIndex = 0;
 		
-		assertEquals(p, UserInterface.AGENDA.getSessionByID(sessionID).getPlayer(placeInIndex));
+		assertEquals(p, ss.getPlayer(placeInIndex));
 	}
 
 	@Test
 	public final void testGetPlayer() {
-		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
-		String location = "Skodsborg";
-		UUID sessionID;
-		UUID playerID;
-
-		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
-		sessionID = s.getSessionID();
+		// setup ScoutingSession
+		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
 		
-		Player p = UserInterface.PDB.register("Svend", 12, "FC København");
-		playerID = p.getID();
-		s.addPlayer(p);
+		// setup player
+		Player p = UserInterface.PDB.register(name, age, club);
+		
+		// add player to the scouting session and specify the index 0, which
+		// we know the player has because it's the only one in the session
+		ss.addPlayer(p);
 		int placeInIndex = 0;
 		
-		Player checkPlayer;
-		checkPlayer = UserInterface.AGENDA.getSessionByID(sessionID).getPlayer(placeInIndex);
-		
-		
-		assertEquals(p, checkPlayer);
+		assertEquals(p, ss.getPlayer(placeInIndex));
 	}
 
 	@Test
 	public final void testGetNumberOfPlayers() {
-		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
-		String location = "Skodsborg";
-		UUID sessionID;
-
-		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
-		sessionID = s.getSessionID();
+		// setup ScoutingSession
+		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
 		
-		Player p = UserInterface.PDB.register("Svend", 12, "FC København");
+		// setup players and specify the number of players we know exists for
+		// the given session
+		Player p = UserInterface.PDB.register(name, age, club);
 		Player p2 = UserInterface.PDB.register("Karl", 14, "Skive");
 		int numberOfPlayers = 2;
-	
-		s.addPlayer(p);
-		s.addPlayer(p2);
 		
-		assertSame(numberOfPlayers, UserInterface.AGENDA.getSessionByID(sessionID).getNumberOfPlayers());
+		// add the players to the session
+		ss.addPlayer(p);
+		ss.addPlayer(p2);
+		
+		assertEquals(numberOfPlayers, ss.getNumberOfPlayers());
 	}
 
 	@Test
 	public final void testAddNote() {
-		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
-		String location = "Skodsborg";
-		UUID sessionID;
-		UUID playerID;
-
-		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
-		sessionID = s.getSessionID();
+		// setup ScoutingSession
+		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
 		
-		Player p = UserInterface.PDB.register("Svend", 12, "FC København");
-		playerID = p.getID();
-		s.addPlayer(p);
-		int placeInIndex = 0;
+		// setup player
+		Player p = UserInterface.PDB.register(name, age, club);
 		
-		Note n = p.addNote(s, "Hurtig på banen", 4, "Bakker holdkammerater godt op",
+		// setup note and save the place in the index, which is 0, because we know
+		// it's the only one
+		Note n = p.addNote(ss, "Hurtig på banen", 4, "Bakker holdkammerater godt op",
 				3, "Fin teknik", 5, "Står godt på banen", 3);
 		int notePlaceInIndex = 0;
 		
-		Note checkNote;
-		checkNote = UserInterface.AGENDA.getSessionByID(sessionID).getPlayer(placeInIndex).getNote(notePlaceInIndex);
-		
-		
-		assertEquals(n, checkNote);
-		assertEquals("Hurtig på banen", UserInterface.AGENDA.getSessionByID(sessionID).getPlayer(placeInIndex).getNote(notePlaceInIndex).getSpeedText());
+		// add player to the session and note the place in the index, which is 0,
+		// because we know it's the only one
+		ss.addPlayer(p);
+		int placeInIndex = 0;
+			
+		assertEquals(n, ss.getPlayer(placeInIndex).getNote(notePlaceInIndex));
+		//assertEquals("Hurtig på banen", UserInterface.AGENDA.getSessionByID(sessionID).getPlayer(placeInIndex).getNote(notePlaceInIndex).getSpeedText());
 	}
 
 	@Test
 	public final void testRemovePlayer() {
-		Date date = UserInterface.DATEMANAGER.fromStringToDate("27-05-2015");
-		String location = "Skodsborg";
-		UUID sessionID;
+		// setup ScoutingSession
+		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
+		
+		// setup player
+		Player p = UserInterface.PDB.register(name, age, club);
 
-		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
-		sessionID = s.getSessionID();
+		// add the player to the scouting session
+		ss.addPlayer(p);
 		
-		Player p = UserInterface.PDB.register("Svend", 12, "FC København");
-		s.addPlayer(p);
+		// check that there is one player assigned to the scouting session
+		assertEquals(1, ss.getNumberOfPlayers());
 		
-		UserInterface.AGENDA.getSessionByID(sessionID).removePlayer(p);
+		// remove the player from the scouting session
+		ss.removePlayer(p);
 		
-		assertEquals(0, UserInterface.AGENDA.getSessionByID(sessionID).getNumberOfPlayers());
+		// check that there are 0 players assigned to the scouting session
+		assertEquals(0, ss.getNumberOfPlayers());
 	}
 
 	@Test
