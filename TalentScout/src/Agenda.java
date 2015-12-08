@@ -41,7 +41,7 @@ public class Agenda {
 		pathForFile = path+"/"+fileName;
 		
 		// Loads the previously saved databases on the hard drive, if any
-		sessions = this.loadAgenda();
+		loadAgenda();
 	}
 	
 	/**
@@ -49,6 +49,9 @@ public class Agenda {
 	 **/
 	public void saveAgenda(){
     		try {
+        		// we check if the folder/directory exists
+        		checkDirectoryExist();
+        		
     			//Connecting to the file
     			FileOutputStream fo = new FileOutputStream(pathForFile);
     		
@@ -69,11 +72,8 @@ public class Agenda {
 	* Load a file which contains all agenda objects
 	* @return
 	*/
-	public ArrayList<ScoutingSession> loadAgenda(){
+	public void loadAgenda(){
 		try {
-        		// we check if the folder/directory exists
-        		checkDirectoryExist();
-        
     			// Connection established to the file
     			FileInputStream fi = new FileInputStream(pathForFile);
     	
@@ -96,11 +96,11 @@ public class Agenda {
     			
     			Agenda.idCounter = highestNumber + 1;
     		
-    			return agendaArray;
+    			sessions = agendaArray;
     	
     		} catch (Exception e){
     			e.printStackTrace();
-    			return new ArrayList<ScoutingSession>();
+    			sessions = new ArrayList<ScoutingSession>();
     		}
     	}
 	
@@ -175,11 +175,6 @@ public class Agenda {
         if(!playerDir.isDirectory()){
             // If it doesn't exist, we create it with mkdir().
             playerDir.mkdir();
-            /*
-            if(!preference.getPlayerDir().isDirectory()){
-            String lol = System.getProperty("user.dir");
-            System.out.println(lol);
-            }*/
         }
     }
 }

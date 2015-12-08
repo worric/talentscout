@@ -51,11 +51,6 @@ public class PlayerDBTest {
 	}
 
 	@Test
-	public void testPlayerDB() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testSavePlayerDB() {
 		// Creating a new Player Object
 		Player p = UserInterface.PDB.register(name, age, club);
