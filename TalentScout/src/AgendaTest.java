@@ -1,10 +1,8 @@
 import static org.junit.Assert.*;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
-
 import org.junit.Test;
 import org.junit.After;
 import org.junit.Before;
@@ -69,7 +67,7 @@ public class AgendaTest {
 		// Writing to the agendadb file
 		UserInterface.AGENDA.saveAgenda();
 		// Checking if the agendadb file has been created
-		//assertTrue(pathAgendaDB.exists());
+		assertTrue(pathAgendaDB.exists());
 		
 		// Loading the agendadb file
 		UserInterface.AGENDA.loadAgenda();

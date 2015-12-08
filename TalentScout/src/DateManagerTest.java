@@ -6,6 +6,8 @@ public class DateManagerTest {
 
 	@Test
 	public final void testFromStringToDate() {
+		// setup a set of strings to be fed to the converter.
+		// Both legal and illegal strings are chosen
 		String date = "01-01-2015";
 		String date0 = "23-06-2015";
 		String date1 = "31-12-2015";
@@ -16,6 +18,7 @@ public class DateManagerTest {
 		String date6 = "";
 		String date7 = "\ny2+i$";
 		
+		// convert the strings
 		Date d = UserInterface.DATEMANAGER.fromStringToDate(date);
 		Date d0 = UserInterface.DATEMANAGER.fromStringToDate(date0);
 		Date d1 = UserInterface.DATEMANAGER.fromStringToDate(date1);
@@ -26,6 +29,7 @@ public class DateManagerTest {
 		Date d6 = UserInterface.DATEMANAGER.fromStringToDate(date6);
 		Date d7 = UserInterface.DATEMANAGER.fromStringToDate(date7);
 		
+		// check if the strings are accepted. If they aren't, null is returned
 		assertEquals(UserInterface.DATEMANAGER.fromDateToString(d), date);
 		assertEquals(UserInterface.DATEMANAGER.fromDateToString(d0), date0);
 		assertEquals(UserInterface.DATEMANAGER.fromDateToString(d1), date1);
