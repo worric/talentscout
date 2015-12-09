@@ -21,9 +21,11 @@ public class Search {
 	 */
 	public ArrayList<Player> performSearch(String searchStringName, String searchStringClub){
 		
+		// initialize a new list that holds the results of the search
 		ArrayList<Player> searchedList = new ArrayList<Player>();
 		
-		// Loop through the database one player at a time and add it to a list to be returned to the GUI if it matches
+		// Loop through the database one player at a time and add it to a list to
+		// be returned to the GUI if it matches
 		for(int i = 0; i < UserInterface.PDB.getSize(); i++){
 			// Local player variable initialized
 			Player p = UserInterface.PDB.getPlayerByIndex(i);
@@ -35,18 +37,16 @@ public class Search {
 				// Add it to a a local list if it does.
 				searchedList.add(p);
 			}*/
-			
+
+			// Check if the player matches the search criteria and add it to
+			// the local list of results if it does. Convert all to lower case to
+			// enable the search to function
 			if (p.getName().toLowerCase().contains(searchStringName.toLowerCase()) &&
 					p.getClub().toLowerCase().contains(searchStringClub.toLowerCase())){
-				
-				// Add it to a a local list if it does.
 				searchedList.add(p);
 			}
-			
-			
 		}
 		// Always return the list even though it may be empty.
 		return searchedList;
 	}
-
 }
