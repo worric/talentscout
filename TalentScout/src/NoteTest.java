@@ -3,6 +3,8 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
+
 import org.junit.BeforeClass;
 import org.junit.After;
 import org.junit.Before;
@@ -413,5 +415,27 @@ public class NoteTest {
 		n.setGameSenseScore(gameSense);
 		
 		assertEquals(gameSense, n.getGameSenseScore());
+	}
+	
+	@Test
+	public void testUpdate() {
+		// setup ScoutingSession
+		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
+		// setup player
+		Player p = UserInterface.PDB.register(name, age, club);
+		// setup note and add it to the player
+		Note n = p.addNote(ss, speedText, speedScore, attitudeText,
+				attitudeScore, techniqueText, techniqueScore, gameSenseText, gameSenseScore);
+		
+		UUID playerUUID = p.getID();
+		UUID sessionUUID = ss.getSessionID();
+		
+		assertNotNull(n.getPlayer());
+		assertNotNull(n.getSession());
+		
+		UserInterface.PDB.removePlayer(p);
+		
+		assertNull(n.getPlayer());
+		assertNull(n.getSession());
 	}
 }

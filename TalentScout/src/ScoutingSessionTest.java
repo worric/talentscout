@@ -200,4 +200,28 @@ public class ScoutingSessionTest {
 	public final void testMakeNote() {
 		fail("Not yet implemented");
 	}
+	
+	@Test
+	public final void testUpdate(){
+		// setup ScoutingSession
+		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
+		
+		// setup player
+		Player p = UserInterface.PDB.register(name, age, club);
+		Player p2 = UserInterface.PDB.register(name, age, club);
+
+		// add the player to the scouting session
+		ss.addPlayer(p);
+		ss.addPlayer(p2);
+		
+		assertEquals(2, ss.getNumberOfPlayers());
+		
+		UserInterface.PDB.removePlayer(p);
+		
+		assertEquals(1, ss.getNumberOfPlayers());
+		
+		UserInterface.PDB.removePlayer(p2);
+		
+		assertEquals(0, ss.getNumberOfPlayers());
+	}
 }

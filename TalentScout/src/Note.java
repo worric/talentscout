@@ -1,7 +1,9 @@
 import java.io.Serializable;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.UUID;
 
-public class Note implements Serializable {
+public class Note implements Serializable, Observer {
 
 	private UUID sessionID;
 	private UUID playerID;
@@ -34,6 +36,7 @@ public class Note implements Serializable {
 		this.techniqueScore = techniqueScore;
 		this.gameSenseText = gameSenseText;
 		this.gameSenseScore = gameSenseScore;
+		UserInterface.PDB.addObserver(this);
 	}
 	
 	public Note(ScoutingSession session, Player player){
@@ -130,5 +133,16 @@ public class Note implements Serializable {
 		System.out.println("Attitude: "+attitudeText+", "+attitudeScore+".");
 		System.out.println("Technique: "+techniqueText+", "+techniqueScore+".");
 		System.out.println("Game Sense: "+gameSenseText+", "+gameSenseScore+".");
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		if (arg instanceof Player){
+			Player p = (Player) arg;
+			if (p.getID().equals(playerID)){
+				this.playerID = null;
+				this.sessionID = null;
+			}
+		}
 	}
 }

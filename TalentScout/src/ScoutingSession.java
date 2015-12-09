@@ -1,4 +1,6 @@
 import java.util.Date;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.UUID;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ import java.util.ArrayList;
  * @author Bjørn Alsted Nielsen 
  */
 
-public class ScoutingSession implements Serializable, Comparable<ScoutingSession> {
+public class ScoutingSession implements Serializable, Comparable<ScoutingSession>, Observer {
 	
 	/** A list of the class Player added to a ScoutingSession*/
 	private ArrayList<UUID> players;
@@ -55,6 +57,7 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 		this.location = location;
 		this.setDate(date);
 		this.sessionID = uuid;
+		UserInterface.PDB.addObserver(this);
 	}
 	
 	/**
@@ -167,5 +170,13 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 	public int compareTo(ScoutingSession s) {		
 		//return this.getDate().compareTo(s.getDate());
 		return s.getDate().compareTo(this.getDate());
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		if(arg instanceof Player){
+			Player p = (Player) arg;
+			this.removePlayer(p);
+		}
 	}
 }

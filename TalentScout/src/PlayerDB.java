@@ -5,8 +5,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.Observable;
 
-public class PlayerDB {
+public class PlayerDB extends Observable {
 	
 	private ArrayList<Player> playerDB;
 	private String path;
@@ -102,6 +103,8 @@ public class PlayerDB {
 	
 	public void removePlayer(Player p){
 		playerDB.remove(p);
+		this.setChanged();
+		this.notifyObservers(p);
 	}
 	
 	public Player getPlayerByIndex(int i){
