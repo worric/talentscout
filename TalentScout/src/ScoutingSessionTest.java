@@ -214,14 +214,17 @@ public class ScoutingSessionTest {
 		ss.addPlayer(p);
 		ss.addPlayer(p2);
 		
+		// check if the number of players on the scouting session is 2 as expected
 		assertEquals(2, ss.getNumberOfPlayers());
 		
+		// remove the player p from the database and check if the
+		// total number of players on the scouting session has also changed
 		UserInterface.PDB.removePlayer(p);
-		
 		assertEquals(1, ss.getNumberOfPlayers());
 		
+		// remove the player p2 from the database and check if the
+		// total number of players on the scouting session is then 0
 		UserInterface.PDB.removePlayer(p2);
-		
 		assertEquals(0, ss.getNumberOfPlayers());
 	}
 }

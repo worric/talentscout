@@ -430,11 +430,13 @@ public class NoteTest {
 		UUID playerUUID = p.getID();
 		UUID sessionUUID = ss.getSessionID();
 		
+		// check that the note n has both a player and a session
 		assertNotNull(n.getPlayer());
 		assertNotNull(n.getSession());
 		
+		// remove the player p from the database and check if the note n has lost both
+		// the player and the session, thereby making it eligible for garbage collection
 		UserInterface.PDB.removePlayer(p);
-		
 		assertNull(n.getPlayer());
 		assertNull(n.getSession());
 	}
