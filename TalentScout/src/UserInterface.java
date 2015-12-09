@@ -87,7 +87,6 @@ public class UserInterface extends javax.swing.JFrame {
         viewAgenda = new javax.swing.JButton();
         viewPlayerList = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         contentPanel = new javax.swing.JPanel();
         playerListPanel = new javax.swing.JPanel();
         searchFieldName = new javax.swing.JTextField();
@@ -401,8 +400,6 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Register Player");
-
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
@@ -422,12 +419,11 @@ public class UserInterface extends javax.swing.JFrame {
                     .addGroup(menuPanelLayout.createSequentialGroup()
                         .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(saveAllBtn)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5))
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
-        menuPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton4, jButton5, registerPlayer, saveAllBtn, viewAgenda, viewPlayerList});
+        menuPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton4, registerPlayer, saveAllBtn, viewAgenda, viewPlayerList});
 
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -442,9 +438,7 @@ public class UserInterface extends javax.swing.JFrame {
                 .addComponent(saveAllBtn)
                 .addGap(114, 114, 114)
                 .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addContainerGap(313, Short.MAX_VALUE))
         );
 
         getContentPane().add(menuPanel, java.awt.BorderLayout.LINE_START);
@@ -1380,6 +1374,9 @@ public class UserInterface extends javax.swing.JFrame {
         populatePlayerList();
     }
     
+    /**
+     * Populates the list of players in the database with players.
+     */
     public void populatePlayerList(){
         // Firstly, clear table from content to avoid inserting all players twice
         playerListModel.setRowCount(0);
@@ -1621,6 +1618,7 @@ public class UserInterface extends javax.swing.JFrame {
      */
     
     /**
+     * Displays the Panel in which the user can register a Player.
      * 
      * @param evt 
      */
@@ -1635,23 +1633,26 @@ public class UserInterface extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_registerPlayerActionPerformed
-
+    /**
+     * Displays the Agenda in the content area.
+     * @param evt 
+     */
     private void viewAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAgendaActionPerformed
         if(checkVisibleCard(agendaPanel)){
             changeCard(contentPanel, agendaPanel);
+            // resets the text of the JLabels
             sessionDateField.setText("");
             sessionPlaceField.setText("");
-                viewAgenda();
+            viewAgenda();
             
-            // #MM IMPLEMENTATION of new custom ComboBox here
+            // Loads the content of the Combobox
             addPlayersToComboBox(sessionPlayerBox, PDB.getArrayListPlayer());
-            
-            // Previous ComboBox
-            // sets the ComboBox content
-            //sessionPlayerBox.setModel(new DefaultComboBoxModel<String>(getAllPlayerNames()));
         }
     }//GEN-LAST:event_viewAgendaActionPerformed
-
+    /** Display the Player list in the content area.
+     * 
+     * @param evt 
+     */
     private void viewPlayerListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewPlayerListActionPerformed
         if(checkVisibleCard(playerListPanel)){
             if(warningUnsavedSessionDetailsToBeLost()){
@@ -1659,8 +1660,12 @@ public class UserInterface extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_viewPlayerListActionPerformed
-    
+    /**
+     * Registers a Player.
+     * @param evt 
+     */
     private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
+        // Retrieves user input to register a new Player
         String name = nameField.getText();
         String strAge = ageField.getText();
         int age = Integer.parseInt(strAge);
@@ -1673,10 +1678,11 @@ public class UserInterface extends javax.swing.JFrame {
         viewPlayerList();
     }//GEN-LAST:event_registerBtnActionPerformed
 
+    /**
+     * Saves both the Player and Agenda database.
+     * @param evt 
+     */
     private void saveAllBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAllBtnActionPerformed
-    	// Erstattet med savePlayerDB, som skriver alle Player Objects i ArrayListen
-    	// til filen. 
-    	
     	PDB.savePlayerDB();
     	AGENDA.saveAgenda();
     }//GEN-LAST:event_saveAllBtnActionPerformed
@@ -1697,36 +1703,15 @@ public class UserInterface extends javax.swing.JFrame {
     private void searchFieldClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldClubActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchFieldClubActionPerformed
-
+    /**
+     * Adds a session to the Agenda.
+     * @param evt 
+     */
     private void sessionAddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionAddBtnActionPerformed
-        // User given date, which is a String
-        String strDate = getSessionDateField();
-        // Convertion of the String to Date
-        Date date = DATEMANAGER.fromStringToDate(strDate);
-        // User given location
-        String place = getSessionPlaceField();
-        
-        // Scouting session added to the agenda ArrayList
-        ScoutingSession ss = AGENDA.planSession(place, date);
-        
-        // Assign Scouting Session ID to instance variable 
-        this.currentSessionID = ss.getSessionID();
-        /*
-        // Adding the seleced players to the Scouting session
-        String[] players = getPlayerFromTF();
-        for(String name : players){
-            Player player = PDB.getPlayerByName(name);
-            // adds the player to the session with the ID of the player
-            ss.addPlayer(player);
-        }*/
-        
-        // Adding the selected players saved in an instance variable of type ArrayList to the Scouting Session
-        for(Player player : this.tempPlayersToSession){
-            // adds the player to the session with the ID of the player
-            ss.addPlayer(player);
-        }
+        addSession();
         
         viewAgenda();
+        // Resets JLabels of the content area the user is departing from
         sessionDateField.setText("");
         sessionPlaceField.setText("");
         sessionPlayersTF.setText("");
@@ -1738,61 +1723,30 @@ public class UserInterface extends javax.swing.JFrame {
  * @param evt 
  */
     private void sessionAddPlayerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionAddPlayerBtnActionPerformed
+        addPlayersToTemporarySession();
 
-        // User input containing name of Player
-        String inputPlayer = sessionPlayerBox.getSelectedItem().toString();
-        
-        /** Retrieving the Player object selected in the ComboBox */
-        // 1. step is to retrieve the Item which the Player object is wrapped in
-        Item item = (Item) sessionPlayerBox.getSelectedItem();
-        // 2. step is to retrieve the Player object from the item wrapper
-        Player player = (Player) item.getValue();
-        
-        // Getting the content of the JTextField of already added players
-        String playersInTF = sessionPlayersTF.getText();
-
-        // Checking if the TextField is empty.
-        if(playersInTF.isEmpty()){
-
-            // Checking if a player is selected
-            if(inputPlayer.isEmpty()) {
-                // Display a message to the user to guide him.
-                JOptionPane.showMessageDialog(new JDialog(), "Please select a player from the list.");
-            } else {
-            sessionPlayersTF.append(inputPlayer + "\n");
-            }
-        // If the JTextField isn't empty
-        } else {
-            // Check if a player already has been added to the TextField
-            if(!PlayerAlreadyAdded()){
-                // If the player isn't added already, we append him to the TextField.
-                sessionPlayersTF.append(inputPlayer + "\n");
-                // And add him to the instance variable ArrayList
-                tempPlayersToSession.add(player);
-            } else {
-                // If the player already has been added, we display a message informing the user.
-                JOptionPane.showMessageDialog(new JDialog(), "The player has already been added to the session.");
-            }
-        }
     }//GEN-LAST:event_sessionAddPlayerBtnActionPerformed
-
+    /** NOT USED FUNCTION */
     private void sessionPlayersTFMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sessionPlayersTFMousePressed
 
     }//GEN-LAST:event_sessionPlayersTFMousePressed
-                                     
+
+    /**
+     * Adds a content area to the window displaying a specific Scouting Session,
+     * which allows the user to create a note on a player.
+     */
     private void sessionCreateNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionCreateNoteBtnActionPerformed
         viewCreateNoteInSession();
         
     }//GEN-LAST:event_sessionCreateNoteBtnActionPerformed
 
     /**
-     * 
+     * Displays the Player Profile for the selected player from the table of all players.
      * @param evt 
      */
     private void sessionViewProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionViewProfileBtnActionPerformed
-        // String player = sessionPlayersBox.getSelectedItem().toString();
-        
         /** Implementation of new ComboBox replacing getPlayerByName() */
+        
         Item item = (Item) sessionPlayersBox.getSelectedItem();
         Player player = (Player) item.getValue();
         viewPlayerProfile(player);
@@ -1924,7 +1878,8 @@ public class UserInterface extends javax.swing.JFrame {
     /**
      * Detects when the table is clicked and identifies the row that is clicked.
      * Subsequently, the value of the cell which contains playerID in the selected row 
-     * is retrieved and passed to the viewPlayerProfileByID() method.
+     * is retrieved and passed to the viewPlayerProfileByID() method, which will
+     * direct the user to the Player Profile of a player matching the playerID.
      * @param evt 
      */
     private void plrTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_plrTableMousePressed
@@ -1976,7 +1931,79 @@ public class UserInterface extends javax.swing.JFrame {
      * 
      */
     
+    /**
+     * 
+     */
+    public void addPlayersToTemporarySession(){
+        // User input containing name of Player
+        String inputPlayer = sessionPlayerBox.getSelectedItem().toString();
+        
+        /** Retrieving the Player object selected in the ComboBox */
+        // 1. step is to retrieve the Item which the Player object is wrapped in
+        Item item = (Item) sessionPlayerBox.getSelectedItem();
+        // 2. step is to retrieve the Player object from the item wrapper
+        Player player = (Player) item.getValue();
+        
+        // Getting the content of the JTextField of already added players
+        String playersInTF = sessionPlayersTF.getText();
 
+        // Checking if the TextField is empty.
+        if(playersInTF.isEmpty()){
+
+            // Checking if a player is selected
+            if(inputPlayer.isEmpty()) {
+                // Display a message to the user to guide him.
+                JOptionPane.showMessageDialog(new JDialog(), "Please select a player from the list.");
+            } else {
+            sessionPlayersTF.append(inputPlayer + "\n");
+            }
+        // If the JTextField isn't empty
+        } else {
+            // Check if a player already has been added to the TextField
+            if(!PlayerAlreadyAdded()){
+                // If the player isn't added already, we append him to the TextField.
+                sessionPlayersTF.append(inputPlayer + "\n");
+                // And add him to the instance variable ArrayList
+                tempPlayersToSession.add(player);
+            } else {
+                // If the player already has been added, we display a message informing the user.
+                JOptionPane.showMessageDialog(new JDialog(), "The player has already been added to the session.");
+            }
+        }
+    }
+    
+    /**
+     * Adds a session to the Agenda
+     */
+    public void addSession(){
+        // User given date, which is a String
+        String strDate = getSessionDateField();
+        // Convertion of the String to Date
+        Date date = DATEMANAGER.fromStringToDate(strDate);
+        // User given location
+        String place = getSessionPlaceField();
+        
+        // Scouting session added to the agenda ArrayList
+        ScoutingSession ss = AGENDA.planSession(place, date);
+        
+        // Assign Scouting Session ID to instance variable 
+        this.currentSessionID = ss.getSessionID();
+        /*
+        // Adding the seleced players to the Scouting session
+        String[] players = getPlayerFromTF();
+        for(String name : players){
+            Player player = PDB.getPlayerByName(name);
+            // adds the player to the session with the ID of the player
+            ss.addPlayer(player);
+        }*/
+        
+        // Adding the selected players saved in an instance variable of type ArrayList to the Scouting Session
+        for(Player player : this.tempPlayersToSession){
+            // adds the player to the session with the ID of the player
+            ss.addPlayer(player);
+        }
+    }
+    
     /**
      * Changes card to playerPanel in which it inserts the found players attributes.
      * @param table the table that was clicked
@@ -2152,7 +2179,6 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

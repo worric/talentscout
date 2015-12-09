@@ -43,13 +43,4 @@ public class DateManager {
 		}
 	}
 	
-	/**
-	 * Function that can take a date object and return the date in the
-	 * same notation as the pattern specified in the constructor 
-	 * @param date
-	 * @return
-	 */
-	public String fromDateToString(Date date){
-		return df.format(date);
-	}
 }
