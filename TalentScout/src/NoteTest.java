@@ -434,10 +434,21 @@ public class NoteTest {
 		assertNotNull(n.getPlayer());
 		assertNotNull(n.getSession());
 		
+		UserInterface.PDB.savePlayerDB();
+		UserInterface.AGENDA.saveAgenda();
+		
+		UserInterface.PDB.loadPlayerDB();
+		UserInterface.AGENDA.loadAgenda();
+		
+		assertEquals(p, n.getPlayer());
+		assertEquals(ss, n.getSession());
+		
 		// remove the player p from the database and check if the note n has lost both
 		// the player and the session, thereby making it eligible for garbage collection
 		UserInterface.PDB.removePlayer(p);
-		assertNull(n.getPlayer());
-		assertNull(n.getSession());
+		assertEquals(p, n.getPlayer());
+		assertNotEquals(ss, n.getSession());
+		
+		Player p2 = UserInterface.PDB.register(name, age, club);
 	}
 }
