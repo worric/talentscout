@@ -141,6 +141,7 @@ public class PlayerTest {
 		double attitudeResult = (4.0+5.0)/2;
 		double techniqueResult = (2.0+1.0)/2;
 		double gameSenseResult = (6.0+5.0)/2;
+		double totalAverage = (speedResult + attitudeResult + techniqueResult + gameSenseResult)/4;
 		
 		// assert the player's average score with regards to the SPEED parameter
 		assertEquals(speedResult, p.getAverage(Player.Parameters.SPEED), 0.0);
@@ -150,6 +151,8 @@ public class PlayerTest {
 		assertEquals(techniqueResult, p.getAverage(Player.Parameters.TECHNIQUE), 0.0);
 		// assert the player's average score with regards to the GAMESENSE parameter
 		assertEquals(gameSenseResult, p.getAverage(Player.Parameters.GAMESENSE), 0.0);
+		// assert the player's total average score across all parameters
+		assertEquals(totalAverage, p.getAverage(Player.Parameters.ALL), 0.0);
 	}
 
 	@Test
