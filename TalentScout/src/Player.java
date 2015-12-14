@@ -114,7 +114,6 @@ public class Player implements Serializable {
 	 * Get the average score from all notes owned by the player based on a single parameter
 	 */
 	public double getAverage(Parameters parameters){
-            try{
 		if(!notes.isEmpty()){
 			int j;
 			switch(parameters){
@@ -158,18 +157,17 @@ public class Player implements Serializable {
 					}
 				}
 				return totalGameSense/j;
-                        case ALL:
-                            return (this.getAverage(Player.Parameters.SPEED)+this.getAverage(Player.Parameters.ATTITUDE)+this.getAverage(Player.Parameters.TECHNIQUE)+this.getAverage(Player.Parameters.GAMESENSE))/4;
-                        default:
-				return 0;
+            case ALL:
+                return (this.getAverage(Player.Parameters.SPEED)+
+                		this.getAverage(Player.Parameters.ATTITUDE)+
+                		this.getAverage(Player.Parameters.TECHNIQUE)+
+                		this.getAverage(Player.Parameters.GAMESENSE))/4;
+            default:
+				return 0.0;
 			}
 		} else {
-			return 0;
+			return 0.0;
 		}
-            } catch(Exception e){
-                e.printStackTrace();
-                return 0;
-            }
 	}
 	
 	public double displayAverageScore(){
