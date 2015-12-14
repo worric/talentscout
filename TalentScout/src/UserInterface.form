@@ -1090,6 +1090,11 @@
                                           <Component id="playerAgeLabel" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel39" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                      <Component id="playerAvrScoreLabel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1120,7 +1125,12 @@
                           <Component id="jLabel11" linkSize="6" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="playerAgeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="playerAvrScoreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane3" min="-2" pref="205" max="-2" attributes="0"/>
@@ -1215,6 +1225,16 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Lucida Grande" size="18" style="1"/>
                 </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel39">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Average score:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="playerAvrScoreLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jLabel40"/>
               </Properties>
             </Component>
           </SubComponents>

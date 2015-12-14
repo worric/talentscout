@@ -3,9 +3,13 @@ import java.util.UUID;
 import java.io.Serializable;
 
 /**
- * The Player class holds information about a Player's name, age and club.
- * It furthermore holds an ArrayList of notes of type Note, which is all the notes written about a Player.
+ * The Player class holds information about a Player's name, age and club
+ * as well as a unique ID for the Player object.
+ * Furthermore, it holds an ArrayList of notes of type Note, which is all the notes written about a Player.
  *  
+ * Furthermore, it holds a serialVersionUID which allows for future changes in the class
+ * that can be serialized. This subject is further explained in the development report.
+ * 
  * @author Frederik Frode Nygart
  * @author Mikkel Mørch
  * @author Jacob Krag Hansen
@@ -15,6 +19,9 @@ import java.io.Serializable;
  */
 public class Player implements Serializable {
 	
+        /** This class' serialVersionUID */ 
+        static final long serialVersionUID = -1853146508452710587L;
+    
 	/** The Player's name */
 	private String name;
 	
@@ -34,7 +41,7 @@ public class Player implements Serializable {
 	private boolean isActive; //TODO may be renamed to reflect "player discarded"
 	
 	// Initializes an enum with the four parameters
-	public enum Parameters {SPEED, ATTITUDE, TECHNIQUE, GAMESENSE};
+	public enum Parameters {SPEED, ATTITUDE, TECHNIQUE, GAMESENSE, ALL};
 	
 	/**
 	 * Constructs a new instance of the class Player, and ties up all the 
@@ -102,11 +109,12 @@ public class Player implements Serializable {
 			displayNote(i);
 		}
 	}
-	
+        
 	/**
 	 * Get the average score from all notes owned by the player based on a single parameter
 	 */
 	public double getAverage(Parameters parameters){
+            try{
 		if(!notes.isEmpty()){
 			int j;
 			switch(parameters){
@@ -150,12 +158,18 @@ public class Player implements Serializable {
 					}
 				}
 				return totalGameSense/j;
-			default:
+                        case ALL:
+                            return (this.getAverage(Player.Parameters.SPEED)+this.getAverage(Player.Parameters.ATTITUDE)+this.getAverage(Player.Parameters.TECHNIQUE)+this.getAverage(Player.Parameters.GAMESENSE))/4;
+                        default:
 				return 0;
 			}
 		} else {
 			return 0;
 		}
+            } catch(Exception e){
+                e.printStackTrace();
+                return 0;
+            }
 	}
 	
 	public double displayAverageScore(){

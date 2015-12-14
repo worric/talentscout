@@ -6,6 +6,10 @@
  *
  *  The "description" property is used by the renderer. The "value"
  *  property is used for processing by the application.
+ * 
+ * @author Rob Camick
+ * @see <a href="https://tips4java.wordpress.com/2013/02/18/combo-box-with-hidden-data/">Source</a>
+ * 
  */
 public class Item<V> implements Comparable<Item>
 {
@@ -27,7 +31,7 @@ public class Item<V> implements Comparable<Item>
 	/**
 	 *  Get the Object containing application data
 	 *
-	 *  @returns the application data
+	 *  @return the application data
 	 */
 	public V getValue()
 	{
@@ -37,7 +41,7 @@ public class Item<V> implements Comparable<Item>
 	/**
 	 *  Get the description of the value data
 	 *
-	 *  @returns the description to be displayed by a renderer
+	 *  @return the description to be displayed by a renderer
 	 */
 	public String getDescription()
 	{

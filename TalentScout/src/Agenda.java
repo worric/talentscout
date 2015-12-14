@@ -8,9 +8,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.UUID;
 
-/**The Agenda class holds an ArrayList of ScoutingSessions.
- *The class is responsible for planning ScoutingSessions or canceling planned ScoutingSessions. 
- *It can also show an overview of all the planned ScoutingSessions.
+/** The Agenda class holds an ArrayList of ScoutingSessions.
+ * The class is responsible for planning ScoutingSessions or cancelling planned ScoutingSessions. 
+ * It can also show an overview of all the planned ScoutingSessions.
  *
  * @author Frederik Frode Nygart
  * @author Mikkel Mørch
@@ -25,25 +25,26 @@ public class Agenda {
 	/**ArrayList with ScoutingSessions referred to as "sessions".*/
 	private ArrayList<ScoutingSession> sessions;
 	
-	// Delare the variables needed for reading/writing data to/from disk
+	// Declare the variables needed for reading/writing data to/from disk
 	private String path;
 	private String fileName;
 	private String pathForFile;
 		
-	/**Creates an agenda which ties the reference variable "sessions" to a new ArrayList*/
+	/** Creates an agenda which ties the reference variable "sessions" to a new ArrayList*/
 	public Agenda(){
 		// Initializing the variables needed for reading/writing data to/from disk
 		path = "./playerfiles";
 		fileName = "agendadb";
 		pathForFile = path+"/"+fileName;
 		
-		// Loads the previously saved databases on the hard drive, if any
+		// Loads the previously saved database on the hard drive,
+                // or creates one if none has been saved yet.
 		loadAgenda();
 	}
 	
 	/**
-	 * Save the current list of scouting session to disk
-	 **/
+	 * Save the current list of ScoutingSessions to disk.
+	 */
 	public void saveAgenda(){
 		try {
     		// we check if the folder/directory exists
@@ -61,13 +62,12 @@ public class Agenda {
 			// Close the stream
 			oo.close();
 		} catch (Exception e){
-			e.printStackTrace();
+                    
 		}
 	}
     
 	/**
-	* Load a file which contains all agenda objects
-	* @return
+	* Load a file which contains all ScoutingSession objects.
 	*/
 	public void loadAgenda(){
 		try {
@@ -87,16 +87,17 @@ public class Agenda {
 			sessions = agendaArray;
 	
 		} catch (Exception e){
-			e.printStackTrace();
 			sessions = new ArrayList<ScoutingSession>();
 		}
 	}
 	
 	/**
-	 * Plans a ScoutingSession by creating a new ScoutingSession and thereafter adding it to the ArrayList "sessions". It also initiates a new ScoutingSession with an unique sessionID.
+	 * Creates a new ScoutingSession Objects which is added to the ArrayList "sessions". 
+         * Besides the location and date, which are user given information, the ScoutingSession
+         * object also holds a unique ID.
 	 * @param location is the location of where a planned ScoutingSession takes place.
 	 * @param date is the date of when a ScoutingSession takes place.
-	 * @return ScoutingSession(location, date)
+	 * @return A ScoutingSession Object
 	 * */
 	public ScoutingSession planSession(String location, Date date){
 		ScoutingSession session = new ScoutingSession(location, date, UUID.randomUUID());
@@ -105,25 +106,24 @@ public class Agenda {
 	}
 	
 	/**
-	 * This method cancels an already planned ScoutingSession.
-	 * @see #planSession()
-	 * @param
-	 * */
+         * Removes a ScoutingSession Object from the list of ScoutingSessions.
+         * @param session The ScoutingSession which will be removed.
+         */
 	public void cancelSession(ScoutingSession session){
 		sessions.remove(session);
 	}
 	
 	/**
 	 * Gets a ScoutingSession from the ArrayList "sessions".
-	 * @param index is an integer value which decides the place of action in the ArrayList
-	 * @return ScoutingSession
+	 * @param index The index in the ArrayList of a ScoutingSession Object
+	 * @return ScoutingSession A ScoutingSession Object
 	 */
 	public ScoutingSession getSessionByIndex(int index){
 		return sessions.get(index);
 	}
 	
 	/**
-	 * Gets a ScoutingSession from the ArrayList "sessions" based on the ID of the object
+	 * Gets a ScoutingSession from the ArrayList "sessions" based on the ID of the object.
 	 */
 	public ScoutingSession getSessionByID(UUID uuid){
 		for(ScoutingSession s : sessions){

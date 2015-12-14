@@ -2,22 +2,12 @@ import java.util.ArrayList;
 
 public class Search {
 	
-	// Declare a reference to the player database
-	private PlayerDB pdb; // TODO Search must be initialized with a PlayerDB object. UserInterface must also be in itialized with a Search object
-	
-	/**
-	 * The constructor takes an argument of type PlayerDB and initializes its instance variable
-	 * @param pdb
-	 */
-	public Search(PlayerDB pdb){
-		this.pdb = pdb;
-	}
 	/**
 	 * Call the database and loop through all players one at a time to
 	 * determine if it fits the search criteria. If it does, add to a list to be returned to the caller
-	 * @param searchStringName
-	 * @param searchStringClub
-	 * @return searchedList
+	 * @param searchStringName - Player name which will be searched upon.
+	 * @param searchStringClub - Club of the player which will be search upon.
+	 * @return searchedList - An ArrayList of Player Objects which match the search criteria.
 	 */
 	public ArrayList<Player> performSearch(String searchStringName, String searchStringClub){
 		

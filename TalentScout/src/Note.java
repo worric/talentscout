@@ -1,8 +1,27 @@
 import java.io.Serializable;
 import java.util.UUID;
 
+/** The Note class holds information about a Player's performance in a Scouting Session.
+ * The class is responsible for getting and setting information of a Player's performance
+ * in a Scouting Session. It is Serializable as it contains user information which is to be
+ * saved as data, which can be displayed for the user whenever he wishes.
+ * 
+ * Furthermore, it holds a serialVersionUID which allows for future changes in the class
+ * that can be serialized. This subject is further explained in the development report.
+ * 
+ * @author Frederik Frode Nygart
+ * @author Mikkel Mørch
+ * @author Jacob Krag Hansen
+ * @author Robin Damsgaard Larsen
+ * @author Lotte Selnø
+ * @author Bjørn Alsted Nielsen 
+ */
+
 public class Note implements Serializable {
 
+        /** This class' serialVersionUID */ 
+        static final long serialVersionUID = 6094974046434229287L;
+    
 	private UUID sessionID;
 	private UUID playerID;
 	private String speedText;

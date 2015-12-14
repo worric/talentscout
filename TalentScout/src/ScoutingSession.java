@@ -3,23 +3,16 @@ import java.util.UUID;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
-/*
-            if(evt.getClickCount() == 2){
-            int row = upcomingTable.getSelectedRow();
-            // Important to use getModel() as we have to access the model in order 
-            // to get the value at the 'hidden' column. 
-            Object ssID = upcomingTable.getModel().getValueAt(row, 3);
-            int sessionID = (int) ssID;
-            // JDialog opens with the scouting session which ID match sessionID
-            viewSession(sessionID);
-        }*/
-
-
-
 /**
- * The ScoutingSession class holds an ArrayList of the class Player that are added to a ScoutingSession. 
- * Further it holds information about a specific ScoutingSession's location and date.
+ * The ScoutingSession class holds information about the Player Objects associated
+ * with a particular ScoutingSession Object, the time and palce of the Scouting Session,
+ * as well as a unique ID for the ScoutingSession Object.
+ * 
+ * The Player Objects associated with the ScoutingSession Object are referenced by the
+ * Player Objects' IDs which are hold by an ArrayList.
+ * 
+ * Furthermore, it holds a serialVersionUID which allows for future changes in the class
+ * that can be serialized. This subject is further explained in the development report.
  * 
  * @author Frederik Frode Nygart
  * @author Mikkel Mørch
@@ -31,7 +24,10 @@ import java.util.ArrayList;
 
 public class ScoutingSession implements Serializable, Comparable<ScoutingSession> {
 	
-	/** A list of the class Player added to a ScoutingSession*/
+        /** This class' serialVersionUID */ 
+        static final long serialVersionUID = 592517302213845997L;
+        
+	/** A list of IDs representing Player Objects added to a ScoutingSession*/
 	private ArrayList<UUID> players;
 	
 	/** A ScoutingSession's location*/
@@ -97,9 +93,7 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 	/**
 	 * Gets a ScoutingSession's ID
 	 * @return the ScoutingSession's ID
-	 * @see #setSessionID(String)
 	 */
-	
 	public UUID getSessionID(){
 		return sessionID;
 	}

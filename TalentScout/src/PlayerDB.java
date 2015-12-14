@@ -21,9 +21,8 @@ public class PlayerDB {
 	}
 	
     /**
-     * Saves all current Player Objects in the ArrayList<Player> to the playerdb file.
+     * Saves all current Player Objects in the arraylist to the playerdb file.
      * In case the file does not exist, it is created automatically and the objects are written to it.
-     * @param playerList
      */
     public void savePlayerDB(){
     	try {
@@ -46,7 +45,6 @@ public class PlayerDB {
     
     /**
      * Loads a file which contains all player objects
-     * @return
      */
     @SuppressWarnings("unchecked")
 	public void loadPlayerDB(){

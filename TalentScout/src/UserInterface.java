@@ -2,6 +2,7 @@
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectStreamClass;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -11,13 +12,16 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.UUID;
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-/**
+/** The UserInterface class is responsible for the graphical user interface part 
+ * of the implementation. 
+ * 
  * @author Frederik Frode Nygart
  * @author Mikkel Mørch
  * @author Jacob Krag Hansen
@@ -29,6 +33,7 @@ public class UserInterface extends javax.swing.JFrame {
     static final Agenda AGENDA = new Agenda();
     static final PlayerDB PDB = new PlayerDB();
     static final DateManager DATEMANAGER = new DateManager();
+    static final Search SEARCH = new Search();
     JDialog sessionFrame = new JDialog();
     private UUID currentPlayerID;
     private UUID currentSessionID;
@@ -44,7 +49,8 @@ public class UserInterface extends javax.swing.JFrame {
         playerListModel = (DefaultTableModel) plrTable.getModel();
         agendaModel = (DefaultTableModel) upcomingTable.getModel();
         sessionModel = (DefaultTableModel) sessionNotesTable.getModel();
-        
+        ObjectStreamClass osc = ObjectStreamClass.lookup(Note.class);
+        System.out.println(osc.getSerialVersionUID());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -137,6 +143,8 @@ public class UserInterface extends javax.swing.JFrame {
         sessionNotesTable = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
         jXLabel4 = new org.jdesktop.swingx.JXLabel();
+        jLabel39 = new javax.swing.JLabel();
+        playerAvrScoreLabel = new javax.swing.JLabel();
         notePanel = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
@@ -843,6 +851,10 @@ public class UserInterface extends javax.swing.JFrame {
         jXLabel4.setText("Player Profile");
         jXLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
 
+        jLabel39.setText("Average score:");
+
+        playerAvrScoreLabel.setText("jLabel40");
+
         javax.swing.GroupLayout playerPanelLayout = new javax.swing.GroupLayout(playerPanel);
         playerPanel.setLayout(playerPanelLayout);
         playerPanelLayout.setHorizontalGroup(
@@ -866,7 +878,11 @@ public class UserInterface extends javax.swing.JFrame {
                                         .addComponent(jLabel12)
                                         .addGap(53, 53, 53)
                                         .addComponent(playerClubLabel))
-                                    .addComponent(playerAgeLabel)))))
+                                    .addComponent(playerAgeLabel)))
+                            .addGroup(playerPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel39)
+                                .addGap(31, 31, 31)
+                                .addComponent(playerAvrScoreLabel))))
                     .addComponent(jLabel16))
                 .addContainerGap(85, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerPanelLayout.createSequentialGroup()
@@ -892,7 +908,11 @@ public class UserInterface extends javax.swing.JFrame {
                 .addGroup(playerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(playerAgeLabel))
-                .addGap(54, 54, 54)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(playerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel39)
+                    .addComponent(playerAvrScoreLabel))
+                .addGap(26, 26, 26)
                 .addComponent(jLabel16)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1277,31 +1297,6 @@ public class UserInterface extends javax.swing.JFrame {
         return this.currentSessionID;
     }
     
-    /**
-     * FUNCTION HAS NO USAGES - TO BE DELETED
-     * @return 
-     */
-    public String[] getAllPlayerNames(){
-    	//new ArrayList of Player names 
-    	ArrayList<String> strNames = new ArrayList<String>();
-            // Get current ArrayList of all Player Objects
-            ArrayList<Player> list = PDB.getArrayListPlayer();
-                // Check if there are Player Objects in the array
-                if(!list.isEmpty()) {                   
-                    // iterate through all Player Objects
-                    for(int i = 0; i < list.size(); i++){                    	
-                    	String plrName = list.get(i).getName();
-                    	strNames.add(plrName);
-                    }
-                }
-
-                // new String array
-                String[] strArray = new String[list.size()];
-                strNames.toArray(strArray);
-                Arrays.sort(strArray);
-                return strArray;
-    }
-    
      /**
      * 
      * 
@@ -1344,7 +1339,7 @@ public class UserInterface extends javax.swing.JFrame {
     
     /**
      * Returns the current visible card in the CardLayout of the contentPanel
-     * @return JPanel
+     * @return JPanel the JPanel which is currently visible in the GUI
      */
     public JPanel getCurrentCard(){
         JPanel card = null;
@@ -1359,7 +1354,7 @@ public class UserInterface extends javax.swing.JFrame {
     
     /**
      * Checks if the already visible card is different from the card the user wants to be displayed
-     * @param comp The component we wish to compare to the current visible card.
+     * @param comp The component the user wishes to be displayed in the GUI
      * @return TRUE if they are different
      */
     public boolean checkVisibleCard(Component comp){
@@ -1367,7 +1362,7 @@ public class UserInterface extends javax.swing.JFrame {
     }
     
      /**
-     * displays List of Players in a table in the playerListPanel
+     * Displays a list of Players in a table in the playerListPanel.
      */
     public void viewPlayerList(){
         changeCard(contentPanel, playerListPanel);
@@ -1409,39 +1404,44 @@ public class UserInterface extends javax.swing.JFrame {
     }
     
      /**
-     * displays List of sessions in a table in the agendaPanel
+     * Displays a list of sessions in a table in the agendaPanel.
      */
     public void viewAgenda(){
-        changeCard(contentPanel, agendaPanel);
-        // Clear table from content 
-        agendaModel.setRowCount(0);
-        
-        try{
-            
-            for(int i = 0; i < AGENDA.getNumberOfSessions(); i++){
-                ScoutingSession ss = AGENDA.getSessionByIndex(i);
-                String date = DATEMANAGER.fromDateToString(ss.getDate());
-                UUID id = ss.getSessionID();
-                // Number of players in the array
-                int lengthOfPlayerStrArray = ss.getNumberOfPlayers();
-                // Merging the players into one String where each player is divided by a comma and whitespace
-                StringBuilder players = new StringBuilder();
-                for(int k = 0; k < lengthOfPlayerStrArray; k++){
-                    players.append(ss.getPlayer(k).getName());
-                    if(k < lengthOfPlayerStrArray-1){
-                    players.append(", ");
-                    }
-                }
-                // create array containing player attributes
-                Object[] data = {date, ss.getLocation(), players.toString(), id};
+        if(checkVisibleCard(agendaPanel)){
+            changeCard(contentPanel, agendaPanel);
+            // resets the text of the JLabels
+            sessionDateField.setText("");
+            sessionPlaceField.setText("");
+            // Clear table from content 
+            agendaModel.setRowCount(0);
 
-                // insert the array into the table 
-                agendaModel.addRow(data);
+            try{
+
+                for(int i = 0; i < AGENDA.getNumberOfSessions(); i++){
+                    ScoutingSession ss = AGENDA.getSessionByIndex(i);
+                    String date = DATEMANAGER.fromDateToString(ss.getDate());
+                    UUID id = ss.getSessionID();
+                    // Number of players in the array
+                    int lengthOfPlayerStrArray = ss.getNumberOfPlayers();
+                    // Merging the players into one String where each player is divided by a comma and whitespace
+                    StringBuilder players = new StringBuilder();
+                    for(int k = 0; k < lengthOfPlayerStrArray; k++){
+                        players.append(ss.getPlayer(k).getName());
+                        if(k < lengthOfPlayerStrArray-1){
+                        players.append(", ");
+                        }
+                    }
+                    // create array containing the data in a scouting session
+                    Object[] data = {date, ss.getLocation(), players.toString(), id};
+
+                    // insert the array into the table 
+                    agendaModel.addRow(data);
+                }
+            } catch (NullPointerException e){
+                e.printStackTrace();
             }
-        } catch (NullPointerException e){
-            e.printStackTrace();
         }
-    }
+   }
     
     /**
      * Opens a new window containing information about a specific Scouting Session
@@ -1461,14 +1461,6 @@ public class UserInterface extends javax.swing.JFrame {
         String id = ss.getSessionID().toString();
         sessionIDLabel.setText(id);
         
-        /*
-        //Retrieving players associated with the Scouting Session
-        //Populating a String array with the players
-        String[] players = new String[ss.getNumberOfPlayers()];
-        for(int i = 0; i < ss.getNumberOfPlayers(); i++){
-            players[i] = ss.getPlayer(i).getName();
-        }*/
-        
         // Retrieving players associated with the Scouting Session
         // Populating a ArrayList<Player> with the players
         ArrayList<Player> players = new ArrayList<Player>();
@@ -1476,12 +1468,9 @@ public class UserInterface extends javax.swing.JFrame {
             players.add(ss.getPlayer(i));
         }
         
-        // #MM IMPLEMENTATION of new custom ComboBox here
+        // Populating ComboBox with players in the scouting session
         addPlayersToComboBox(sessionPlayersBox, players);
-        
-        // Previous ComboBox
-        //Exporting players into the ComboBox
-        //sessionPlayersBox.setModel(new DefaultComboBoxModel<String>(players));
+
     }
     
     /**
@@ -1511,29 +1500,8 @@ public class UserInterface extends javax.swing.JFrame {
                 sessionModel.addRow(data);
             }
         } catch(NullPointerException e){
-            e.printStackTrace();
+
         }
-    }
-    
-    /**
-     * Displays a Player profile in the content area.
-     * @param plr The Player Object whose profile is to be displayed
-     */
-    public void viewPlayerProfile(Player plr){
-        changeCard(contentPanel, playerPanel);
-        
-        Player player = plr;
-        
-        String playerName = player.getName();
-        String age = Integer.toString(player.getAge());
-        String playerAge = age;
-        String playerClub = player.getClub();
-        String playerID = player.getID().toString();
-        
-        playerAgeLabel.setText(playerAge);
-        playerNameLabel.setText(playerName);
-        playerClubLabel.setText(playerClub);
-        InsertNoteIntoSessionTable(player);
     }
     
     /**
@@ -1549,10 +1517,12 @@ public class UserInterface extends javax.swing.JFrame {
         String age = Integer.toString(player.getAge());
         String playerAge = age;
         String playerClub = player.getClub();
+        String avgScore = Double.toString(player.getAverage(Player.Parameters.ALL));
         
         playerAgeLabel.setText(playerAge);
         playerNameLabel.setText(playerName);
         playerClubLabel.setText(playerClub);
+        playerAvrScoreLabel.setText(avgScore);
         InsertNoteIntoSessionTable(player);
     }
     
@@ -1638,16 +1608,10 @@ public class UserInterface extends javax.swing.JFrame {
      * @param evt 
      */
     private void viewAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAgendaActionPerformed
-        if(checkVisibleCard(agendaPanel)){
-            changeCard(contentPanel, agendaPanel);
-            // resets the text of the JLabels
-            sessionDateField.setText("");
-            sessionPlaceField.setText("");
             viewAgenda();
             
             // Loads the content of the Combobox
             addPlayersToComboBox(sessionPlayerBox, PDB.getArrayListPlayer());
-        }
     }//GEN-LAST:event_viewAgendaActionPerformed
     /** Display the Player list in the content area.
      * 
@@ -1687,16 +1651,24 @@ public class UserInterface extends javax.swing.JFrame {
     	AGENDA.saveAgenda();
     }//GEN-LAST:event_saveAllBtnActionPerformed
 
+    /**
+     * Searches for and displays players matching the given user input of name and club.
+     * @param evt 
+     */
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
-        
         try{
+            // Clear the table to avoid duplication 
             playerListModel.setRowCount(0);
-            //function.InsertSearchResultToTable(getSearchFieldNameText(), getSearchFieldClubText(), getSearchFieldAgeText(), model);
-           // function.InsertSearchResultToTableName(getSearchFieldNameText(), model);
+            // Get an ArrayList of players matching the search criteria
+            ArrayList<Player> list = SEARCH.performSearch(searchFieldName.getText(), searchFieldClub.getText());
+            
+            // Insert each player found into table
+            for(Player token : list){
+                Object[] data = {token.getName(), token.getAge(), token.getClub(), token.getID()};
+                playerListModel.addRow(data);
+            }
         } catch (Exception e){
-            e.getCause();
-            e.getClass();
-            e.printStackTrace();   
+ 
         }
     }//GEN-LAST:event_searchBtnActionPerformed
 
@@ -1717,7 +1689,7 @@ public class UserInterface extends javax.swing.JFrame {
         sessionPlayersTF.setText("");
         upcomingTable.packAll();
     }//GEN-LAST:event_sessionAddBtnActionPerformed
-/**
+    /**
  * Adds a selected player to a TextField, which shows the players whom the user want to add
  * to his session. 
  * @param evt 
@@ -1745,11 +1717,9 @@ public class UserInterface extends javax.swing.JFrame {
      * @param evt 
      */
     private void sessionViewProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionViewProfileBtnActionPerformed
-        /** Implementation of new ComboBox replacing getPlayerByName() */
-        
-        Item item = (Item) sessionPlayersBox.getSelectedItem();
-        Player player = (Player) item.getValue();
-        viewPlayerProfile(player);
+        // Get selected player from the ComboBox
+        Player player = getPlayerFromBox(sessionPlayersBox);
+        viewPlayerProfileByID(player.getID());
         int i = JOptionPane.showConfirmDialog(new JDialog(), "Do you wish to close the session?", "Close session?", JOptionPane.YES_NO_OPTION);
         if(i == 0){
             sessionFrame.dispose();
@@ -1762,12 +1732,8 @@ public class UserInterface extends javax.swing.JFrame {
      * @param evt 
      */
     private void sessionAddNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionAddNoteActionPerformed
-        //String playerName = sessionPlayersBox.getSelectedItem().toString();
-        //Player player = PDB.getPlayerByName(playerName);
-        
-        /** Implementation of new ComboBox replacing getPlayerByName() */
-        Item item = (Item) sessionPlayersBox.getSelectedItem();
-        Player player = (Player) item.getValue();
+        // Get selected player from the ComboBox
+        Player player = getPlayerFromBox(sessionPlayersBox);
         UUID ssID = this.currentSessionID;
         ScoutingSession ss = AGENDA.getSessionByID(ssID);
         
@@ -1785,7 +1751,7 @@ public class UserInterface extends javax.swing.JFrame {
                 attitudeText, attitudeScore,
                 techniqueText, techniqueScore,
                 gamesenseText, gamesenseScore);
-        viewPlayerProfile(player);
+        viewPlayerProfileByID(player.getID());
         sessionFrame.dispose();
     }//GEN-LAST:event_sessionAddNoteActionPerformed
 
@@ -1932,17 +1898,26 @@ public class UserInterface extends javax.swing.JFrame {
      */
     
     /**
-     * 
+     * Retrieves a Player Object from a JComboBox.
+     * @param box The ComboBox which holds zero or more Items
+     * @return The selected Player Object
+     */
+    public Player getPlayerFromBox(JComboBox box){
+        // Retrieves the Item which the Player object is wrapped in
+        Item item = (Item) box.getSelectedItem();
+        // Retrieves and returns the Player object from the Item wrapper
+        return (Player) item.getValue();
+    }
+    
+    /**
+     * Checks if there's been added any Players to the TextField and if the selected
+     * Player already has been added to the TextField.
      */
     public void addPlayersToTemporarySession(){
         // User input containing name of Player
         String inputPlayer = sessionPlayerBox.getSelectedItem().toString();
         
-        /** Retrieving the Player object selected in the ComboBox */
-        // 1. step is to retrieve the Item which the Player object is wrapped in
-        Item item = (Item) sessionPlayerBox.getSelectedItem();
-        // 2. step is to retrieve the Player object from the item wrapper
-        Player player = (Player) item.getValue();
+        Player player = getPlayerFromBox(sessionPlayerBox);
         
         // Getting the content of the JTextField of already added players
         String playersInTF = sessionPlayersTF.getText();
@@ -1988,14 +1963,6 @@ public class UserInterface extends javax.swing.JFrame {
         
         // Assign Scouting Session ID to instance variable 
         this.currentSessionID = ss.getSessionID();
-        /*
-        // Adding the seleced players to the Scouting session
-        String[] players = getPlayerFromTF();
-        for(String name : players){
-            Player player = PDB.getPlayerByName(name);
-            // adds the player to the session with the ID of the player
-            ss.addPlayer(player);
-        }*/
         
         // Adding the selected players saved in an instance variable of type ArrayList to the Scouting Session
         for(Player player : this.tempPlayersToSession){
@@ -2005,33 +1972,8 @@ public class UserInterface extends javax.swing.JFrame {
     }
     
     /**
-     * Changes card to playerPanel in which it inserts the found players attributes.
-     * @param table the table that was clicked
-     * @param row the row that was clicked
-     * @param col the column that was clicked
-     */
-    public void insertCellValueToPanel(JTable table, int row, int col){
-        // Gets the player name that was pressed
-        String playerName = table.getValueAt(row, col).toString();
-        // Finds the Player in the database
-        for(int i = 0; i < PDB.getArrayListPlayer().size(); i++){
-            if(playerName.matches(PDB.getPlayerByIndex(i).getName())){
-                //Change card to playerPanel
-                changeCard(contentPanel, playerPanel);
-                //Set player name
-                playerNameLabel.setText(PDB.getPlayerByIndex(i).getName());
-                //Set player age
-                String age = Integer.toString(PDB.getPlayerByIndex(i).getAge());
-                playerAgeLabel.setText(age);
-                //Set player club
-                playerClubLabel.setText(PDB.getPlayerByIndex(i).getClub());
-            }
-        }
-    }
-    
-    /**
-     * Returns true if a Player already has been added to the TextField.
-     * @return true or false
+     * Checks if a Player already has been added to a scouting session.
+     * @return TRUE if a Player already has been added to the TextField
      */
     public boolean PlayerAlreadyAdded(){
    // User input containing name of Player
@@ -2058,58 +2000,41 @@ public class UserInterface extends javax.swing.JFrame {
         return false;
     }
     
-    /**
-     * Retrieves the players from the TextField of players wished to be added to a session
-     * @return String array of Player names
-     */
-    public String[] getPlayerFromTF(){
-        String playersInTF = sessionPlayersTF.getText();
-        String[] plrArray = playersInTF.split("\n");
-        
-        return plrArray;
-    }
-    
-    /**
+     /**
      * Checks if there's any unsaved user input in the JTextFields under the agenda.
      * @return TRUE in case there is and asks the user if he wants to continue anyway.
      */
     public boolean warningUnsavedSessionDetailsToBeLost(){
-        if(!sessionDateField.getText().isEmpty()){
+        if(checkJTextFieldContent(sessionDateField) && checkJTextFieldContent(sessionPlaceField) && checkJTextFieldContent(sessionPlayersTF)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * Checks if there's any unsaved user input in a JTextComponent
+     * @param sessionField The JTextComponent which is being checked for content.
+     * @return 
+     */
+    public boolean checkJTextFieldContent(JTextComponent sessionField){
+        if(!sessionField.getText().isEmpty()){
             int i = JOptionPane.showConfirmDialog(new JDialog(), "Your data has not been saved and will be lost. Do you wish to continue?", "Data will be lost", JOptionPane.YES_NO_OPTION);
                 if(i == 0){
-                    this.setSessionDateField("");
+                    sessionField.setText("");
                     return true;
                 } else {
                     return false;
                 }
         }
-        if(!sessionPlaceField.getText().isEmpty()){
-            int i = JOptionPane.showConfirmDialog(new JDialog(), "Your data has not been saved and will be lost. Do you wish to continue?", "Data will be lost",JOptionPane.YES_NO_OPTION);
-                if(i == 0){
-                    this.setSessionPlaceField("");
-                    return true;
-                } else {
-                    return false;
-                }
-        }
-        if(!sessionPlayersTF.getText().isEmpty()){
-            int i = JOptionPane.showConfirmDialog(new JDialog(), "Your data has not been saved and will be lost. Do you wish to continue?", "Data will be lost",JOptionPane.YES_NO_OPTION);
-                if(i == 0){
-                    sessionPlayersTF.setText("");
-                    return true;
-                } else {
-                    return false;
-                }
-        }
-        // Is true by default as we want the page to load if there is no warning anyway.
+        // TRUE by default as the page is to load if there is no warning anyway.
         return true;
     }
     
     /**
-     * 
-     * @param box
-     * @param list 
-     * @param t 
+     * Populate Player Objects into a JComboBox.
+     * @param box The JComboBox that is to be populated.
+     * @param list The ArrayList containing the Player Objects which will be inserted into the JComboBox.
      */
     public void addPlayersToComboBox(JComboBox box, ArrayList<Player> list){
         // Clear box of items so we avoid dublets
@@ -2211,6 +2136,7 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2254,6 +2180,7 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JTextField noteTFTechnique;
     private javax.swing.JTextField noteTFTechnique1;
     private javax.swing.JLabel playerAgeLabel;
+    private javax.swing.JLabel playerAvrScoreLabel;
     private javax.swing.JLabel playerClubLabel;
     private javax.swing.JPanel playerListPanel;
     private javax.swing.JLabel playerNameLabel;
