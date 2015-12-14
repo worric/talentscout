@@ -42,7 +42,6 @@ public class TestScout2 {
 	private static void testRestoredDB() {
 		pdb = new PlayerDB();
 		a = new Agenda();
-		s = new Search(pdb);
 		
 		System.out.println("Test if equal...");
 		System.out.println(pdb.getPlayerByIndex(0).getName()+" (index 0 in pdb) and "+a.getSessionByIndex(0).getPlayer(0).getName()+" (index 0 in session 0) are equal? "+pdb.getPlayerByIndex(0).equals(a.getSessionByIndex(0).getPlayer(0)));
@@ -83,7 +82,6 @@ public class TestScout2 {
 	private static void initializeDB() {
 		pdb = new PlayerDB();
 		a = new Agenda();
-		s = new Search(pdb);
 		// new UserInterface(s) skal indsættes her.
 		dmgr = new DateManager();
 			
