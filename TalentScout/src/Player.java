@@ -18,10 +18,7 @@ import java.io.Serializable;
  * @author Bjørn Alsted Nielsen 
  */
 public class Player implements Serializable {
-	
-        /** This class' serialVersionUID */ 
-        static final long serialVersionUID = -1853146508452710587L;
-    
+
 	/** The Player's name */
 	private String name;
 	
@@ -59,6 +56,19 @@ public class Player implements Serializable {
 		notes = new ArrayList<Note>();
 	}
 	
+        /** Creates a Note which contains information about a Player's performance in a specific ScoutingSession.
+         * 
+         * @param session the ScoutingSession associated with the Note
+         * @param speedText a description of Player's performance in regard to his speed.
+         * @param speedScore a score of Player's performance in regard to his speed.
+         * @param attitudeText a description of Player's performance in regard to his attitude.
+         * @param attitudeScore a score of Player's performance in regard to his attitude.
+         * @param techniqueText a description of Player's performance in regard to his technique.
+         * @param techniqueScore a score of Player's performance in regard to his technique.
+         * @param gameSenseText a description of Player's performance in regard to his gamesense.
+         * @param gameSenseScore a score of Player's performance in regard to his gamesense.
+         * @return a Note object
+         */
 	public Note addNote(ScoutingSession session,
 			String speedText, int speedScore,
 			String attitudeText, int attitudeScore,
@@ -98,16 +108,6 @@ public class Player implements Serializable {
 	 */
 	public int getNumberOfNotes(){
 		return notes.size();
-	}
-	
-	public void displayNote(int index){
-		System.out.println(notes.get(index));
-	}
-	
-	public void displayNoteOverview(){
-		for(int i = 0; i < notes.size(); i++){
-			displayNote(i);
-		}
 	}
         
 	/**
@@ -170,22 +170,6 @@ public class Player implements Serializable {
 		}
 	}
 	
-	public double displayAverageScore(){
-		double totalScore = 0;
-		for(int i = 0; i < notes.size(); i++){
-			Note report = getNote(i);
-			int speed = report.getSpeedScore();
-			int attitude = report.getAttitudeScore();
-			int technique = report.getTechniqueScore();
-			int gameSense = report.getGameSenseScore();
-			
-			totalScore = totalScore + speed + attitude + technique + gameSense;
-		}
-		
-		System.out.println(totalScore);  
-		return totalScore/(notes.size()*4);
-	}
-
 	public String getName() {
 		return name;
 	}

@@ -6,6 +6,18 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/** The PlayerDB class holds an ArrayList of Player Objects.
+ *  The class is responsible for writing and reading all Player objects to a file as well as
+ *  managing those player objects, e.g. registering and deleting player objects. 
+ * 
+ * @author Frederik Frode Nygart
+ * @author Mikkel Mørch
+ * @author Jacob Krag Hansen
+ * @author Robin Damsgaard Larsen
+ * @author Lotte Selnø
+ * @author Bjørn Alsted Nielsen 
+ */
+
 public class PlayerDB {
 	
 	private ArrayList<Player> playerDB;

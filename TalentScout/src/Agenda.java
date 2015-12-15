@@ -9,8 +9,9 @@ import java.util.Date;
 import java.util.UUID;
 
 /** The Agenda class holds an ArrayList of ScoutingSessions.
- * The class is responsible for planning ScoutingSessions or cancelling planned ScoutingSessions. 
- * It can also show an overview of all the planned ScoutingSessions.
+ * The class is responsible for writing and reading all ScoutingSession objects to a file 
+ * as well as planning ScoutingSessions or cancelling planned ScoutingSessions. It can also show 
+ * an overview of all the planned ScoutingSessions.
  *
  * @author Frederik Frode Nygart
  * @author Mikkel Mørch

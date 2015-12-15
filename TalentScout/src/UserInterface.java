@@ -37,7 +37,7 @@ public class UserInterface extends javax.swing.JFrame {
     JDialog sessionFrame = new JDialog();
     private UUID currentPlayerID;
     private UUID currentSessionID;
-    ArrayList<Player> tempPlayersToSession;
+    private ArrayList<Player> tempPlayersToSession = new ArrayList<Player>();
     /**
      * Creates new form UserInterface
      */
@@ -49,8 +49,6 @@ public class UserInterface extends javax.swing.JFrame {
         playerListModel = (DefaultTableModel) plrTable.getModel();
         agendaModel = (DefaultTableModel) upcomingTable.getModel();
         sessionModel = (DefaultTableModel) sessionNotesTable.getModel();
-        ObjectStreamClass osc = ObjectStreamClass.lookup(Note.class);
-        System.out.println(osc.getSerialVersionUID());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1931,6 +1929,9 @@ public class UserInterface extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(new JDialog(), "Please select a player from the list.");
             } else {
             sessionPlayersTF.append(inputPlayer + "\n");
+            tempPlayersToSession.add(player);
+            // #MM
+            System.out.print(tempPlayersToSession.get(0).getName());
             }
         // If the JTextField isn't empty
         } else {

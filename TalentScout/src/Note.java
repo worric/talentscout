@@ -19,9 +19,6 @@ import java.util.UUID;
 
 public class Note implements Serializable {
 
-        /** This class' serialVersionUID */ 
-        static final long serialVersionUID = 6094974046434229287L;
-    
 	private UUID sessionID;
 	private UUID playerID;
 	private String speedText;
