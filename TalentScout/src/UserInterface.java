@@ -444,7 +444,7 @@ public class UserInterface extends javax.swing.JFrame {
                 .addComponent(saveAllBtn)
                 .addGap(114, 114, 114)
                 .addComponent(jButton4)
-                .addContainerGap(313, Short.MAX_VALUE))
+                .addContainerGap(348, Short.MAX_VALUE))
         );
 
         getContentPane().add(menuPanel, java.awt.BorderLayout.LINE_START);
@@ -505,10 +505,6 @@ public class UserInterface extends javax.swing.JFrame {
         playerListPanel.setLayout(playerListPanelLayout);
         playerListPanelLayout.setHorizontalGroup(
             playerListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerListPanelLayout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
             .addGroup(playerListPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(playerListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -525,14 +521,18 @@ public class UserInterface extends javax.swing.JFrame {
                                 .addComponent(searchFieldName, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                                 .addComponent(searchFieldClub)
                                 .addComponent(searchFieldAge)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(429, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerListPanelLayout.createSequentialGroup()
+                .addContainerGap(167, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(140, 140, 140))
         );
         playerListPanelLayout.setVerticalGroup(
             playerListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerListPanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jXLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addGroup(playerListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
@@ -546,14 +546,12 @@ public class UserInterface extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(27, 27, 27)
                 .addComponent(searchBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addContainerGap())
         );
 
         contentPanel.add(playerListPanel, "card2");
-
-        registerPanel.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setText("Name:");
 
@@ -590,7 +588,7 @@ public class UserInterface extends javax.swing.JFrame {
                             .addComponent(clubField)
                             .addComponent(ageField)
                             .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(375, Short.MAX_VALUE))
         );
         registerPanelLayout.setVerticalGroup(
             registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -611,12 +609,10 @@ public class UserInterface extends javax.swing.JFrame {
                     .addComponent(clubField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(registerBtn)
-                .addContainerGap(339, Short.MAX_VALUE))
+                .addContainerGap(374, Short.MAX_VALUE))
         );
 
         contentPanel.add(registerPanel, "card4");
-
-        agendaPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         playerPanelBottomBlank.setPreferredSize(new java.awt.Dimension(418, 418));
 
@@ -657,18 +653,16 @@ public class UserInterface extends javax.swing.JFrame {
         playerPanelBottomBlankLayout.setHorizontalGroup(
             playerPanelBottomBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerPanelBottomBlankLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(42, 42, 42)
                 .addGroup(playerPanelBottomBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerPanelBottomBlankLayout.createSequentialGroup()
                         .addComponent(upcomingLabel)
                         .addGap(380, 380, 380))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerPanelBottomBlankLayout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addGroup(playerPanelBottomBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jButton2))
                         .addGap(41, 41, 41))))
-            .addGroup(playerPanelBottomBlankLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         playerPanelBottomBlankLayout.setVerticalGroup(
             playerPanelBottomBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -686,7 +680,7 @@ public class UserInterface extends javax.swing.JFrame {
         playerPanelBottom.setLayout(playerPanelBottomLayout);
         playerPanelBottomLayout.setHorizontalGroup(
             playerPanelBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(playerPanelBottomBlank, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
+            .addComponent(playerPanelBottomBlank, javax.swing.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE)
         );
         playerPanelBottomLayout.setVerticalGroup(
             playerPanelBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -740,36 +734,31 @@ public class UserInterface extends javax.swing.JFrame {
             agendaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(playerPanelBottom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(agendaPanelLayout.createSequentialGroup()
-                .addGroup(agendaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, agendaPanelLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(agendaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(agendaPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(32, 32, 32)
-                                .addComponent(sessionPlayerBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(sessionAddPlayerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, agendaPanelLayout.createSequentialGroup()
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(113, 113, 113))
-                            .addComponent(sessionAddBtn, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(agendaPanelLayout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addGroup(agendaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(32, 32, 32)
-                        .addGroup(agendaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(sessionDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sessionPlaceField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, agendaPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(197, 197, 197))
+                .addGap(320, 320, 320))
+            .addGroup(agendaPanelLayout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addGroup(agendaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(32, 32, 32)
+                .addGroup(agendaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(agendaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(agendaPanelLayout.createSequentialGroup()
+                            .addComponent(jLabel9)
+                            .addGap(32, 32, 32)
+                            .addComponent(sessionPlayerBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(sessionAddPlayerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, agendaPanelLayout.createSequentialGroup()
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(113, 113, 113))
+                        .addComponent(sessionAddBtn, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(sessionDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sessionPlaceField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         agendaPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {sessionDateField, sessionPlaceField, sessionPlayerBox});
@@ -777,9 +766,9 @@ public class UserInterface extends javax.swing.JFrame {
         agendaPanelLayout.setVerticalGroup(
             agendaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(agendaPanelLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(30, 30, 30)
                 .addComponent(jXLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addGroup(agendaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(sessionDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -796,7 +785,7 @@ public class UserInterface extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(sessionAddBtn)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addComponent(playerPanelBottom, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -857,13 +846,17 @@ public class UserInterface extends javax.swing.JFrame {
         playerPanel.setLayout(playerPanelLayout);
         playerPanelLayout.setHorizontalGroup(
             playerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerPanelLayout.createSequentialGroup()
+                .addContainerGap(388, Short.MAX_VALUE)
+                .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(176, 176, 176))
             .addGroup(playerPanelLayout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addGroup(playerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(playerPanelLayout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addGroup(playerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(playerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(playerPanelLayout.createSequentialGroup()
                                 .addGroup(playerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel11)
@@ -872,7 +865,7 @@ public class UserInterface extends javax.swing.JFrame {
                                 .addGroup(playerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(playerPanelLayout.createSequentialGroup()
                                         .addComponent(playerNameLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(31, 31, 31)
                                         .addComponent(jLabel12)
                                         .addGap(53, 53, 53)
                                         .addComponent(playerClubLabel))
@@ -882,11 +875,7 @@ public class UserInterface extends javax.swing.JFrame {
                                 .addGap(31, 31, 31)
                                 .addComponent(playerAvrScoreLabel))))
                     .addComponent(jLabel16))
-                .addContainerGap(85, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jXLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(176, 176, 176))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         playerPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel10, jLabel11, jLabel12});
@@ -914,7 +903,7 @@ public class UserInterface extends javax.swing.JFrame {
                 .addComponent(jLabel16)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         playerPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel10, jLabel11, jLabel12});
@@ -1014,7 +1003,7 @@ public class UserInterface extends javax.swing.JFrame {
                                 .addComponent(jLabel30)
                                 .addGap(18, 18, 18)
                                 .addComponent(noteLocationLabel)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
                         .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1)
                             .addGroup(notePanelLayout.createSequentialGroup()
@@ -1043,7 +1032,7 @@ public class UserInterface extends javax.swing.JFrame {
                     .addComponent(jLabel30)
                     .addComponent(noteDateLabel)
                     .addComponent(noteLocationLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addGroup(notePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
                     .addComponent(jLabel28))
@@ -1191,7 +1180,7 @@ public class UserInterface extends javax.swing.JFrame {
                                         .addComponent(jLabel38)
                                         .addGap(18, 18, 18)
                                         .addComponent(noteLocationLabelEdit)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
                                 .addComponent(jButton3)))
                         .addGap(17, 17, 17))))
         );
@@ -1209,7 +1198,7 @@ public class UserInterface extends javax.swing.JFrame {
                     .addComponent(jLabel38)
                     .addComponent(noteDateLabelEdit)
                     .addComponent(noteLocationLabelEdit))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addGroup(notePanelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel32)
                     .addComponent(jLabel36))
@@ -1360,7 +1349,8 @@ public class UserInterface extends javax.swing.JFrame {
     }
     
      /**
-     * Displays a list of Players in a table in the playerListPanel.
+     * Displays the player list page, which contains a list of all players
+     * as well as a search functionality to search for specific players.
      */
     public void viewPlayerList(){
         changeCard(contentPanel, playerListPanel);
@@ -1368,15 +1358,14 @@ public class UserInterface extends javax.swing.JFrame {
     }
     
     /**
-     * Populates the list of players in the database with players.
+     * Populates the list of players in a table with players.
      */
     public void populatePlayerList(){
         // Firstly, clear table from content to avoid inserting all players twice
         playerListModel.setRowCount(0);
-        
         try{
             // Get current ArrayList of all Player Objects
-            ArrayList<Player> list = PDB.getArrayListPlayer();
+            ArrayList<Player> list = PDB.getSortedList();
                 // Check if there are Player Objects in the array
                 if(!list.isEmpty()) {                   
                     // iterate through all Player Objects
@@ -1384,8 +1373,6 @@ public class UserInterface extends javax.swing.JFrame {
                         //open each player file
                         //Player plrRestore = function.open(list[i].getName());
                     	Player plrRestore = list.get(i);
-                    	// print the list to the console as a test
-                    	System.out.println(list.get(i).getName());
                         //convert the ints to Strings
                         String age = Integer.toString(plrRestore.getAge());
 
@@ -1397,26 +1384,34 @@ public class UserInterface extends javax.swing.JFrame {
                     }
                 }
         } catch (Exception e){
-            e.printStackTrace();
+            
         }
     }
     
      /**
-     * Displays a list of sessions in a table in the agendaPanel.
+     * Displays the Agenda page, which contains a list of all Scouting Session as well
+     * as the functionality to plan Scouting Sessions.
      */
     public void viewAgenda(){
         if(checkVisibleCard(agendaPanel)){
             changeCard(contentPanel, agendaPanel);
-            // resets the text of the JLabels
+            // resets the text of the JTextFields
             sessionDateField.setText("");
             sessionPlaceField.setText("");
+            populateAgendaTable();
+        }
+   }
+    
+    /**
+     * Populates the table of scouting sessions in a table in the agenda agendaPanel.
+     */
+    public void populateAgendaTable(){
             // Clear table from content 
             agendaModel.setRowCount(0);
-
             try{
-
                 for(int i = 0; i < AGENDA.getNumberOfSessions(); i++){
-                    ScoutingSession ss = AGENDA.getSessionByIndex(i);
+                    ArrayList<ScoutingSession> list = AGENDA.getSortedList();
+                    ScoutingSession ss = list.get(i);
                     String date = DATEMANAGER.fromDateToString(ss.getDate());
                     UUID id = ss.getSessionID();
                     // Number of players in the array
@@ -1431,15 +1426,13 @@ public class UserInterface extends javax.swing.JFrame {
                     }
                     // create array containing the data in a scouting session
                     Object[] data = {date, ss.getLocation(), players.toString(), id};
-
                     // insert the array into the table 
                     agendaModel.addRow(data);
                 }
             } catch (NullPointerException e){
                 e.printStackTrace();
             }
-        }
-   }
+    }
     
     /**
      * Opens a new window containing information about a specific Scouting Session
@@ -1679,8 +1672,7 @@ public class UserInterface extends javax.swing.JFrame {
      */
     private void sessionAddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionAddBtnActionPerformed
         addSession();
-        
-        viewAgenda();
+        populateAgendaTable();
         // Resets JLabels of the content area the user is departing from
         sessionDateField.setText("");
         sessionPlaceField.setText("");
@@ -1912,33 +1904,30 @@ public class UserInterface extends javax.swing.JFrame {
      * Player already has been added to the TextField.
      */
     public void addPlayersToTemporarySession(){
-        // User input containing name of Player
-        String inputPlayer = sessionPlayerBox.getSelectedItem().toString();
-        
+        // retrieving the selected player from the ComboBox
         Player player = getPlayerFromBox(sessionPlayerBox);
-        
+        // User input containing name of Player
+        String plrName = player.getName();
         // Getting the content of the JTextField of already added players
         String playersInTF = sessionPlayersTF.getText();
 
         // Checking if the TextField is empty.
         if(playersInTF.isEmpty()){
-
             // Checking if a player is selected
-            if(inputPlayer.isEmpty()) {
+            if(plrName.isEmpty()) {
                 // Display a message to the user to guide him.
                 JOptionPane.showMessageDialog(new JDialog(), "Please select a player from the list.");
             } else {
-            sessionPlayersTF.append(inputPlayer + "\n");
+            // else, add the player to the list of players to be added to the Scouting Session
+            sessionPlayersTF.append(plrName + "\n");
             tempPlayersToSession.add(player);
-            // #MM
-            System.out.print(tempPlayersToSession.get(0).getName());
             }
         // If the JTextField isn't empty
         } else {
             // Check if a player already has been added to the TextField
             if(!PlayerAlreadyAdded()){
                 // If the player isn't added already, we append him to the TextField.
-                sessionPlayersTF.append(inputPlayer + "\n");
+                sessionPlayersTF.append(plrName + "\n");
                 // And add him to the instance variable ArrayList
                 tempPlayersToSession.add(player);
             } else {
@@ -1970,6 +1959,8 @@ public class UserInterface extends javax.swing.JFrame {
             // adds the player to the session with the ID of the player
             ss.addPlayer(player);
         }
+        // Reset temporary scouting session for players
+        this.tempPlayersToSession.clear();
     }
     
     /**

@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.UUID;
 
 /** The PlayerDB class holds an ArrayList of Player Objects.
@@ -146,6 +147,20 @@ public class PlayerDB {
 		return playerDB.size();
 	}
 	
+        /**
+	 * Returns an ArrayList of players, sorted by club, to be presented in the GUI
+	 */
+	public ArrayList<Player> getSortedList(){
+		// Clone the current list of scouting sessions
+		ArrayList<Player> list = (ArrayList<Player>)playerDB.clone();
+		
+		// Perform the actual sorting of the list, based on date
+		Collections.sort(list);
+		
+		// Return the sorted list
+		return list;
+	}
+        
     /**
      * Checks if the directory for player files is created.
      * If it isn't, we create it using mkdir(). 

@@ -17,7 +17,7 @@ import java.io.Serializable;
  * @author Lotte Selnø
  * @author Bjørn Alsted Nielsen 
  */
-public class Player implements Serializable {
+public class Player implements Serializable, Comparable<Player> {
 
 	/** The Player's name */
 	private String name;
@@ -170,6 +170,11 @@ public class Player implements Serializable {
 		}
 	}
 	
+        @Override
+        public int compareTo(Player p) {
+            return p.getClub().compareTo(this.getClub());
+        }
+        
 	public String getName() {
 		return name;
 	}
