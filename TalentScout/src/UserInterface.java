@@ -1619,8 +1619,10 @@ public class UserInterface extends javax.swing.JFrame {
     private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
         // Retrieves user input to register a new Player
         String name = nameField.getText();
+        // Checks if name is empty
         if(!name.equals("")){
             String strAge = ageField.getText();
+            // Checks if age is an int consisting of one or two digits
             if(strAge.matches("\\d\\d") || strAge.matches("\\d")){
             
             int age = Integer.parseInt(strAge);
@@ -1970,11 +1972,11 @@ public class UserInterface extends javax.swing.JFrame {
                         // adds the player to the session with the ID of the player
                         ss.addPlayer(player);
                     }
+                } else {
                     // Reset temporary scouting session for players
                     this.tempPlayersToSession.clear();
-                } else {
+                    // Message for user
                     JOptionPane.showMessageDialog(new JDialog(), "Please type in a date following the pattern: dd-MM-yyyy.");
-                    sessionDateField.setText("");
                 }
         }
     
