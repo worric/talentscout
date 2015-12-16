@@ -1651,12 +1651,9 @@ public class UserInterface extends javax.swing.JFrame {
      * @param evt 
      */
     private void sessionAddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionAddBtnActionPerformed
-        try {
         addSession();
         populateAgendaTable();
-        } catch (Exception e){
-            
-        }
+
         // Resets JLabels of the content area the user is departing from
         sessionDateField.setText("");
         sessionPlaceField.setText("");
@@ -1921,31 +1918,34 @@ public class UserInterface extends javax.swing.JFrame {
      * Adds a session to the Agenda
      */
     public void addSession(){
-            try {
                 // User given date, which is a String
                 String strDate = getSessionDateField();
+                
                 // Convertion of the String to Date
                 Date date = DATEMANAGER.fromStringToDate(strDate);
-                // User given location
-                String place = getSessionPlaceField();
+                // Checks if the date has been successfully converted from String to Date type
+                if(date != null){
 
-                // Scouting session added to the agenda ArrayList
-                ScoutingSession ss = AGENDA.planSession(place, date);
+                    // User given location
+                    String place = getSessionPlaceField();
 
-                // Assign Scouting Session ID to instance variable 
-                this.currentSessionID = ss.getSessionID();
+                    // Scouting session added to the agenda ArrayList
+                    ScoutingSession ss = AGENDA.planSession(place, date);
 
-                // Adding the selected players saved in an instance variable of type ArrayList to the Scouting Session
-                for(Player player : this.tempPlayersToSession){
-                    // adds the player to the session with the ID of the player
-                    ss.addPlayer(player);
+                    // Assign Scouting Session ID to instance variable 
+                    this.currentSessionID = ss.getSessionID();
+
+                    // Adding the selected players saved in an instance variable of type ArrayList to the Scouting Session
+                    for(Player player : this.tempPlayersToSession){
+                        // adds the player to the session with the ID of the player
+                        ss.addPlayer(player);
+                    }
+                    // Reset temporary scouting session for players
+                    this.tempPlayersToSession.clear();
+                } else {
+                    JOptionPane.showMessageDialog(new JDialog(), "Please type in a date following the pattern: dd-MM-yyyy.");
+                    sessionDateField.setText("");
                 }
-                // Reset temporary scouting session for players
-                this.tempPlayersToSession.clear();
-            } catch (Exception e){
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(new JDialog(), "Please type in a date following the pattern: dd-MM-yyyy.");
-            }
         }
     
     /**

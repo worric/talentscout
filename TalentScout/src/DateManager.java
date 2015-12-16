@@ -38,7 +38,6 @@ public class DateManager {
 		try {
 			return df.parse(date);
 		} catch (ParseException p) {
-			p.printStackTrace();
 			return null;
 		}
 	}
