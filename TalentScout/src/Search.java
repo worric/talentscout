@@ -29,14 +29,6 @@ public class Search {
 		for(int i = 0; i < UserInterface.PDB.getSize(); i++){
 			// Local player variable initialized
 			Player p = UserInterface.PDB.getPlayerByIndex(i);
-			
-			// Check if the player matches the search criteria
-			/*if (p.getName().toLowerCase().matches(".*" + searchStringName.toLowerCase() + ".*") &&
-					p.getClub().toLowerCase().matches(".*" + searchStringClub.toLowerCase() + ".*")){
-				
-				// Add it to a a local list if it does.
-				searchedList.add(p);
-			}*/
 
 			// Check if the player matches the search criteria and add it to
 			// the local list of results if it does. Convert all to lower case to
