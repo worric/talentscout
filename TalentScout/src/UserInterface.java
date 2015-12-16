@@ -1905,7 +1905,11 @@ public class UserInterface extends javax.swing.JFrame {
         // Retrieves the Item which the Player object is wrapped in
         Item item = (Item) box.getSelectedItem();
         // Retrieves and returns the Player object from the Item wrapper
-        return (Player) item.getValue();
+        Player player = (Player) item.getValue();
+        if(!player.getName().equals("select")){
+            return (Player) item.getValue();
+        }
+        return null;
     }
     
     /**
@@ -1915,34 +1919,40 @@ public class UserInterface extends javax.swing.JFrame {
     public void addPlayersToTemporarySession(){
         // retrieving the selected player from the ComboBox
         Player player = getPlayerFromBox(sessionPlayerBox);
-        // User input containing name of Player
-        String plrName = player.getName();
-        // Getting the content of the JTextField of already added players
-        String playersInTF = sessionPlayersTF.getText();
+        
+        if(player != null){
+            // User input containing name of Player
+            String plrName = player.getName();
+            // Getting the content of the JTextField of already added players
+            String playersInTF = sessionPlayersTF.getText();
 
-        // Checking if the TextField is empty.
-        if(playersInTF.isEmpty()){
-            // Checking if a player is selected
-            if(plrName.isEmpty()) {
-                // Display a message to the user to guide him.
-                JOptionPane.showMessageDialog(new JDialog(), "Please select a player from the list.");
-            } else {
-            // else, add the player to the list of players to be added to the Scouting Session
-            sessionPlayersTF.append(plrName + "\n");
-            tempPlayersToSession.add(player);
-            }
-        // If the JTextField isn't empty
+                // Checking if the TextField is empty.
+                if(playersInTF.isEmpty()){
+                    // Checking if a player is selected
+                    if(plrName.isEmpty()) {
+                        // Display a message to the user to guide him.
+                        JOptionPane.showMessageDialog(new JDialog(), "Please select a player from the list.");
+                    } else {
+                    // else, add the player to the list of players to be added to the Scouting Session
+                    sessionPlayersTF.append(plrName + "\n");
+                    tempPlayersToSession.add(player);
+                        }
+                // If the JTextField isn't empty
+                } else {
+                    // Check if a player already has been added to the TextField
+                    if(!PlayerAlreadyAdded()){
+                        // If the player isn't added already, we append him to the TextField.
+                        sessionPlayersTF.append(plrName + "\n");
+                        // And add him to the instance variable ArrayList
+                        tempPlayersToSession.add(player);
+                    } else {
+                        // If the player already has been added, we display a message informing the user.
+                        JOptionPane.showMessageDialog(new JDialog(), "The player has already been added to the session.");
+                    }
+                }
         } else {
-            // Check if a player already has been added to the TextField
-            if(!PlayerAlreadyAdded()){
-                // If the player isn't added already, we append him to the TextField.
-                sessionPlayersTF.append(plrName + "\n");
-                // And add him to the instance variable ArrayList
-                tempPlayersToSession.add(player);
-            } else {
-                // If the player already has been added, we display a message informing the user.
-                JOptionPane.showMessageDialog(new JDialog(), "The player has already been added to the session.");
-            }
+            // If player is null
+            JOptionPane.showMessageDialog(new JDialog(), "The selected object is not a Player. Please select a Player.");
         }
     }
     
@@ -2036,31 +2046,39 @@ public class UserInterface extends javax.swing.JFrame {
     }
     
     /**
-     * Populate Player Objects into a JComboBox.
+     * Populate Player Objects into a JComboBox. 
      * @param box The JComboBox that is to be populated.
      * @param list The ArrayList containing the Player Objects which will be inserted into the JComboBox.
      */
     public void addPlayersToComboBox(JComboBox box, ArrayList<Player> list){
-
+        System.out.println("The number of players in the list is " + list.size());
         // Maybe implement function here that sorts the ArrayList
-         
-        // Loops through all Player objects in the given list of Players that is to be added to the ComboBox
-        for(int i = 0; i < list.size(); i++){
-            // Player we want to add to ComboBox
-            Player plrToBeAdded = list.get(i);
-            // Loops through all Player objects currently in the given ComboBox
-            for(int j = 0; j < box.getItemCount(); j++){
-            // Retrieving the Player
-            Item item = (Item) box.getItemAt(j);
-            Player plrInBox = (Player) item.getValue();
-                // Checking if the Player in the Box is different from the Player we want to add
-                if(!plrToBeAdded.equals(plrInBox)){
-                    //If is not in the Box, we add him to the Box.
-                    box.addItem(plrToBeAdded);
-                }
+ 
+        // The first Item in the ComboBox
+        Player noPlayer = new Player("select", 0, "", UUID.randomUUID());
+        box.addItem(new Item<Player>(noPlayer, "- select player-"));
+        
+        // The amount of players in the combobox
+        int countOfPlayers = box.getItemCount();
+        // Checks if there's currently any players in the box
+        if(countOfPlayers > 0){
+            // If so, we clear the table of all players - except for the first Item - to avoid duplicates
+            for(int i = countOfPlayers; i > 1; i--){
+                box.removeItemAt(i-1);
+            }
+            // Then we repopulate the ComboBox with all players in the database
+            for(int j = 0; j < list.size(); j++){
+                Player plr = list.get(j);
+                box.addItem(new Item<Player>(plr, plr.getName()));
+                System.out.println("A player has been added and the count is now "+box.getItemCount());
+            }
+        } else {
+            // If there's no players in the box, we populate it with all players in the database
+            for(int j = 0; j < list.size(); j++){
+                Player plr = list.get(j);
+                box.addItem(new Item<Player>(plr, plr.getName()));
             }
         }
-        
     }
     
     /**
