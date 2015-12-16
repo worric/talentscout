@@ -1942,7 +1942,8 @@ public class UserInterface extends javax.swing.JFrame {
                 }
                 // Reset temporary scouting session for players
                 this.tempPlayersToSession.clear();
-            } catch (NullPointerException e){
+            } catch (Exception e){
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(new JDialog(), "Please type in a date following the pattern: dd-MM-yyyy.");
             }
         }
