@@ -1711,8 +1711,16 @@ public class UserInterface extends javax.swing.JFrame {
      * which allows the user to create a note on a player.
      */
     private void sessionCreateNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionCreateNoteBtnActionPerformed
-        viewCreateNoteInSession();
+        // retrieving the selected player from the ComboBox
+        Player player = getPlayerFromBox(sessionPlayersBox);
         
+        // Checks if the selected player is not null
+        if(player != null){
+        viewCreateNoteInSession();
+        } else {
+            // If player is null
+            JOptionPane.showMessageDialog(new JDialog(), "The selected object is not a Player. Please select a Player.");
+        }
     }//GEN-LAST:event_sessionCreateNoteBtnActionPerformed
 
     /**
@@ -1720,12 +1728,18 @@ public class UserInterface extends javax.swing.JFrame {
      * @param evt 
      */
     private void sessionViewProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionViewProfileBtnActionPerformed
-        // Get selected player from the ComboBox
+        // retrieving the selected player from the ComboBox
         Player player = getPlayerFromBox(sessionPlayersBox);
-        viewPlayerProfileByID(player.getID());
-        int i = JOptionPane.showConfirmDialog(new JDialog(), "Do you wish to close the session?", "Close session?", JOptionPane.YES_NO_OPTION);
-        if(i == 0){
-            sessionFrame.dispose();
+        // Checks if the selected player is not null
+        if(player != null){
+            viewPlayerProfileByID(player.getID());
+            int i = JOptionPane.showConfirmDialog(new JDialog(), "Do you wish to close the session?", "Close session?", JOptionPane.YES_NO_OPTION);
+            if(i == 0){
+                sessionFrame.dispose();
+            }
+        } else {
+            // If player is null
+            JOptionPane.showMessageDialog(new JDialog(), "The selected object is not a Player. Please select a Player.");
         }
     }//GEN-LAST:event_sessionViewProfileBtnActionPerformed
 
@@ -2051,9 +2065,8 @@ public class UserInterface extends javax.swing.JFrame {
      * @param list The ArrayList containing the Player Objects which will be inserted into the JComboBox.
      */
     public void addPlayersToComboBox(JComboBox box, ArrayList<Player> list){
-        System.out.println("The number of players in the list is " + list.size());
         // Maybe implement function here that sorts the ArrayList
- 
+
         // The first Item in the ComboBox
         Player noPlayer = new Player("select", 0, "", UUID.randomUUID());
         box.addItem(new Item<Player>(noPlayer, "- select player-"));
