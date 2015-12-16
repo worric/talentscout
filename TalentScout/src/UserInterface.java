@@ -1952,7 +1952,6 @@ public class UserInterface extends javax.swing.JFrame {
     public void addSession(){
                 // User given date, which is a String
                 String strDate = getSessionDateField();
-                
                 // Convertion of the String to Date
                 Date date = DATEMANAGER.fromStringToDate(strDate);
                 // Checks if the date has been successfully converted from String to Date type
@@ -2014,11 +2013,7 @@ public class UserInterface extends javax.swing.JFrame {
      * @return TRUE in case there is and asks the user if he wants to continue anyway.
      */
     public boolean warningUnsavedSessionDetailsToBeLost(){
-        if(checkJTextFieldContent(sessionDateField) && checkJTextFieldContent(sessionPlaceField) && checkJTextFieldContent(sessionPlayersTF)){
-            return true;
-        } else {
-            return false;
-        }
+        return (checkJTextFieldContent(sessionDateField) && checkJTextFieldContent(sessionPlaceField) && checkJTextFieldContent(sessionPlayersTF));
     }
     
     /**
@@ -2047,13 +2042,12 @@ public class UserInterface extends javax.swing.JFrame {
      */
     public void addPlayersToComboBox(JComboBox box, ArrayList<Player> list){
         // Clear box of items so we avoid dublets
-        box.removeAll();
+        box.removeAllItems();
         // Maybe implement function here that sorts the ArrayList
         for(Player token : list){
             box.addItem(new Item<Player>(token, token.getName()));
         }
     }
-    
     
     /**
      * 
