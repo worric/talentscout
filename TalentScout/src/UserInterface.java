@@ -1957,7 +1957,6 @@ public class UserInterface extends javax.swing.JFrame {
                 Date date = DATEMANAGER.fromStringToDate(strDate);
                 // Checks if the date has been successfully converted from String to Date type
                 if(date != null){
-
                     // User given location
                     String place = getSessionPlaceField();
 
@@ -1972,6 +1971,7 @@ public class UserInterface extends javax.swing.JFrame {
                         // adds the player to the session with the ID of the player
                         ss.addPlayer(player);
                     }
+                    this.tempPlayersToSession.clear();
                 } else {
                     // Reset temporary scouting session for players
                     this.tempPlayersToSession.clear();
