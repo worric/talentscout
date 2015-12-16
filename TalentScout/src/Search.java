@@ -1,5 +1,15 @@
 import java.util.ArrayList;
 
+/**
+ * This class is responsible for the search function.
+ * 
+ * @author Frederik Frode Nygart
+ * @author Mikkel Mørch
+ * @author Jacob Krag Hansen
+ * @author Robin Damsgaard Larsen
+ * @author Lotte Selnø
+ * @author Bjørn Alsted Nielsen 
+ */
 public class Search {
 	
 	/**

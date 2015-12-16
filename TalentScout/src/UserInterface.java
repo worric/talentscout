@@ -90,7 +90,6 @@ public class UserInterface extends javax.swing.JFrame {
         registerPlayer = new javax.swing.JButton();
         viewAgenda = new javax.swing.JButton();
         viewPlayerList = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         contentPanel = new javax.swing.JPanel();
         playerListPanel = new javax.swing.JPanel();
         searchFieldName = new javax.swing.JTextField();
@@ -116,7 +115,6 @@ public class UserInterface extends javax.swing.JFrame {
         playerPanelBottom = new javax.swing.JPanel();
         playerPanelBottomBlank = new javax.swing.JPanel();
         upcomingLabel = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         upcomingTable = new org.jdesktop.swingx.JXTable();
         sessionAddBtn = new javax.swing.JButton();
@@ -399,13 +397,6 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Create new Event");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
@@ -423,13 +414,11 @@ public class UserInterface extends javax.swing.JFrame {
                             .addComponent(viewPlayerList, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(12, 12, 12))
                     .addGroup(menuPanelLayout.createSequentialGroup()
-                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(saveAllBtn)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(saveAllBtn)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
-        menuPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton4, registerPlayer, saveAllBtn, viewAgenda, viewPlayerList});
+        menuPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {registerPlayer, saveAllBtn, viewAgenda, viewPlayerList});
 
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -442,9 +431,7 @@ public class UserInterface extends javax.swing.JFrame {
                 .addComponent(viewPlayerList)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(saveAllBtn)
-                .addGap(114, 114, 114)
-                .addComponent(jButton4)
-                .addContainerGap(348, Short.MAX_VALUE))
+                .addContainerGap(491, Short.MAX_VALUE))
         );
 
         getContentPane().add(menuPanel, java.awt.BorderLayout.LINE_START);
@@ -618,8 +605,6 @@ public class UserInterface extends javax.swing.JFrame {
 
         upcomingLabel.setText("Upcoming events");
 
-        jButton2.setText("Clear all");
-
         upcomingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -659,9 +644,7 @@ public class UserInterface extends javax.swing.JFrame {
                         .addComponent(upcomingLabel)
                         .addGap(380, 380, 380))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerPanelBottomBlankLayout.createSequentialGroup()
-                        .addGroup(playerPanelBottomBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2)
-                            .addComponent(jButton2))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
                         .addGap(41, 41, 41))))
         );
         playerPanelBottomBlankLayout.setVerticalGroup(
@@ -671,9 +654,7 @@ public class UserInterface extends javax.swing.JFrame {
                 .addComponent(upcomingLabel)
                 .addGap(17, 17, 17)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout playerPanelBottomLayout = new javax.swing.GroupLayout(playerPanelBottom);
@@ -1334,7 +1315,6 @@ public class UserInterface extends javax.swing.JFrame {
             if(comp.isVisible()){
                 card = (JPanel) comp;
             }
-
         }
         return card;
     }
@@ -1671,8 +1651,12 @@ public class UserInterface extends javax.swing.JFrame {
      * @param evt 
      */
     private void sessionAddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionAddBtnActionPerformed
+        try {
         addSession();
         populateAgendaTable();
+        } catch (Exception e){
+            
+        }
         // Resets JLabels of the content area the user is departing from
         sessionDateField.setText("");
         sessionPlaceField.setText("");
@@ -1863,10 +1847,6 @@ public class UserInterface extends javax.swing.JFrame {
         viewPlayerProfileByID(this.currentPlayerID);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
      /**
      * 
      * 
@@ -1941,27 +1921,31 @@ public class UserInterface extends javax.swing.JFrame {
      * Adds a session to the Agenda
      */
     public void addSession(){
-        // User given date, which is a String
-        String strDate = getSessionDateField();
-        // Convertion of the String to Date
-        Date date = DATEMANAGER.fromStringToDate(strDate);
-        // User given location
-        String place = getSessionPlaceField();
-        
-        // Scouting session added to the agenda ArrayList
-        ScoutingSession ss = AGENDA.planSession(place, date);
-        
-        // Assign Scouting Session ID to instance variable 
-        this.currentSessionID = ss.getSessionID();
-        
-        // Adding the selected players saved in an instance variable of type ArrayList to the Scouting Session
-        for(Player player : this.tempPlayersToSession){
-            // adds the player to the session with the ID of the player
-            ss.addPlayer(player);
+            try {
+                // User given date, which is a String
+                String strDate = getSessionDateField();
+                // Convertion of the String to Date
+                Date date = DATEMANAGER.fromStringToDate(strDate);
+                // User given location
+                String place = getSessionPlaceField();
+
+                // Scouting session added to the agenda ArrayList
+                ScoutingSession ss = AGENDA.planSession(place, date);
+
+                // Assign Scouting Session ID to instance variable 
+                this.currentSessionID = ss.getSessionID();
+
+                // Adding the selected players saved in an instance variable of type ArrayList to the Scouting Session
+                for(Player player : this.tempPlayersToSession){
+                    // adds the player to the session with the ID of the player
+                    ss.addPlayer(player);
+                }
+                // Reset temporary scouting session for players
+                this.tempPlayersToSession.clear();
+            } catch (NullPointerException e){
+                JOptionPane.showMessageDialog(new JDialog(), "Please type in a date following the pattern: dd-MM-yyyy.");
+            }
         }
-        // Reset temporary scouting session for players
-        this.tempPlayersToSession.clear();
-    }
     
     /**
      * Checks if a Player already has been added to a scouting session.
@@ -2093,9 +2077,7 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JTextField clubField;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
