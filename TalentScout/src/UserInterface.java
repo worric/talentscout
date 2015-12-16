@@ -2041,12 +2041,26 @@ public class UserInterface extends javax.swing.JFrame {
      * @param list The ArrayList containing the Player Objects which will be inserted into the JComboBox.
      */
     public void addPlayersToComboBox(JComboBox box, ArrayList<Player> list){
-        // Clear box of items so we avoid dublets
-        box.removeAllItems();
+
         // Maybe implement function here that sorts the ArrayList
-        for(Player token : list){
-            box.addItem(new Item<Player>(token, token.getName()));
+         
+        // Loops through all Player objects in the given list of Players that is to be added to the ComboBox
+        for(int i = 0; i < list.size(); i++){
+            // Player we want to add to ComboBox
+            Player plrToBeAdded = list.get(i);
+            // Loops through all Player objects currently in the given ComboBox
+            for(int j = 0; j < box.getItemCount(); j++){
+            // Retrieving the Player
+            Item item = (Item) box.getItemAt(j);
+            Player plrInBox = (Player) item.getValue();
+                // Checking if the Player in the Box is different from the Player we want to add
+                if(!plrToBeAdded.equals(plrInBox)){
+                    //If is not in the Box, we add him to the Box.
+                    box.addItem(plrToBeAdded);
+                }
+            }
         }
+        
     }
     
     /**
