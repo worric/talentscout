@@ -3,6 +3,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.ObjectStreamClass;
+import java.text.NumberFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +14,7 @@ import java.util.Date;
 import java.util.UUID;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
+import javax.swing.text.NumberFormatter;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -107,10 +109,10 @@ public class UserInterface extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        ageField = new javax.swing.JTextField();
         clubField = new javax.swing.JTextField();
         registerBtn = new javax.swing.JButton();
         jXLabel2 = new org.jdesktop.swingx.JXLabel();
+        ageField = new javax.swing.JTextField();
         agendaPanel = new javax.swing.JPanel();
         playerPanelBottom = new javax.swing.JPanel();
         playerPanelBottomBlank = new javax.swing.JPanel();
@@ -573,10 +575,13 @@ public class UserInterface extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(clubField)
-                            .addComponent(ageField)
-                            .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(nameField, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                            .addComponent(ageField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(375, Short.MAX_VALUE))
         );
+
+        registerPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {ageField, nameField});
+
         registerPanelLayout.setVerticalGroup(
             registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(registerPanelLayout.createSequentialGroup()
@@ -586,18 +591,20 @@ public class UserInterface extends javax.swing.JFrame {
                 .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(ageField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(clubField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(registerBtn)
-                .addContainerGap(374, Short.MAX_VALUE))
+                .addContainerGap(379, Short.MAX_VALUE))
         );
+
+        registerPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {ageField, nameField});
 
         contentPanel.add(registerPanel, "card4");
 
@@ -1540,6 +1547,16 @@ public class UserInterface extends javax.swing.JFrame {
         }
         
     }
+    
+    public NumberFormatter formatTextField(){
+        NumberFormat longFormat = NumberFormat.getIntegerInstance();
+        NumberFormatter numberFormatter = new NumberFormatter(longFormat);
+        numberFormatter.setValueClass(Long.class);
+        numberFormatter.setAllowsInvalid(false);
+        numberFormatter.setMinimum(01);
+        return numberFormatter;
+    }
+    
     /**
      * 
      * 
@@ -1602,15 +1619,28 @@ public class UserInterface extends javax.swing.JFrame {
     private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
         // Retrieves user input to register a new Player
         String name = nameField.getText();
-        String strAge = ageField.getText();
-        int age = Integer.parseInt(strAge);
-        String club = clubField.getText();
-        
-        // Saving the player object in a file
-        PDB.register(name, age, club);
-        
-        // Let the user view the player list
-        viewPlayerList();
+        if(!name.equals("")){
+            String strAge = ageField.getText();
+            if(strAge.matches("\\d\\d") || strAge.matches("\\d")){
+            
+            int age = Integer.parseInt(strAge);
+            String club = clubField.getText();
+            
+                if(!club.equals("")){
+                // Saving the player object in a file
+                PDB.register(name, age, club);
+
+                // Let the user view the player list
+                viewPlayerList();
+                } else {
+                    // popup for empty name
+                }
+            } else {
+                    // popup for empty age
+                }
+        } else {
+            // popup for empty club
+        }
     }//GEN-LAST:event_registerBtnActionPerformed
 
     /**
