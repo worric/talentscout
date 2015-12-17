@@ -1995,7 +1995,7 @@ public class UserInterface extends javax.swing.JFrame {
                         ss.addPlayer(player);
                     }
                     this.tempPlayersToSession.clear();
-                } else {
+                } else { // If date is null
                     // Reset temporary scouting session for players
                     this.tempPlayersToSession.clear();
                     // Message for user
@@ -2067,26 +2067,25 @@ public class UserInterface extends javax.swing.JFrame {
     public void addPlayersToComboBox(JComboBox box, ArrayList<Player> list){
         // Maybe implement function here that sorts the ArrayList
 
-        // The first Item in the ComboBox
+        // The first Item in the ComboBox, which will be the default selected item
         Player noPlayer = new Player("select", 0, "", UUID.randomUUID());
         box.addItem(new Item<Player>(noPlayer, "- select player-"));
         
         // The amount of players in the combobox
         int countOfPlayers = box.getItemCount();
-        // Checks if there's currently any players in the box
-        if(countOfPlayers > 0){
+        // Checks if there's currently any players in the box besides the default selected item
+        if(countOfPlayers > 1){
             // If so, we clear the table of all players - except for the first Item - to avoid duplicates
             for(int i = countOfPlayers; i > 1; i--){
                 box.removeItemAt(i-1);
             }
-            // Then we repopulate the ComboBox with all players in the database
+            // Then we repopulate the ComboBox with all players on the given list
             for(int j = 0; j < list.size(); j++){
                 Player plr = list.get(j);
                 box.addItem(new Item<Player>(plr, plr.getName()));
-                System.out.println("A player has been added and the count is now "+box.getItemCount());
             }
         } else {
-            // If there's no players in the box, we populate it with all players in the database
+            // If there's no players in the box, we populate it with all players on the given list
             for(int j = 0; j < list.size(); j++){
                 Player plr = list.get(j);
                 box.addItem(new Item<Player>(plr, plr.getName()));
