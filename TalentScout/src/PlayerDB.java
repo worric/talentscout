@@ -52,7 +52,7 @@ public class PlayerDB {
     		
     		oo.close();
     	} catch (Exception e){
-    		e.printStackTrace();
+
     	}
     }
     
@@ -87,8 +87,7 @@ public class PlayerDB {
     		this.playerDB = arrayOfPlayers;
     	
     	} catch (Exception e){
-    		e.printStackTrace();
-    		// In case the file does not exist - there is not ArrayList to load
+    		// In case the file does not exist - there is no ArrayList to load
     		// we initialize the playerDB ArrayList<Player> and return it. 
     		// playerDB = new ArrayList<Player>();
     		this.playerDB = new ArrayList<Player>();
