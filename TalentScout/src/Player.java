@@ -35,7 +35,7 @@ public class Player implements Serializable, Comparable<Player> {
 	private UUID playerID;
 	
 	// Track if the player is active or not
-	private boolean isActive; //TODO may be renamed to reflect "player discarded"
+	private boolean isActive;
 	
 	// Initializes an enum with the four parameters
 	public enum Parameters {SPEED, ATTITUDE, TECHNIQUE, GAMESENSE, ALL};
