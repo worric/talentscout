@@ -4,9 +4,14 @@ import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 import java.text.ParseException;
 /**
- * The purpose of this class is to provide date sanity checks to the create/edit ScoutingSession functionality
- * @author folmer
- *
+ * The purpose of this class is to provide date sanity checks to the create/edit ScoutingSession functionality.
+ * 
+ * @author Frederik Frode Nygart
+ * @author Mikkel Mørch
+ * @author Jacob Krag Hansen
+ * @author Robin Damsgaard Larsen
+ * @author Lotte Selnø
+ * @author Bjørn Alsted Nielsen 
  */
 public class DateManager {
 	

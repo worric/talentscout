@@ -137,7 +137,7 @@ public class PlayerDB {
      * Checks if the directory for player files is created.
      * If it isn't, we create it using mkdir(). 
      */
-    public void checkDirectoryExist(){
+    private void checkDirectoryExist(){
     	File playerDir = new File("./playerfiles");
         // We check if the directory for the file is created
         if(!playerDir.isDirectory()){

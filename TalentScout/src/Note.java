@@ -6,9 +6,6 @@ import java.util.UUID;
  * in a Scouting Session. It is Serializable as it contains user information which is to be
  * saved as data, which can be displayed for the user whenever he wishes.
  * 
- * Furthermore, it holds a serialVersionUID which allows for future changes in the class
- * that can be serialized. This subject is further explained in the development report.
- * 
  * @author Frederik Frode Nygart
  * @author Mikkel Mørch
  * @author Jacob Krag Hansen
@@ -29,12 +26,7 @@ public class Note implements Serializable {
 	private int techniqueScore;
 	private String gameSenseText;
 	private int gameSenseScore;
-	
-	/*public Note(ScoutingSession session, Player player){
-		this.setSession(session);
-		this.setPlayer(player);
-	}*/
-	
+
 	public Note(ScoutingSession session, Player player,
 		String speedText, int speedScore,
 		String attitudeText, int attitudeScore,
@@ -51,11 +43,11 @@ public class Note implements Serializable {
 		this.gameSenseText = gameSenseText;
 		this.gameSenseScore = gameSenseScore;
 	}
-	
-	public Note(ScoutingSession session, Player player){
-		this(session, player, "", 0, "", 0, "", 0, "", 0);
-	}
-	
+        
+        /**
+         * Getter for the ScoutingSession object itself.
+         * @return A ScoutingSession object.
+         */
 	public ScoutingSession getSession() {
 		return UserInterface.AGENDA.getSessionByID(this.sessionID);
 	}
@@ -134,17 +126,5 @@ public class Note implements Serializable {
 
 	public void setGameSenseScore(int gameSenseScore) {
 		this.gameSenseScore = gameSenseScore;
-	}
-	
-	/**
-	 * Method mostly for testing purposes
-	 */
-	public void printNote(){
-		System.out.println("Name: "+TestScout2.pdb.getPlayerById(playerID).getName()+":");
-		System.out.println("Session: "+TestScout2.a.getSessionByID(sessionID).getLocation());
-		System.out.println("Speed: "+speedText+", "+speedScore+".");
-		System.out.println("Attitude: "+attitudeText+", "+attitudeScore+".");
-		System.out.println("Technique: "+techniqueText+", "+techniqueScore+".");
-		System.out.println("Game Sense: "+gameSenseText+", "+gameSenseScore+".");
 	}
 }

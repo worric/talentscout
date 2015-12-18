@@ -157,7 +157,11 @@ public class Agenda {
 		return sessions.size();
 	}
 	
-	private void checkDirectoryExist(){
+    /**
+    * Checks if the directory for player files is created.
+    * If it isn't, we create it using mkdir(). 
+    */
+    private void checkDirectoryExist(){
     	File playerDir = new File("./playerfiles");
         // We check if the directory for the file is created
         if(!playerDir.isDirectory()){
