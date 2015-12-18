@@ -7,9 +7,6 @@ import java.io.Serializable;
  * as well as a unique ID for the Player object.
  * Furthermore, it holds an ArrayList of notes of type Note, which is all the notes written about a Player.
  *  
- * Furthermore, it holds a serialVersionUID which allows for future changes in the class
- * that can be serialized. This subject is further explained in the development report.
- * 
  * @author Frederik Frode Nygart
  * @author Mikkel Mørch
  * @author Jacob Krag Hansen
@@ -17,7 +14,7 @@ import java.io.Serializable;
  * @author Lotte Selnø
  * @author Bjørn Alsted Nielsen 
  */
-public class Player implements Serializable, Comparable<Player> {
+public class Player implements Serializable {
 
 	/** The Player's name */
 	private String name;
@@ -169,11 +166,6 @@ public class Player implements Serializable, Comparable<Player> {
 			return 0.0;
 		}
 	}
-	
-        @Override
-        public int compareTo(Player p) {
-            return p.getClub().compareTo(this.getClub());
-        }
         
 	public String getName() {
 		return name;

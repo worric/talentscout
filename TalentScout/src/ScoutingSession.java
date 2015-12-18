@@ -11,9 +11,6 @@ import java.util.ArrayList;
  * The Player Objects associated with the ScoutingSession Object are referenced by the
  * Player Objects' IDs which are hold by an ArrayList.
  * 
- * Furthermore, it holds a serialVersionUID which allows for future changes in the class
- * that can be serialized. This subject is further explained in the development report.
- * 
  * @author Frederik Frode Nygart
  * @author Mikkel Mørch
  * @author Jacob Krag Hansen
@@ -24,9 +21,6 @@ import java.util.ArrayList;
 
 public class ScoutingSession implements Serializable, Comparable<ScoutingSession> {
 	
-        /** This class' serialVersionUID */ 
-        static final long serialVersionUID = 592517302213845997L;
-        
 	/** A list of IDs representing Player Objects added to a ScoutingSession*/
 	private ArrayList<UUID> players;
 	
