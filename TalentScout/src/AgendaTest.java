@@ -66,8 +66,6 @@ public class AgendaTest {
 		UUID id = ss.getSessionID();
 		// Writing to the agendadb file
 		UserInterface.AGENDA.saveAgenda();
-		// Checking if the agendadb file has been created
-		assertTrue(pathAgendaDB.exists());
 		
 		// Loading the agendadb file
 		UserInterface.AGENDA.loadAgenda();
@@ -85,7 +83,25 @@ public class AgendaTest {
 
 	@Test
 	public final void testLoadAgenda() {
-		fail("Not yet implemented");
+		// Creating a new ScoutingSession object
+		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
+		// Get the ScoutingSession object's ID
+		UUID id = ss.getSessionID();
+		// Writing to the agendadb file
+		UserInterface.AGENDA.saveAgenda();
+		
+		// Loading the agendadb file
+		UserInterface.AGENDA.loadAgenda();
+		// Retrieving the ScoutingSession object by the previously declared ID creating
+		// a new reference to this object
+		ScoutingSession ss2 = UserInterface.AGENDA.getSessionByID(id);
+		// Get the new ScoutingSession Object's ID
+		UUID id2 = ss2.getSessionID();
+		// Comparing the two IDs. They should match.
+		assertEquals(id, id2);
+		// Comparing the two ScoutingSession objects, which is expected to be
+		// different due to the serialization process
+		assertNotEquals(ss, ss2);
 	}
 
 	@Test

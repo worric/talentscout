@@ -84,13 +84,6 @@ public class Player implements Serializable {
 	}
 	
 	/**
-	 * Adds an instance of a Note to the ArrayList "notes"
-	 * @param note is the Note which is added to "notes" 
-	 */
-	public void addNote(Note note){
-		notes.add(note);
-	}
-	/**
 	 * Gets a specific Note from the ArrayList "notes"
 	 * @param index is the chosen index position in "notes"
 	 * @return the Note at the chosen index position

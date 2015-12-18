@@ -59,8 +59,6 @@ public class PlayerDBTest {
 		UUID id = p.getID();
 		// Writing to the playerdb file
 		UserInterface.PDB.savePlayerDB();
-		// Checking if the playerdb file has been created
-		assertTrue(pathPlayerDB.exists());
 		
 		// Loading the playerdb file
 		UserInterface.PDB.loadPlayerDB();
@@ -76,7 +74,23 @@ public class PlayerDBTest {
 
 	@Test
 	public void testLoadPlayerDB() {
-		fail("Not yet implemented");
+		// Creating a new Player Object
+		Player p = UserInterface.PDB.register(name, age, club);
+		// Get the Player Object's ID
+		UUID id = p.getID();
+		// Writing to the playerdb file
+		UserInterface.PDB.savePlayerDB();
+		
+		// Loading the playerdb file
+		UserInterface.PDB.loadPlayerDB();
+		// Retrieving the Player Object by the before declared ID creating a new Player Object
+		Player p2 = UserInterface.PDB.getPlayerById(id);
+		// Get the new Player Object's ID
+		UUID id2 = p2.getID();
+		// Comparing the two IDs 
+		assertEquals(id, id2);
+		// Comparing the two Player objects, which is expected to be different due to Serialization
+		assertNotEquals(p, p2);
 	}
 
 	@Test
@@ -93,11 +107,6 @@ public class PlayerDBTest {
 		assertEquals(club, UserInterface.PDB.getPlayerById(id).getClub());
 		// Comparing the Player object
 		assertEquals(p, UserInterface.PDB.getPlayerById(id));
-	}
-
-	@Test
-	public void testAddPlayer() {
-		fail("Not yet implemented");
 	}
 
 	@Test
@@ -135,11 +144,6 @@ public class PlayerDBTest {
 		Player p2 = UserInterface.PDB.getPlayerById(id1);
 		// Checking if we're getting the same Player objects
 		assertEquals(p1, p2);
-	}
-
-	@Test
-	public void testGetPlayerByName() {
-		fail("Not yet implemented");
 	}
 
 	@Test

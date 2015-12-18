@@ -106,10 +106,6 @@ public class PlayerDB {
         return plr;
     }
 	
-	public void addPlayer(Player p){
-		playerDB.add(p);
-	}
-	
 	public void removePlayer(Player p){
 		playerDB.remove(p);
 	}
@@ -128,15 +124,6 @@ public class PlayerDB {
 		}
 		return null;
 	}
-        /*
-        public Player getPlayerByName(String name){
-            for(Player p : playerDB){
-                if(p.getName().equals(name)){
-                    return p;
-                }
-            }
-            return null;
-        }*/
 	
 	public ArrayList<Player> getArrayListPlayer(){
 		return this.playerDB;
@@ -145,21 +132,7 @@ public class PlayerDB {
 	public int getSize(){
 		return playerDB.size();
 	}
-	
-        /**
-	 * Returns an ArrayList of players, sorted by club, to be presented in the GUI
-	 */
-	public ArrayList<Player> getSortedList(){
-		// Clone the current list of scouting sessions
-		ArrayList<Player> list = (ArrayList<Player>)playerDB.clone();
-		
-		// Perform the actual sorting of the list, based on date
-		Collections.sort(list);
-		
-		// Return the sorted list
-		return list;
-	}
-        
+	       
     /**
      * Checks if the directory for player files is created.
      * If it isn't, we create it using mkdir(). 

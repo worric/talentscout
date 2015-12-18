@@ -1352,7 +1352,7 @@ public class UserInterface extends javax.swing.JFrame {
         playerListModel.setRowCount(0);
         try{
             // Get current ArrayList of all Player Objects
-            ArrayList<Player> list = PDB.getSortedList();
+            ArrayList<Player> list = PDB.getArrayListPlayer();
                 // Check if there are Player Objects in the array
                 if(!list.isEmpty()) {                   
                     // iterate through all Player Objects

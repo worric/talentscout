@@ -71,11 +71,6 @@ public class PlayerTest {
 	}
 
 	@Test
-	public void testAddNoteNote() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testGetNote() {
 		// setup ScoutingSession, a Player and a Note, and add the note to the player
 		ScoutingSession s = UserInterface.AGENDA.planSession(location, date);
@@ -99,16 +94,6 @@ public class PlayerTest {
 				"Står lidt galt på banen", 3);
 		
 		assertEquals(2, p.getNumberOfNotes());
-	}
-
-	@Test
-	public void testDisplayNote() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testDisplayNoteOverview() {
-		fail("Not yet implemented");
 	}
 
 	@Test
@@ -153,11 +138,6 @@ public class PlayerTest {
 		assertEquals(gameSenseResult, p.getAverage(Player.Parameters.GAMESENSE), 0.0);
 		// assert the player's total average score across all parameters
 		assertEquals(totalAverage, p.getAverage(Player.Parameters.ALL), 0.0);
-	}
-
-	@Test
-	public void testDisplayAverageScore() {
-		fail("Not yet implemented");
 	}
 
 	@Test

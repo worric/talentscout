@@ -195,9 +195,4 @@ public class ScoutingSessionTest {
 		// check that there are 0 players assigned to the scouting session
 		assertEquals(0, ss.getNumberOfPlayers());
 	}
-
-	@Test
-	public final void testMakeNote() {
-		fail("Not yet implemented");
-	}
 }

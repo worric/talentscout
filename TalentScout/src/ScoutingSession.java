@@ -111,44 +111,23 @@ public class ScoutingSession implements Serializable, Comparable<ScoutingSession
 		return UserInterface.PDB.getPlayerById(players.get(index));
 	}
 	
+	/**
+	 * Returns the number of players associated with a ScoutingSession object
+	 * @return The number of players associated with the object
+	 */
 	public int getNumberOfPlayers(){
 		return players.size();
 	}
 	
-	public Note addNote(Player player,
-			String speedText, int speedScore,
-			String attitudeText, int attitudeScore,
-			String techniqueText, int techniqueScore,
-			String gameSenseText, int gameSenseScore){
-		
-		// Construct a new note from the arguments passed
-		Note n = new Note(this, player,
-				speedText, speedScore,
-				attitudeText, attitudeScore,
-				techniqueText, techniqueScore,
-				gameSenseText, gameSenseScore);
-		
-		player.addNote(n);
-		return n;
-	}
-	
-	
+	/**
+	 * Removes the player from the specific ScoutingSession object
+	 * @param player
+	 */
 	public void removePlayer(Player player){
 		/* wraps the integer ID in an object to make us of the remove object function of the ArrayList,
 		 * which would otherwise just remove the object at the index provided
 		 */
 		players.remove(player.getID());
-	}
-	
-	/**
-	 * Creates a new note and adds it to the ArrayList "notes" in the class Player
-	 * @param player is a generic instance of the class Player
-	 * @return The Note with this ScoutingSession and the Player stated in the parameter
-	 */
-	public Note makeNote(Player player){ // TODO ved ikke om den er overflødig.
-			Note note = new Note(this, player);
-			player.addNote(note);
-			return note;
 	}
 	
 	@Override
