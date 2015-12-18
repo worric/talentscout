@@ -60,9 +60,9 @@ public class AgendaTest {
 
 	@Test
 	public final void testSaveAgenda() {
-		// Creating a new Player Object
+		// Creating a new ScoutingSession object
 		ScoutingSession ss = UserInterface.AGENDA.planSession(location, date);
-		// Get the Player Object's ID
+		// Get the ScoutingSession object's ID
 		UUID id = ss.getSessionID();
 		// Writing to the agendadb file
 		UserInterface.AGENDA.saveAgenda();
@@ -71,15 +71,15 @@ public class AgendaTest {
 		
 		// Loading the agendadb file
 		UserInterface.AGENDA.loadAgenda();
-		// Retrieving the ScoutingSession Object by the before declared ID creating
-		// a new ScoutingSession Object
+		// Retrieving the ScoutingSession object by the previously declared ID creating
+		// a new reference to this object
 		ScoutingSession ss2 = UserInterface.AGENDA.getSessionByID(id);
 		// Get the new ScoutingSession Object's ID
 		UUID id2 = ss2.getSessionID();
-		// Comparing the two IDs 
+		// Comparing the two IDs. They should match.
 		assertEquals(id, id2);
 		// Comparing the two ScoutingSession objects, which is expected to be
-		// different due to the Serialization process
+		// different due to the serialization process
 		assertNotEquals(ss, ss2);
 	}
 
